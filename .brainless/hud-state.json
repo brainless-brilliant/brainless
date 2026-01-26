@@ -1,0 +1,223 @@
+{
+  "timestamp": "2026-01-25T05:03:59.592Z",
+  "backgroundTasks": [
+    {
+      "id": "task-1769317255507-g9v8ku",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:00:55.508Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317255512-dmp5t7",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:00:55.512Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317255513-s5edhh",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:00:55.513Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317255514-amdwq0",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:00:55.514Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317255515-6p7awo",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:00:55.515Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317303420-na2zj4",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:01:43.421Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317303425-x7chtl",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:01:43.425Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317303426-pmrlfm",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:01:43.426Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317303427-h93635",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:01:43.427Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317303428-zgbmvj",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:01:43.428Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317364124-mnng4w",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:02:44.124Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317364128-oezars",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:02:44.128Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317364130-q5jzft",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:02:44.130Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317364131-qzlncn",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:02:44.131Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317364132-7m2s2b",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:02:44.132Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317389619-geds2o",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:09.620Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317389623-s1r2p2",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:09.623Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317389625-2qq7u7",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:03:09.625Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317389625-9fkioe",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:09.625Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317389626-r7f3cx",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:09.626Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317404185-u2vtf2",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:24.185Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317404189-xi185r",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:24.189Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317404190-w2axni",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:03:24.190Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317404191-7jnpjg",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:24.191Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317404192-y6a65z",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:24.192Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317439581-iahv4j",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:59.582Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317439588-94m5jd",
+      "description": "Test task",
+      "agentType": "anveeksha:executor",
+      "startedAt": "2026-01-25T05:03:59.588Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317439590-twsfe3",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-25T05:03:59.590Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769317439591-o1u12a",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:59.591Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769244318139-kgdoke",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-24T08:45:18.139Z",
+      "status": "failed",
+      "completedAt": "2026-01-25T05:00:55.508Z"
+    },
+    {
+      "id": "task-1769317439592-4insfv",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-25T05:03:59.592Z",
+      "status": "running"
+    }
+  ]
+}

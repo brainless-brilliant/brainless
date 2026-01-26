@@ -1,0 +1,43 @@
+{
+  "id": "debate_1769380051131_faf31cf2",
+  "topic": "JWT vs Sessions",
+  "created_at": "2026-01-25T22:27:31.131Z",
+  "participants": [
+    "anveeksha:architect",
+    "anveeksha:security"
+  ],
+  "moderator": "anveeksha:pm",
+  "messages": [
+    {
+      "id": "msg_1769380051131_3c32a2",
+      "timestamp": "2026-01-25T22:27:31.131Z",
+      "from": "anveeksha:architect",
+      "type": "proposal",
+      "content": "Use JWT for stateless API"
+    }
+  ],
+  "concerns": [
+    {
+      "id": "concern_1769380051131_a84acf",
+      "description": "Token storage is a cross-cutting concern",
+      "raised_by": "anveeksha:security",
+      "affects": [
+        "frontend",
+        "security"
+      ],
+      "priority": "high",
+      "options": [],
+      "raised_at": "2026-01-25T22:27:31.131Z"
+    }
+  ],
+  "round": 1,
+  "max_rounds": 3,
+  "status": "resolved",
+  "resolution": {
+    "decided_by": "anveeksha:pm",
+    "decision": "JWT with HttpOnly cookies",
+    "rationale": "Balances needs",
+    "was_consensus": false,
+    "timestamp": "2026-01-25T22:27:31.131Z"
+  }
+}

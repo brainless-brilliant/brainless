@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "anveeksha",
+  "description": "Anveeksha AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution",
+  "owner": {
+    "name": "Anveeksha Technologies Pvt. Ltd.",
+    "email": "contact@anveeksha.in"
+  },
+  "plugins": [
+    {
+      "name": "workforce",
+      "description": "Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts. Built on oh-my-claudecode by Yeochan Heo.",
+      "version": "4.0.0",
+      "author": {
+        "name": "Anveeksha Technologies Pvt. Ltd.",
+        "email": "contact@anveeksha.in"
+      },
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://anveeksha.in/workforce",
+      "tags": ["multi-agent", "orchestration", "pm-agent", "debate-protocol", "transcript", "autonomous-team"]
+    }
+  ]
+}
