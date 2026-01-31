@@ -16,9 +16,11 @@ import {
   TIER_MODELS,
   TIER_TO_MODEL_TYPE,
 } from './types.js';
-import { extractAllSignals } from './signals.js';
+import { extractAllSignals, extractTaskCapabilities } from './signals.js';
 import { calculateComplexityScore, calculateConfidence, scoreToTier } from './scorer.js';
 import { evaluateRules, DEFAULT_ROUTING_RULES } from './rules.js';
+import { composePromptFromModules } from '../../agents/modules/index.js';
+import type { PromptModuleId } from '../../agents/modules/types.js';
 
 /**
  * Route a task to the appropriate model tier
@@ -49,6 +51,12 @@ export function routeTask(
   // Extract signals from the task
   const signals = extractAllSignals(context.taskPrompt, context);
 
+  // Extract task capabilities for modular prompt composition
+  const capabilities = extractTaskCapabilities(signals);
+
+  // Compose optimized prompt based on capabilities
+  const composedPrompt = composePromptFromModules(capabilities);
+
   // Evaluate routing rules
   const ruleResult = evaluateRules(context, signals, DEFAULT_ROUTING_RULES);
 
@@ -66,6 +74,7 @@ export function routeTask(
     ruleResult.reason,
     `Rule: ${ruleResult.ruleName}`,
     `Score: ${score} (${scoreTier} tier by score)`,
+    `Modules: ${composedPrompt.includedModules.join(', ')}`,
   ];
 
   return {
@@ -74,9 +83,12 @@ export function routeTask(
     tier: ruleResult.tier,
     confidence,
     reasons,
+    adaptedPrompt: composedPrompt.prompt,
+    selectedModules: composedPrompt.includedModules,
     escalated: false,
   };
 }
+
 
 /**
  * Create a routing decision for a given tier

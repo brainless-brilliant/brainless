@@ -13,6 +13,7 @@ import type {
   RoutingContext,
 } from './types.js';
 import { COMPLEXITY_KEYWORDS } from './types.js';
+import type { TaskCapabilities } from '../../agents/modules/types.js';
 
 /**
  * Extract lexical signals from task prompt
@@ -321,3 +322,43 @@ function assessImpactScope(prompt: string): 'local' | 'module' | 'system-wide' {
 
   return 'local';
 }
+
+/**
+ * Extract task capabilities from complexity signals
+ * Used for modular prompt composition
+ */
+export function extractTaskCapabilities(signals: ComplexitySignals): TaskCapabilities {
+  const { lexical, structural, context } = signals;
+
+  return {
+    // Needs delegation if complex multi-step with cross-file or high subtask count
+    needsDelegation:
+      structural.estimatedSubtasks > 3 ||
+      (structural.crossFileDependencies && structural.estimatedSubtasks > 1) ||
+      context.planComplexity > 5,
+
+    // Needs search guidance for simple lookups
+    needsSearch:
+      lexical.hasSimpleKeywords &&
+      !lexical.hasArchitectureKeywords &&
+      !lexical.hasDebuggingKeywords,
+
+    // Needs architecture for refactoring/design
+    needsArchitecture:
+      lexical.hasArchitectureKeywords ||
+      structural.impactScope === 'system-wide' ||
+      structural.reversibility === 'difficult',
+
+    // Needs security for security domain
+    needsSecurity: structural.domainSpecificity === 'security',
+
+    // Needs testing guidance for test-related tasks
+    needsTesting: structural.hasTestRequirements,
+
+    // Needs tool guidance for multi-file operations
+    needsToolGuidance:
+      lexical.filePathCount > 2 ||
+      structural.crossFileDependencies,
+  };
+}
+

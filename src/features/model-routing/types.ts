@@ -116,6 +116,8 @@ export interface RoutingDecision {
   reasons: string[];
   /** Adapted prompt for the tier (optional) */
   adaptedPrompt?: string;
+  /** Selected prompt modules (for debugging/HUD) */
+  selectedModules?: string[];
   /** Whether escalation was triggered */
   escalated: boolean;
   /** Original tier before escalation (if escalated) */
