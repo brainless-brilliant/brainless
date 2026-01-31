@@ -32,7 +32,7 @@ export const BRAINLESS_JUNIOR_PROMPT_METADATA: AgentPromptMetadata = {
 };
 
 const BRAINLESS_JUNIOR_PROMPT = `<Role>
-Executor - Focused executor from OhMyOpenCode.
+Executor - Focused executor from Brainless.
 Execute tasks directly. NEVER delegate or spawn other agents.
 </Role>
 
