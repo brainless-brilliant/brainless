@@ -145,7 +145,7 @@ export {
   researcherAgent,
   RESEARCHER_PROMPT_METADATA,
   executorAgent,
-  SISYPHUS_JUNIOR_PROMPT_METADATA,
+  BRAINLESS_JUNIOR_PROMPT_METADATA,
   designerAgent,
   FRONTEND_ENGINEER_PROMPT_METADATA,
   writerAgent,
@@ -157,7 +157,7 @@ export {
   analystAgent,
   ANALYST_PROMPT_METADATA,
   coordinatorAgent,
-  ORCHESTRATOR_SISYPHUS_PROMPT_METADATA,
+  ORCHESTRATOR_BRAINLESS_PROMPT_METADATA,
   plannerAgent,
   PLANNER_PROMPT_METADATA
 } from './agents/index.js';
@@ -209,7 +209,7 @@ export interface WorkforceOptions {
 }
 
 /** @deprecated Use WorkforceOptions instead */
-export type SisyphusOptions = WorkforceOptions;
+export type BrainlessOptions = WorkforceOptions;
 
 /**
  * Result of creating a Workforce session
@@ -240,7 +240,7 @@ export interface WorkforceSession {
 }
 
 /** @deprecated Use WorkforceSession instead */
-export type SisyphusSession = WorkforceSession;
+export type BrainlessSession = WorkforceSession;
 
 /**
  * Create a Workforce orchestration session
@@ -368,7 +368,7 @@ export function createWorkforceSession(options?: WorkforceOptions): WorkforceSes
 }
 
 /** @deprecated Use createWorkforceSession instead */
-export const createSisyphusSession = createWorkforceSession;
+export const createBrainlessSession = createWorkforceSession;
 
 /**
  * Quick helper to process a prompt with Workforce enhancements

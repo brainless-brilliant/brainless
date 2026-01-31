@@ -371,7 +371,7 @@ If you're coming from oh-my-opencode with agent switching:
 While Claude Code's fixed master agent might seem like a limitation compared to OpenCode's swappable masters, the **skill-based routing system is actually more elegant**:
 
 1. **Preserves context** across mode changes
-2. **Enables composition** (ultrawork + git-master + sisyphus)
+2. **Enables composition** (ultrawork + git-master + brainless)
 3. **Natural language** activation (no explicit mode switching)
 4. **Judgment-based** routing (Claude decides based on task)
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Sisyphus Persistent Mode Hook
+# Brainless Persistent Mode Hook
 # Unified handler for ultrawork, ralph-loop, and todo continuation
 # Prevents stopping when work remains incomplete
 

@@ -29,7 +29,7 @@ export const CONFIG_FILE = join(CLAUDE_CONFIG_DIR, '.brainless-config.json');
 /**
  * OMC configuration (stored in .brainless-config.json)
  */
-export interface SisyphusConfig {
+export interface BrainlessConfig {
   /** Whether silent auto-updates are enabled (opt-in for security) */
   silentAutoUpdate: boolean;
   /** When the configuration was set */
@@ -39,9 +39,9 @@ export interface SisyphusConfig {
 }
 
 /**
- * Read the Sisyphus configuration
+ * Read the Brainless configuration
  */
-export function getSisyphusConfig(): SisyphusConfig {
+export function getBrainlessConfig(): BrainlessConfig {
   if (!existsSync(CONFIG_FILE)) {
     // No config file = disabled by default for security
     return { silentAutoUpdate: false };
@@ -49,7 +49,7 @@ export function getSisyphusConfig(): SisyphusConfig {
 
   try {
     const content = readFileSync(CONFIG_FILE, 'utf-8');
-    const config = JSON.parse(content) as SisyphusConfig;
+    const config = JSON.parse(content) as BrainlessConfig;
     return {
       silentAutoUpdate: config.silentAutoUpdate ?? false,
       configuredAt: config.configuredAt,
@@ -65,7 +65,7 @@ export function getSisyphusConfig(): SisyphusConfig {
  * Check if silent auto-updates are enabled
  */
 export function isSilentAutoUpdateEnabled(): boolean {
-  return getSisyphusConfig().silentAutoUpdate;
+  return getBrainlessConfig().silentAutoUpdate;
 }
 
 /**

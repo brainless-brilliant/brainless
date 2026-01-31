@@ -480,11 +480,11 @@ else
     log_fail "qa-tester NOT in AGENTS.md"
 fi
 
-# Check commands/sisyphus.md updated
-if grep -q "qa-tester" commands/sisyphus.md 2>/dev/null; then
-    log_pass "qa-tester in commands/sisyphus.md"
+# Check commands/brainless.md updated
+if grep -q "qa-tester" commands/brainless.md 2>/dev/null; then
+    log_pass "qa-tester in commands/brainless.md"
 else
-    log_fail "qa-tester NOT in commands/sisyphus.md"
+    log_fail "qa-tester NOT in commands/brainless.md"
 fi
 
 # Check commands/ultrawork.md updated

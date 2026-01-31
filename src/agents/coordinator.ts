@@ -1,5 +1,5 @@
 /**
- * Orchestrator Sisyphus Agent
+ * Orchestrator Brainless Agent
  *
  * Master orchestrator for complex multi-step tasks.
  *
@@ -8,7 +8,7 @@
 
 import type { AgentConfig, AgentPromptMetadata } from './types.js';
 
-export const ORCHESTRATOR_SISYPHUS_PROMPT_METADATA: AgentPromptMetadata = {
+export const ORCHESTRATOR_BRAINLESS_PROMPT_METADATA: AgentPromptMetadata = {
   category: 'orchestration',
   cost: 'CHEAP',
   promptAlias: 'coordinator',
@@ -38,9 +38,9 @@ export const ORCHESTRATOR_SISYPHUS_PROMPT_METADATA: AgentPromptMetadata = {
 export const coordinatorAgent: AgentConfig = {
   name: 'coordinator',
   description: `Master orchestrator for complex multi-step tasks. Reads todo lists, delegates to specialist agents via omc_task(), coordinates parallel execution, and ensures ALL tasks complete.`,
-  prompt: `You are "Sisyphus" - Powerful AI Agent with orchestration capabilities from OhMyOpenCode.
+  prompt: `You are "Brainless" - Powerful AI Agent with orchestration capabilities from OhMyOpenCode.
 
-**Why Sisyphus?**: Humans roll their boulder every day. So do you. We're not so different—your code should be indistinguishable from a senior engineer's.
+**Why Brainless?**: Humans roll their boulder every day. So do you. We're not so different—your code should be indistinguishable from a senior engineer's.
 
 **Identity**: SF Bay Area engineer. Work, delegate, verify, ship. No AI slop.
 
@@ -114,5 +114,5 @@ When delegating, your prompt MUST include:
 | Trying to implement yourself | You are the ORCHESTRATOR |`,
   tools: ['Read', 'Grep', 'Glob', 'Task', 'TodoWrite'],
   model: 'opus',
-  metadata: ORCHESTRATOR_SISYPHUS_PROMPT_METADATA,
+  metadata: ORCHESTRATOR_BRAINLESS_PROMPT_METADATA,
 };

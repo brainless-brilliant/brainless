@@ -25,13 +25,13 @@ export {
 export { architectAgent, ARCHITECT_PROMPT_METADATA } from './architect.js';
 export { exploreAgent, EXPLORE_PROMPT_METADATA } from './explore.js';
 export { researcherAgent, RESEARCHER_PROMPT_METADATA } from './researcher.js';
-export { executorAgent, SISYPHUS_JUNIOR_PROMPT_METADATA } from './executor.js';
+export { executorAgent, BRAINLESS_JUNIOR_PROMPT_METADATA } from './executor.js';
 export { designerAgent, FRONTEND_ENGINEER_PROMPT_METADATA } from './designer.js';
 export { writerAgent, DOCUMENT_WRITER_PROMPT_METADATA } from './writer.js';
 export { visionAgent, MULTIMODAL_LOOKER_PROMPT_METADATA } from './vision.js';
 export { criticAgent, CRITIC_PROMPT_METADATA } from './critic.js';
 export { analystAgent, ANALYST_PROMPT_METADATA } from './analyst.js';
-export { coordinatorAgent, ORCHESTRATOR_SISYPHUS_PROMPT_METADATA } from './coordinator.js';
+export { coordinatorAgent, ORCHESTRATOR_BRAINLESS_PROMPT_METADATA } from './coordinator.js';
 export { plannerAgent, PLANNER_PROMPT_METADATA } from './planner.js';
 export { qaTesterAgent, QA_TESTER_PROMPT_METADATA } from './qa-tester.js';
 export { scientistAgent, SCIENTIST_PROMPT_METADATA } from './scientist.js';

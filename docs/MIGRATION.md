@@ -82,7 +82,7 @@ All agent names have been updated from Greek mythology references to intuitive, 
 | metis | analyst |
 | mnemosyne | learner |
 | brainless-junior | executor |
-| orchestrator-sisyphus | coordinator |
+| orchestrator-brainless | coordinator |
 | librarian | researcher |
 | frontend-engineer | designer |
 | document-writer | writer |
@@ -95,11 +95,11 @@ All agent names have been updated from Greek mythology references to intuitive, 
 Directory structures have been renamed for consistency with the new package name:
 
 #### Local Project Directories
-- **Old**: `.sisyphus/`
+- **Old**: `.brainless/`
 - **New**: `.brainless/`
 
 #### Global Directories
-- **Old**: `~/.sisyphus/`
+- **Old**: `~/.brainless/`
 - **New**: `~/.brainless/`
 
 #### Skills Directory
@@ -107,7 +107,7 @@ Directory structures have been renamed for consistency with the new package name
 - **New**: `~/.claude/skills/omc-learned/`
 
 #### Config Files
-- **Old**: `~/.claude/sisyphus/mnemosyne.json`
+- **Old**: `~/.claude/brainless/mnemosyne.json`
 - **New**: `~/.claude/omc/learner.json`
 
 ### Environment Variables
@@ -216,20 +216,20 @@ If you have existing projects using the old directory structure:
 
 ```bash
 # In each project directory
-mv .sisyphus .anv
+mv .brainless .anv
 ```
 
 #### 4. Rename Global Directories
 
 ```bash
 # Global configuration directory
-mv ~/.sisyphus ~/.anv
+mv ~/.brainless ~/.anv
 
 # Skills directory
 mv ~/.claude/skills/brainless-learned ~/.claude/skills/omc-learned
 
 # Config directory
-mv ~/.claude/sisyphus ~/.claude/omc
+mv ~/.claude/brainless ~/.claude/omc
 ```
 
 #### 5. Update Environment Variables
@@ -249,7 +249,7 @@ Search for and update any references to:
 - Package name: `brainless` → `brainless`
 - Agent names: Use the mapping table above
 - Commands: Use the new slash commands
-- Directory paths: Update `.sisyphus` → `.anv`
+- Directory paths: Update `.brainless` → `.anv`
 
 #### 7. Run One-Time Setup
 

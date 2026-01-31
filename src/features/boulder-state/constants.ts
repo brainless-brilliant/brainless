@@ -4,7 +4,7 @@
  * Ported from oh-my-opencode's boulder-state.
  */
 
-/** Sisyphus state directory */
+/** Brainless state directory */
 export const BOULDER_DIR = '.anv';
 
 /** Boulder state file name */

@@ -1,11 +1,11 @@
-# Sisyphus Mode Aliases for Claude CLI
+# Brainless Mode Aliases for Claude CLI
 # Add these to your ~/.bashrc or ~/.zshrc
 
-# Primary Sisyphus alias - enforces task completion discipline
-alias claude-s='/home/bellman/.claude/claude-sisyphus.sh'
+# Primary Brainless alias - enforces task completion discipline
+alias claude-s='/home/bellman/.claude/claude-brainless.sh'
 
 # Work mode alias - shorter alternative
-alias claudew='/home/bellman/.claude/claude-sisyphus.sh'
+alias claudew='/home/bellman/.claude/claude-brainless.sh'
 
 # Usage examples:
 #   claude-s "Refactor the API layer"

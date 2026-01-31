@@ -1,7 +1,7 @@
 /**
  * Advanced Usage Example
  *
- * This example demonstrates advanced features of Oh-My-Claude-Sisyphus:
+ * This example demonstrates advanced features of Brainless:
  * - Custom agent configuration
  * - Custom system prompts
  * - Context file injection
@@ -16,7 +16,7 @@ import {
 } from '../src/index.js';
 
 async function main() {
-  console.log('=== Advanced Oh-My-Claude-Sisyphus Example ===\n');
+  console.log('=== Advanced Brainless Example ===\n');
 
   // Example 1: Custom agent configuration
   console.log('Example 1: Custom Agents');

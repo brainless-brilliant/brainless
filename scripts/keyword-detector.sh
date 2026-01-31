@@ -1,5 +1,5 @@
 #!/bin/bash
-# Sisyphus Keyword Detector Hook
+# Brainless Keyword Detector Hook
 # Detects ultrawork/ultrathink/search/analyze keywords and injects enhanced mode messages
 
 # Read stdin (JSON input from Claude Code)

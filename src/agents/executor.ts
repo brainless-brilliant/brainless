@@ -2,14 +2,14 @@
  * Executor Agent - Focused Task Executor
  *
  * Executes tasks directly without delegation capabilities.
- * Same discipline as Sisyphus, but works alone.
+ * Same discipline as Brainless, but works alone.
  *
  * Ported from oh-my-opencode's executor agent.
  */
 
 import type { AgentConfig, AgentPromptMetadata } from './types.js';
 
-export const SISYPHUS_JUNIOR_PROMPT_METADATA: AgentPromptMetadata = {
+export const BRAINLESS_JUNIOR_PROMPT_METADATA: AgentPromptMetadata = {
   category: 'specialist',
   cost: 'CHEAP',
   promptAlias: 'Junior',
@@ -31,7 +31,7 @@ export const SISYPHUS_JUNIOR_PROMPT_METADATA: AgentPromptMetadata = {
   ],
 };
 
-const SISYPHUS_JUNIOR_PROMPT = `<Role>
+const BRAINLESS_JUNIOR_PROMPT = `<Role>
 Executor - Focused executor from OhMyOpenCode.
 Execute tasks directly. NEVER delegate or spawn other agents.
 </Role>
@@ -89,10 +89,10 @@ Task NOT complete without:
 
 export const executorAgent: AgentConfig = {
   name: 'executor',
-  description: 'Focused task executor. Execute tasks directly. NEVER delegate or spawn other agents. Same discipline as Sisyphus, no delegation.',
-  prompt: SISYPHUS_JUNIOR_PROMPT,
+  description: 'Focused task executor. Execute tasks directly. NEVER delegate or spawn other agents. Same discipline as Brainless, no delegation.',
+  prompt: BRAINLESS_JUNIOR_PROMPT,
   tools: ['Read', 'Write', 'Edit', 'Grep', 'Glob', 'Bash'],
   model: 'sonnet',
   defaultModel: 'sonnet',
-  metadata: SISYPHUS_JUNIOR_PROMPT_METADATA
+  metadata: BRAINLESS_JUNIOR_PROMPT_METADATA
 };

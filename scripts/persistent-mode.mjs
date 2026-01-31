@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Sisyphus Persistent Mode Hook (Node.js)
+ * Brainless Persistent Mode Hook (Node.js)
  * Unified handler for ultrawork, ralph-loop, and todo continuation
  * Cross-platform: Windows, macOS, Linux
  */
@@ -55,7 +55,7 @@ function writeJsonFile(path, data) {
 
 // Read PRD and get status
 function getPrdStatus(projectDir) {
-  // Check both root and .sisyphus for prd.json
+  // Check both root and .brainless for prd.json
   const paths = [
     join(projectDir, 'prd.json'),
     join(projectDir, '.anv', 'prd.json')

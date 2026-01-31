@@ -13,7 +13,7 @@ The UltraQA cycling workflow has been cancelled. Clearing state file.
 Execute this command to cancel UltraQA:
 
 ```bash
-mkdir -p .sisyphus && echo '{"active": false, "cancelled_at": "'$(date -Iseconds)'", "reason": "User cancelled via /cancel-ultraqa"}' > .brainless/ultraqa-state.json
+mkdir -p .brainless && echo '{"active": false, "cancelled_at": "'$(date -Iseconds)'", "reason": "User cancelled via /cancel-ultraqa"}' > .brainless/ultraqa-state.json
 ```
 
 After running this command, the QA cycling will stop.

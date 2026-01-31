@@ -1,5 +1,5 @@
 #!/bin/bash
-# Sisyphus Stop Continuation Hook
+# Brainless Stop Continuation Hook
 # Checks for incomplete todos and injects continuation prompt
 
 # Read stdin

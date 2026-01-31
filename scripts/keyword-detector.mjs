@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Sisyphus Keyword Detector Hook (Node.js)
+ * Brainless Keyword Detector Hook (Node.js)
  * Detects ultrawork/ultrathink/search/analyze keywords and injects enhanced mode messages
  * Cross-platform: Windows, macOS, Linux
  */
@@ -137,7 +137,7 @@ function activateUltraworkState(directory, prompt) {
     last_checked_at: new Date().toISOString()
   };
 
-  // Write to local .sisyphus directory
+  // Write to local .brainless directory
   const localDir = join(directory, '.anv');
   if (!existsSync(localDir)) {
     try { mkdirSync(localDir, { recursive: true }); } catch {}

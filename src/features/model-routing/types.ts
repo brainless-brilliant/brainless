@@ -192,7 +192,7 @@ export interface RoutingConfig {
  * Default routing configuration
  *
  * ALL agents are adaptive except orchestrators.
- * Agent overrides are only for orchestrator-sisyphus (fixed to Opus).
+ * Agent overrides are only for orchestrator-brainless (fixed to Opus).
  */
 export const DEFAULT_ROUTING_CONFIG: RoutingConfig = {
   enabled: true,

@@ -113,7 +113,7 @@ Output escalation recommendation:
 - No escalation needed (highest tier)
 ```
 
-### Sisyphus-Junior Family (Execution)
+### Brainless-Junior Family (Execution)
 
 **Base Identity**: Focused executor, works ALONE, no delegation, TODO obsessed
 

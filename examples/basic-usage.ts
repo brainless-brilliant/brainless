@@ -1,7 +1,7 @@
 /**
  * Basic Usage Example
  *
- * This example demonstrates how to use Oh-My-Claude-Sisyphus
+ * This example demonstrates how to use Brainless
  * with the Claude Agent SDK.
  */
 
@@ -12,7 +12,7 @@ import { createSisyphusSession, enhancePrompt } from '../src/index.js';
 // import { query } from '@anthropic-ai/claude-agent-sdk';
 
 async function main() {
-  console.log('=== Oh-My-Claude-Sisyphus Example ===\n');
+  console.log('=== Brainless Example ===\n');
 
   // Create a Sisyphus session
   const session = createSisyphusSession({

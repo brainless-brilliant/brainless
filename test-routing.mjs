@@ -29,14 +29,14 @@ const testCases = [
 
   // MEDIUM tier - standard implementation
   { prompt: 'Add a new button component with hover state', agent: 'frontend-engineer', expectedTier: 'MEDIUM' },
-  { prompt: 'Update the user list component to show email addresses', agent: 'anveeksha-junior', expectedTier: 'MEDIUM' },
+  { prompt: 'Update the user list component to show email addresses', agent: 'brainless-executor', expectedTier: 'MEDIUM' },
 
   // HIGH tier - risky refactoring (detected via keywords)
-  { prompt: 'Refactor the user service to use the new database schema and add migrations', agent: 'anveeksha-junior', expectedTier: 'HIGH' },
+  { prompt: 'Refactor the user service to use the new database schema and add migrations', agent: 'brainless-executor', expectedTier: 'HIGH' },
 
   // LOW tier - short or document-writer tasks
   { prompt: 'Write documentation for the API endpoints', agent: 'document-writer', expectedTier: 'LOW' },
-  { prompt: 'Implement the user profile page', agent: 'anveeksha-junior', expectedTier: 'LOW' },
+  { prompt: 'Implement the user profile page', agent: 'brainless-executor', expectedTier: 'LOW' },
 
   // HIGH tier - complex tasks
   { prompt: 'Analyze the root cause of the authentication bug affecting production users', agent: 'oracle', expectedTier: 'HIGH' },
@@ -77,7 +77,7 @@ console.log(`\n--- Results: ${passed}/${testCases.length} passed ---\n`);
 
 console.log('--- Test 2: Agent Quick Tier Lookup ---\n');
 
-const agents = ['oracle', 'prometheus', 'momus', 'explore', 'document-writer', 'frontend-engineer', 'anveeksha-junior'];
+const agents = ['oracle', 'prometheus', 'momus', 'explore', 'document-writer', 'frontend-engineer', 'brainless-executor'];
 for (const agent of agents) {
   const tier = quickTierForAgent(agent);
   console.log(`  ${agent}: ${tier} → ${TIER_MODELS[tier]}`);
@@ -87,8 +87,8 @@ console.log('\n--- Test 3: Proactive Model Selection (getModelForTask) ---\n');
 
 const modelTestCases = [
   // Worker agents - adaptive based on task
-  { agent: 'anveeksha-junior', prompt: 'Fix this typo in the README', expectedModel: 'haiku' },
-  { agent: 'anveeksha-junior', prompt: 'Refactor payment system with migration scripts for production data', expectedModel: 'opus' },
+  { agent: 'brainless-executor', prompt: 'Fix this typo in the README', expectedModel: 'haiku' },
+  { agent: 'brainless-executor', prompt: 'Refactor payment system with migration scripts for production data', expectedModel: 'opus' },
 
   // Oracle - adaptive: lookup → haiku, complex → opus
   { agent: 'oracle', prompt: 'Where is the auth middleware configured?', expectedModel: 'haiku' },
@@ -102,7 +102,7 @@ const modelTestCases = [
   { agent: 'explore', prompt: 'Find all .ts files', expectedModel: 'haiku' },
 
   // Orchestrator - ONLY fixed tier (always opus)
-  { agent: 'orchestrator-sisyphus', prompt: 'Simple task', expectedModel: 'opus' },
+  { agent: 'orchestrator-brainless', prompt: 'Simple task', expectedModel: 'opus' },
 ];
 
 console.log('Orchestrator proactively selects model based on task complexity:\n');
@@ -119,7 +119,7 @@ for (const test of modelTestCases) {
 
 console.log('--- Test 3b: Fixed vs Adaptive Agents ---\n');
 
-const allAgents = ['orchestrator-sisyphus', 'oracle', 'prometheus', 'momus', 'metis', 'explore', 'anveeksha-junior', 'frontend-engineer'];
+const allAgents = ['orchestrator-brainless', 'oracle', 'prometheus', 'momus', 'metis', 'explore', 'brainless-executor', 'frontend-engineer'];
 console.log('Only orchestrators are fixed to Opus. All others are adaptive:\n');
 for (const agent of allAgents) {
   const isFixed = isFixedTierAgent(agent);
@@ -171,7 +171,7 @@ console.log(explanation);
 console.log('\n--- Test 7: Complexity Analysis Helper ---\n');
 
 const analysisPrompt = 'Refactor the payment processing module to support multiple payment providers and add migration scripts for existing transactions';
-const analysis = analyzeTaskComplexity(analysisPrompt, 'anveeksha-junior');
+const analysis = analyzeTaskComplexity(analysisPrompt, 'brainless-executor');
 
 console.log('Task:', analysisPrompt.substring(0, 60) + '...');
 console.log('\nAnalysis Result:');

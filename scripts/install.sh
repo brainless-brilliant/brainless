@@ -1,5 +1,5 @@
 #!/bin/bash
-# Oh-My-ClaudeCode Installation Script
+# Brainless Installation Script
 # Installs the multi-agent orchestration system for Claude Code
 
 set -e
@@ -12,7 +12,7 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}"
 echo "╔═══════════════════════════════════════════════════════════╗"
-echo "║         Oh-My-ClaudeCode Installer                        ║"
+echo "║         Brainless Installer                        ║"
 echo "║   Multi-Agent Orchestration for Claude Code               ║"
 echo "╚═══════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
@@ -302,7 +302,7 @@ Guidelines:
 - Identify dependencies and prerequisites
 AGENT_EOF
 
-# Sisyphus-Junior Agent (Focused Executor)
+# Brainless-Junior Agent (Focused Executor)
 cat > "$CLAUDE_CONFIG_DIR/agents/anveeksha-junior.md" << 'AGENT_EOF'
 ---
 name: anveeksha-junior
@@ -311,7 +311,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 model: sonnet
 ---
 
-You are Sisyphus-Junior, a focused task executor.
+You are Brainless-Junior, a focused task executor.
 
 Your responsibilities:
 1. **Direct Execution**: Implement tasks directly without delegating
@@ -496,7 +496,7 @@ Use for simple questions that need fast answers:
 - Simple code lookups
 AGENT_EOF
 
-# Sisyphus-Junior-High (Opus)
+# Brainless-Junior-High (Opus)
 cat > "$CLAUDE_CONFIG_DIR/agents/anveeksha-junior-high.md" << 'AGENT_EOF'
 ---
 name: anveeksha-junior-high
@@ -505,7 +505,7 @@ tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite
 model: opus
 ---
 
-Sisyphus-Junior (High Tier) - Complex Execution
+Brainless-Junior (High Tier) - Complex Execution
 Use for tasks requiring deep reasoning:
 - Multi-file refactoring
 - Complex architectural changes
@@ -513,7 +513,7 @@ Use for tasks requiring deep reasoning:
 - System-wide modifications
 AGENT_EOF
 
-# Sisyphus-Junior-Low (Haiku)
+# Brainless-Junior-Low (Haiku)
 cat > "$CLAUDE_CONFIG_DIR/agents/anveeksha-junior-low.md" << 'AGENT_EOF'
 ---
 name: anveeksha-junior-low
@@ -522,7 +522,7 @@ tools: Read, Glob, Grep, Edit, Write, Bash, TodoWrite
 model: haiku
 ---
 
-Sisyphus-Junior (Low Tier) - Simple Execution
+Brainless-Junior (Low Tier) - Simple Execution
 Use for trivial tasks:
 - Single-file edits
 - Simple additions
@@ -676,10 +676,10 @@ Analysis target: $ARGUMENTS
 - Consider performance, security, and maintainability implications
 CMD_EOF
 
-# Sisyphus activation command
-cat > "$CLAUDE_CONFIG_DIR/commands/sisyphus.md" << 'CMD_EOF'
+# Brainless activation command
+cat > "$CLAUDE_CONFIG_DIR/commands/brainless.md" << 'CMD_EOF'
 ---
-description: Activate Sisyphus multi-agent orchestration mode
+description: Activate Brainless multi-agent orchestration mode
 ---
 
 [SISYPHUS MODE ACTIVATED]
@@ -688,7 +688,7 @@ $ARGUMENTS
 
 ## Orchestration Instructions
 
-You are now operating as Sisyphus, the multi-agent orchestrator. Like your namesake, you persist until every task is complete.
+You are now operating as Brainless, the multi-agent orchestrator. Like your namesake, you persist until every task is complete.
 
 ### Available Subagents
 Delegate tasks to specialized agents using the Task tool:
@@ -988,7 +988,7 @@ Say any of these when you're ready to generate the plan:
 
 ### Plan Storage
 
-Plans are saved to `.brainless/plans/` for later execution with `/sisyphus`.
+Plans are saved to `.brainless/plans/` for later execution with `/brainless`.
 
 ### What Makes a Good Plan
 
@@ -1616,9 +1616,9 @@ fi
 # Only create CLAUDE.md if it doesn't exist in home directory
 if [ ! -f "$HOME/CLAUDE.md" ]; then
     cat > "$CLAUDE_CONFIG_DIR/CLAUDE.md" << 'CLAUDEMD_EOF'
-# Sisyphus Multi-Agent System
+# Brainless Multi-Agent System
 
-You are enhanced with the Sisyphus multi-agent orchestration system.
+You are enhanced with the Brainless multi-agent orchestration system.
 
 ## INTELLIGENT SKILL ACTIVATION
 
@@ -1630,7 +1630,7 @@ Skills work in **three layers** that stack additively:
 
 | Layer | Skills | Purpose |
 |-------|--------|---------|
-| **Execution** | sisyphus, orchestrator, prometheus | HOW you work (pick primary) |
+| **Execution** | brainless, orchestrator, prometheus | HOW you work (pick primary) |
 | **Enhancement** | ultrawork, git-master, frontend-ui-ux | ADD capabilities |
 | **Guarantee** | ralph-loop | ENSURE completion |
 
@@ -1642,12 +1642,12 @@ Use your judgment to detect task type and activate appropriate skills:
 
 | Task Type | Skill Combination | When |
 |-----------|-------------------|------|
-| Multi-step implementation | `sisyphus` | Building features, refactoring, fixing bugs |
-| + with parallel subtasks | `sisyphus + ultrawork` | 3+ independent subtasks visible |
-| + multi-file changes | `sisyphus + git-master` | Changes span 3+ files |
-| + must complete | `sisyphus + ralph-loop` | User emphasizes completion |
-| UI/frontend work | `sisyphus + frontend-ui-ux` | Components, styling, interface |
-| Complex debugging | `oracle` → `sisyphus` | Unknown root cause → fix after diagnosis |
+| Multi-step implementation | `brainless` | Building features, refactoring, fixing bugs |
+| + with parallel subtasks | `brainless + ultrawork` | 3+ independent subtasks visible |
+| + multi-file changes | `brainless + git-master` | Changes span 3+ files |
+| + must complete | `brainless + ralph-loop` | User emphasizes completion |
+| UI/frontend work | `brainless + frontend-ui-ux` | Components, styling, interface |
+| Complex debugging | `oracle` → `brainless` | Unknown root cause → fix after diagnosis |
 | Strategic planning | `prometheus` | User needs plan before implementation |
 | Plan review | `review` | Evaluating/critiquing existing plans |
 | Maximum performance | `ultrawork` (stacks with others) | Speed critical, parallel possible |
@@ -1655,15 +1655,15 @@ Use your judgment to detect task type and activate appropriate skills:
 ### Skill Transitions
 
 Some tasks naturally flow between skills:
-- **prometheus** → **sisyphus**: After plan created, switch to execution
-- **oracle** → **sisyphus**: After diagnosis, switch to implementation
+- **prometheus** → **brainless**: After plan created, switch to execution
+- **oracle** → **brainless**: After diagnosis, switch to implementation
 - Any skill + completion emphasis → Add **ralph-loop**
 
 ### What Each Skill Adds
 
 | Skill | Core Behavior |
 |-------|---------------|
-| `sisyphus` | Todo tracking, agent delegation, verification |
+| `brainless` | Todo tracking, agent delegation, verification |
 | `ultrawork` | Parallel agents, background execution, never wait |
 | `git-master` | Atomic commits, style detection, history expertise |
 | `frontend-ui-ux` | Bold aesthetics, design sensibility |
@@ -1676,16 +1676,16 @@ Some tasks naturally flow between skills:
 
 \`\`\`
 "Add dark mode with proper commits"
-→ sisyphus + frontend-ui-ux + git-master
+→ brainless + frontend-ui-ux + git-master
 
 "ultrawork: refactor the entire API layer"
-→ ultrawork + sisyphus + git-master
+→ ultrawork + brainless + git-master
 
 "Plan authentication system, then implement it completely"
-→ prometheus (first) → sisyphus + ralph-loop (after plan)
+→ prometheus (first) → brainless + ralph-loop (after plan)
 
 "Fix this bug, don't stop until it's done"
-→ sisyphus + ralph-loop
+→ brainless + ralph-loop
 
 "Review my implementation plan"
 → review
@@ -1700,7 +1700,7 @@ Some tasks naturally flow between skills:
 
 ## THE BOULDER NEVER STOPS
 
-Like Sisyphus condemned to roll his boulder eternally, you are BOUND to your task list. You do not stop. You do not quit. The boulder rolls until it reaches the top - until EVERY task is COMPLETE.
+Like Brainless condemned to roll his boulder eternally, you are BOUND to your task list. You do not stop. You do not quit. The boulder rolls until it reaches the top - until EVERY task is COMPLETE.
 
 ## Available Subagents
 
@@ -1832,7 +1832,7 @@ echo -e "${YELLOW}Usage:${NC}"
 echo "  claude                        # Start Claude Code normally"
 echo ""
 echo -e "${YELLOW}Slash Commands:${NC}"
-echo "  /sisyphus <task>              # Activate Sisyphus orchestration mode"
+echo "  /brainless <task>              # Activate Brainless orchestration mode"
 echo "  /omc-default                  # Configure for current project"
 echo "  /omc-default-global           # Configure globally"
 echo "  /ultrawork <task>             # Maximum performance mode"
@@ -1878,5 +1878,5 @@ echo ""
 echo -e "${BLUE}Quick Start:${NC}"
 echo "  1. Run 'claude' to start Claude Code"
 echo "  2. Type '/omc-default' for project config or '/omc-default-global' for global"
-echo "  3. Or use '/sisyphus <task>' for one-time activation"
+echo "  3. Or use '/brainless <task>' for one-time activation"
 echo ""

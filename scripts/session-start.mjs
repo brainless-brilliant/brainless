@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Sisyphus Session Start Hook (Node.js)
+ * Brainless Session Start Hook (Node.js)
  * Restores persistent mode states when session starts
  * Cross-platform: Windows, macOS, Linux
  */
@@ -87,7 +87,7 @@ async function main() {
     const hudCheck = checkHudInstallation();
     if (!hudCheck.installed) {
       messages.push(`<system-reminder>
-[Sisyphus] HUD not configured (${hudCheck.reason}). Run /hud setup then restart Claude Code.
+[Brainless] HUD not configured (${hudCheck.reason}). Run /hud setup then restart Claude Code.
 </system-reminder>`);
     }
 

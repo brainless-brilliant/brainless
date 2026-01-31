@@ -1,6 +1,6 @@
 #!/bin/bash
-# Oh-My-Claude-Sisyphus Uninstaller
-# Completely removes all Sisyphus-installed files and configurations
+# Oh-My-Claude-Brainless Uninstaller
+# Completely removes all Brainless-installed files and configurations
 
 set -e
 
@@ -10,18 +10,18 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-echo -e "${BLUE}Oh-My-Claude-Sisyphus Uninstaller${NC}"
+echo -e "${BLUE}Oh-My-Claude-Brainless Uninstaller${NC}"
 echo ""
 
 # Claude Code config directory (always ~/.claude)
 CLAUDE_CONFIG_DIR="$HOME/.claude"
 
-echo "This will remove ALL Sisyphus components from:"
+echo "This will remove ALL Brainless components from:"
 echo "  $CLAUDE_CONFIG_DIR"
 echo ""
 echo "Components to be removed:"
 echo "  - Agents (oracle, librarian, explore, etc.)"
-echo "  - Commands (sisyphus, ultrawork, plan, etc.)"
+echo "  - Commands (brainless, ultrawork, plan, etc.)"
 echo "  - Skills (ultrawork, git-master, frontend-ui-ux)"
 echo "  - Hooks (keyword-detector, silent-auto-update, stop-continuation)"
 echo "  - Version and state files"
@@ -62,7 +62,7 @@ rm -f "$CLAUDE_CONFIG_DIR/agents/prometheus.md"
 
 # Remove commands
 echo -e "${BLUE}Removing commands...${NC}"
-rm -f "$CLAUDE_CONFIG_DIR/commands/sisyphus.md"
+rm -f "$CLAUDE_CONFIG_DIR/commands/brainless.md"
 rm -f "$CLAUDE_CONFIG_DIR/commands/anveeksha-default.md"
 rm -f "$CLAUDE_CONFIG_DIR/commands/anveeksha-default-global.md"
 rm -f "$CLAUDE_CONFIG_DIR/commands/ultrawork.md"
@@ -103,13 +103,13 @@ if [ -f "$SETTINGS_FILE" ] && command -v jq &> /dev/null; then
     # Create a backup
     cp "$SETTINGS_FILE" "$SETTINGS_FILE.bak"
 
-    # Remove Sisyphus-specific hooks from settings.json
-    # This removes hooks that reference sisyphus hook scripts
+    # Remove Brainless-specific hooks from settings.json
+    # This removes hooks that reference brainless hook scripts
     TEMP_SETTINGS=$(mktemp)
 
-    # Use jq to filter out Sisyphus hooks
+    # Use jq to filter out Brainless hooks
     jq '
-      # Remove Sisyphus hooks from UserPromptSubmit
+      # Remove Brainless hooks from UserPromptSubmit
       if .hooks.UserPromptSubmit then
         .hooks.UserPromptSubmit |= map(
           if .hooks then
@@ -119,7 +119,7 @@ if [ -f "$SETTINGS_FILE" ] && command -v jq &> /dev/null; then
         ) | .hooks.UserPromptSubmit |= map(select(.hooks | length > 0))
       else . end |
 
-      # Remove Sisyphus hooks from Stop
+      # Remove Brainless hooks from Stop
       if .hooks.Stop then
         .hooks.Stop |= map(
           if .hooks then
@@ -137,12 +137,12 @@ if [ -f "$SETTINGS_FILE" ] && command -v jq &> /dev/null; then
 
     if [ $? -eq 0 ] && [ -s "$TEMP_SETTINGS" ]; then
         mv "$TEMP_SETTINGS" "$SETTINGS_FILE"
-        echo -e "${GREEN}✓ Removed Sisyphus hooks from settings.json${NC}"
+        echo -e "${GREEN}✓ Removed Brainless hooks from settings.json${NC}"
         echo -e "${YELLOW}  Backup saved to: $SETTINGS_FILE.bak${NC}"
     else
         rm -f "$TEMP_SETTINGS"
         echo -e "${YELLOW}⚠ Could not modify settings.json automatically${NC}"
-        echo "  Please manually remove Sisyphus hooks from the 'hooks' section"
+        echo "  Please manually remove Brainless hooks from the 'hooks' section"
     fi
 else
     if [ -f "$SETTINGS_FILE" ]; then

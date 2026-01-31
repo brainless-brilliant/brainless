@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# PreToolUse Hook: Sisyphus Reminder Enforcer
+# PreToolUse Hook: Brainless Reminder Enforcer
 # Injects contextual reminders before every tool execution
 
 set -euo pipefail
