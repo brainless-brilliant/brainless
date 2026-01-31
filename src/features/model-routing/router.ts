@@ -89,6 +89,90 @@ export function routeTask(
   };
 }
 
+/**
+ * Route a task using async Haiku classification for better accuracy
+ * Falls back to keyword-based routing if Haiku fails
+ */
+export async function routeTaskAsync(
+  context: RoutingContext,
+  config: Partial<RoutingConfig> = {}
+): Promise<RoutingDecision & { classificationSource?: 'haiku' | 'keyword' | 'cache' }> {
+  const mergedConfig = { ...DEFAULT_ROUTING_CONFIG, ...config };
+
+  // If routing is disabled, use default tier
+  if (!mergedConfig.enabled) {
+    return {
+      ...createDecision(mergedConfig.defaultTier, ['Routing disabled, using default tier'], false),
+      classificationSource: 'keyword',
+    };
+  }
+
+  // If explicit model is specified, respect it
+  if (context.explicitModel) {
+    const tier = modelTypeToTier(context.explicitModel);
+    return {
+      ...createDecision(tier, ['Explicit model specified by user'], false),
+      classificationSource: 'keyword',
+    };
+  }
+
+  // Check for agent-specific overrides
+  if (context.agentType && mergedConfig.agentOverrides?.[context.agentType]) {
+    const override = mergedConfig.agentOverrides[context.agentType];
+    return {
+      ...createDecision(override.tier, [override.reason], false),
+      classificationSource: 'keyword',
+    };
+  }
+
+  // Extract signals from the task
+  const signals = extractAllSignals(context.taskPrompt, context);
+
+  // Use async Haiku-powered classification
+  const { extractTaskCapabilitiesAsync } = await import('./signals.js');
+  const classificationResult = await extractTaskCapabilitiesAsync(signals, context.taskPrompt);
+
+  // Compose optimized prompt based on capabilities
+  const composedPrompt = composePromptFromModules(classificationResult.capabilities);
+
+  // Evaluate routing rules
+  const ruleResult = evaluateRules(context, signals, DEFAULT_ROUTING_RULES);
+
+  if (ruleResult.tier === 'EXPLICIT') {
+    return {
+      ...createDecision('MEDIUM', ['Unexpected EXPLICIT tier'], false),
+      classificationSource: classificationResult.source,
+    };
+  }
+
+  // Calculate score for confidence and logging
+  const score = calculateComplexityScore(signals);
+  const scoreTier = scoreToTier(score);
+  const confidence = calculateConfidence(score, ruleResult.tier);
+
+  const sourceLabel = classificationResult.source === 'haiku' 
+    ? `Haiku (${Math.round((classificationResult.confidence ?? 0) * 100)}% conf)`
+    : classificationResult.source;
+
+  const reasons = [
+    ruleResult.reason,
+    `Rule: ${ruleResult.ruleName}`,
+    `Classification: ${sourceLabel}`,
+    `Modules: ${composedPrompt.includedModules.join(', ')}`,
+  ];
+
+  return {
+    model: mergedConfig.tierModels[ruleResult.tier],
+    modelType: TIER_TO_MODEL_TYPE[ruleResult.tier],
+    tier: ruleResult.tier,
+    confidence,
+    reasons,
+    adaptedPrompt: composedPrompt.prompt,
+    selectedModules: composedPrompt.includedModules,
+    escalated: false,
+    classificationSource: classificationResult.source,
+  };
+}
 
 /**
  * Create a routing decision for a given tier

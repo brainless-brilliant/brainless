@@ -362,3 +362,33 @@ export function extractTaskCapabilities(signals: ComplexitySignals): TaskCapabil
   };
 }
 
+/**
+ * Extract task capabilities using Haiku classification with keyword fallback
+ * This is the async version that provides more accurate classification
+ */
+export async function extractTaskCapabilitiesAsync(
+  signals: ComplexitySignals,
+  taskPrompt: string
+): Promise<{
+  capabilities: TaskCapabilities;
+  source: 'haiku' | 'keyword' | 'cache';
+  confidence?: number;
+  latencyMs: number;
+}> {
+  const { classifyTask } = await import('./classifier/index.js');
+
+  // Create keyword fallback function
+  const keywordFallback = () => extractTaskCapabilities(signals);
+
+  // Run classification (uses Haiku with keyword fallback)
+  const result = await classifyTask(taskPrompt, keywordFallback);
+
+  return {
+    capabilities: result.capabilities,
+    source: result.source,
+    confidence: result.confidence,
+    latencyMs: result.latencyMs,
+  };
+}
+
+

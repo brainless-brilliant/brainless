@@ -1,94 +1,94 @@
 {
-  "timestamp": "2026-01-31T17:09:41.874Z",
+  "timestamp": "2026-01-31T17:41:16.117Z",
   "backgroundTasks": [
-    {
-      "id": "task-1769876018423-s44zet",
-      "description": "Test task",
-      "agentType": "brainless:executor",
-      "startedAt": "2026-01-31T16:13:38.424Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.866Z"
-    },
-    {
-      "id": "task-1769876018428-fy9s4h",
-      "description": "Test task",
-      "agentType": "brainless:executor",
-      "startedAt": "2026-01-31T16:13:38.428Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.868Z"
-    },
-    {
-      "id": "task-1769876018429-j7b15f",
-      "description": "Test task",
-      "agentType": "executor-low",
-      "startedAt": "2026-01-31T16:13:38.429Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.868Z"
-    },
-    {
-      "id": "task-1769876018430-xu6buk",
-      "description": "Test",
-      "agentType": "architect",
-      "startedAt": "2026-01-31T16:13:38.430Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.868Z"
-    },
-    {
-      "id": "task-1769876018431-56skpp",
-      "description": "Test",
-      "agentType": "executor",
-      "startedAt": "2026-01-31T16:13:38.431Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.868Z"
-    },
-    {
-      "id": "task-1769876018432-kbzr88",
-      "description": "Test",
-      "agentType": "executor",
-      "startedAt": "2026-01-31T16:13:38.432Z",
-      "status": "failed",
-      "completedAt": "2026-01-31T17:09:41.868Z"
-    },
     {
       "id": "task-1769879381866-9sfhmf",
       "description": "Test task",
       "agentType": "brainless:executor",
       "startedAt": "2026-01-31T17:09:41.868Z",
-      "status": "running"
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.108Z"
     },
     {
       "id": "task-1769879381871-mgum1r",
       "description": "Test task",
       "agentType": "brainless:executor",
       "startedAt": "2026-01-31T17:09:41.871Z",
-      "status": "running"
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.110Z"
     },
     {
       "id": "task-1769879381872-3q4p0g",
       "description": "Test task",
       "agentType": "executor-low",
       "startedAt": "2026-01-31T17:09:41.872Z",
-      "status": "running"
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.110Z"
     },
     {
       "id": "task-1769879381873-9zg8kl",
       "description": "Test",
       "agentType": "architect",
       "startedAt": "2026-01-31T17:09:41.873Z",
-      "status": "running"
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.110Z"
     },
     {
       "id": "task-1769879381873-y3ccdm",
       "description": "Test",
       "agentType": "executor",
       "startedAt": "2026-01-31T17:09:41.873Z",
-      "status": "running"
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.110Z"
     },
     {
       "id": "task-1769879381874-6at6nl",
       "description": "Test",
       "agentType": "executor",
       "startedAt": "2026-01-31T17:09:41.874Z",
+      "status": "failed",
+      "completedAt": "2026-01-31T17:41:16.110Z"
+    },
+    {
+      "id": "task-1769881276108-9iae5v",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-01-31T17:41:16.110Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769881276113-dwfk2k",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-01-31T17:41:16.113Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769881276113-olv8er",
+      "description": "Test task",
+      "agentType": "executor-low",
+      "startedAt": "2026-01-31T17:41:16.114Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769881276114-26j5y1",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-31T17:41:16.114Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769881276115-wc9con",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-31T17:41:16.115Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1769881276117-otomzt",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-31T17:41:16.117Z",
       "status": "running"
     }
   ]
