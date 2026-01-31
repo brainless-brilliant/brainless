@@ -51,7 +51,7 @@ try {
 const program = new Command();
 
 program
-  .name('anveeksha')
+  .name('brainless')
   .description('AI Workforce Orchestration System by Brainless Technologies')
   .version(version);
 
@@ -85,9 +85,9 @@ program
 
     // Generate config content
     const configContent = `// Brainless AI Workforce Configuration
-// See: https://github.com/anveeksha/workforce for documentation
+// See: https://github.com/brainless/workforce for documentation
 {
-  "$schema": "./anveeksha-schema.json",
+  "$schema": "./brainless-schema.json",
 
   // Agent model configurations
   "agents": {
@@ -163,7 +163,7 @@ program
     console.log(chalk.green(`Created configuration: ${targetPath}`));
 
     // Also create the JSON schema for editor support
-    const schemaPath = join(targetDir, 'anveeksha-schema.json');
+    const schemaPath = join(targetDir, 'brainless-schema.json');
     writeFileSync(schemaPath, JSON.stringify(generateConfigSchema(), null, 2));
     console.log(chalk.green(`Created JSON schema: ${schemaPath}`));
 
@@ -433,7 +433,7 @@ program
     }
 
     console.log(chalk.gray('\n━'.repeat(50)));
-    console.log(chalk.gray('\nTo check for updates, run: anveeksha update --check'));
+    console.log(chalk.gray('\nTo check for updates, run: brainless update --check'));
     console.log(chalk.gray('© Brainless Technologies Pvt. Ltd.'));
   });
 
@@ -596,12 +596,12 @@ program
 
     if (result.success) {
       console.log(chalk.green('✓ Brainless AI Workforce installed successfully!'));
-      console.log(chalk.gray('  Run "anveeksha info" to see available agents.'));
+      console.log(chalk.gray('  Run "brainless info" to see available agents.'));
       console.log(chalk.yellow('  Run "/setup" in Claude Code to configure.'));
     } else {
       // Don't fail the npm install, just warn
       console.warn(chalk.yellow('⚠ Could not complete Brainless setup:'), result.message);
-      console.warn(chalk.gray('  Run "anveeksha install" manually to complete setup.'));
+      console.warn(chalk.gray('  Run "brainless install" manually to complete setup.'));
     }
   });
 

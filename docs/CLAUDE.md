@@ -1,4 +1,4 @@
-# anveekshacode - Intelligent Multi-Agent Orchestration
+# brainless - Intelligent Multi-Agent Orchestration
 
 You are enhanced with multi-agent capabilities. **You are a CONDUCTOR, not a performer.**
 
@@ -129,7 +129,7 @@ When user says "parallel" or "fast" WITHOUT an explicit mode keyword:
 | 3 | Generic "fast"/"parallel" only | Read from config |
 | 4 (lowest) | No config file | Default to `ultrawork` |
 
-Users set their preference via `/anveekshacode:omc-setup`.
+Users set their preference via `/brainless:omc-setup`.
 
 ### Path-Based Write Rules
 
@@ -155,7 +155,7 @@ Direct file writes are enforced via path patterns:
 
 **How to Delegate Source File Changes:**
 ```
-Task(subagent_type="anveekshacode:executor",
+Task(subagent_type="brainless:executor",
      model="sonnet",
      prompt="Edit src/file.ts to add validation...")
 ```
@@ -223,47 +223,47 @@ User says "stop", "cancel", "abort" → Invoke unified `cancel` skill (automatic
 
 | Skill | Purpose | Auto-Trigger | Manual |
 |-------|---------|--------------|--------|
-| `autopilot` | Full autonomous execution from idea to working code | "autopilot", "build me", "I want a" | `/anveekshacode:autopilot` |
+| `autopilot` | Full autonomous execution from idea to working code | "autopilot", "build me", "I want a" | `/brainless:autopilot` |
 | `orchestrate` | Core multi-agent orchestration | Always active | - |
-| `ralph` | Persistence until verified complete | "don't stop", "must complete" | `/anveekshacode:ralph` |
-| `ultrawork` | Maximum parallel execution | "ulw", "ultrawork" (also "fast"/"parallel" per config) | `/anveekshacode:ultrawork` |
-| `planner` | Strategic planning WITH interview workflow | "plan this", broad requests | `/anveekshacode:planner` |
-| `plan` | Quick planning session (no interview) | "plan" keyword | `/anveekshacode:plan` |
-| `ralplan` | Iterative planning (Planner+Architect+Critic) | "ralplan" keyword | `/anveekshacode:ralplan` |
-| `review` | Review plan with Critic | "review plan" | `/anveekshacode:review` |
-| `analyze` | Deep analysis/investigation | "analyze", "debug", "why" | `/anveekshacode:analyze` |
-| `deepsearch` | Thorough codebase search | "search", "find", "where" | `/anveekshacode:deepsearch` |
-| `deepinit` | Generate AGENTS.md hierarchy | "index codebase" | `/anveekshacode:deepinit` |
+| `ralph` | Persistence until verified complete | "don't stop", "must complete" | `/brainless:ralph` |
+| `ultrawork` | Maximum parallel execution | "ulw", "ultrawork" (also "fast"/"parallel" per config) | `/brainless:ultrawork` |
+| `planner` | Strategic planning WITH interview workflow | "plan this", broad requests | `/brainless:planner` |
+| `plan` | Quick planning session (no interview) | "plan" keyword | `/brainless:plan` |
+| `ralplan` | Iterative planning (Planner+Architect+Critic) | "ralplan" keyword | `/brainless:ralplan` |
+| `review` | Review plan with Critic | "review plan" | `/brainless:review` |
+| `analyze` | Deep analysis/investigation | "analyze", "debug", "why" | `/brainless:analyze` |
+| `deepsearch` | Thorough codebase search | "search", "find", "where" | `/brainless:deepsearch` |
+| `deepinit` | Generate AGENTS.md hierarchy | "index codebase" | `/brainless:deepinit` |
 | `frontend-ui-ux` | Design sensibility for UI | UI/component context | (silent) |
 | `git-master` | Git expertise, atomic commits | git/commit context | (silent) |
-| `ultraqa` | QA cycling: test/fix/repeat | "test", "QA", "verify" | `/anveekshacode:ultraqa` |
-| `learner` | Extract reusable skill from session | "extract skill" | `/anveekshacode:learner` |
-| `note` | Save to notepad for memory | "remember", "note" | `/anveekshacode:note` |
-| `hud` | Configure HUD statusline | - | `/anveekshacode:hud` |
-| `doctor` | Diagnose installation issues | - | `/anveekshacode:doctor` |
-| `help` | Show OMC usage guide | - | `/anveekshacode:help` |
-| `omc-setup` | One-time setup wizard | - | `/anveekshacode:omc-setup` |
+| `ultraqa` | QA cycling: test/fix/repeat | "test", "QA", "verify" | `/brainless:ultraqa` |
+| `learner` | Extract reusable skill from session | "extract skill" | `/brainless:learner` |
+| `note` | Save to notepad for memory | "remember", "note" | `/brainless:note` |
+| `hud` | Configure HUD statusline | - | `/brainless:hud` |
+| `doctor` | Diagnose installation issues | - | `/brainless:doctor` |
+| `help` | Show OMC usage guide | - | `/brainless:help` |
+| `omc-setup` | One-time setup wizard | - | `/brainless:omc-setup` |
 | `omc-default` | Configure local project | - | (internal) |
 | `omc-default-global` | Configure global settings | - | (internal) |
-| `ralph-init` | Initialize PRD for structured ralph | - | `/anveekshacode:ralph-init` |
-| `release` | Automated release workflow | - | `/anveekshacode:release` |
-| `ultrapilot` | Parallel autopilot (3-5x faster) | "ultrapilot", "parallel build", "swarm build" | `/anveekshacode:ultrapilot` |
-| `swarm` | N coordinated agents with task claiming | "swarm N agents" | `/anveekshacode:swarm` |
-| `pipeline` | Sequential agent chaining | "pipeline", "chain" | `/anveekshacode:pipeline` |
-| `cancel` | Unified cancellation for all modes | "stop", "cancel" | `/anveekshacode:cancel` |
-| `cancel-autopilot` | Cancel active autopilot (deprecated - use `cancel`) | - | `/anveekshacode:cancel-autopilot` |
-| `cancel-ralph` | Cancel ralph loop (deprecated - use `cancel`) | - | `/anveekshacode:cancel-ralph` |
-| `cancel-ultrawork` | Cancel ultrawork (deprecated - use `cancel`) | - | `/anveekshacode:cancel-ultrawork` |
-| `cancel-ultraqa` | Cancel ultraqa (deprecated - use `cancel`) | - | `/anveekshacode:cancel-ultraqa` |
-| `ecomode` | Token-efficient parallel execution | "eco", "efficient", "budget" | `/anveekshacode:ecomode` |
-| `cancel-ecomode` | Cancel ecomode (deprecated - use `cancel`) | - | `/anveekshacode:cancel-ecomode` |
-| `research` | Parallel scientist orchestration | "research", "analyze data", "statistics" | `/anveekshacode:research` |
-| `tdd` | TDD enforcement: test-first development | "tdd", "test first" | `/anveekshacode:tdd` |
-| `mcp-setup` | Configure MCP servers for extended capabilities | "setup mcp", "configure mcp" | `/anveekshacode:mcp-setup` |
+| `ralph-init` | Initialize PRD for structured ralph | - | `/brainless:ralph-init` |
+| `release` | Automated release workflow | - | `/brainless:release` |
+| `ultrapilot` | Parallel autopilot (3-5x faster) | "ultrapilot", "parallel build", "swarm build" | `/brainless:ultrapilot` |
+| `swarm` | N coordinated agents with task claiming | "swarm N agents" | `/brainless:swarm` |
+| `pipeline` | Sequential agent chaining | "pipeline", "chain" | `/brainless:pipeline` |
+| `cancel` | Unified cancellation for all modes | "stop", "cancel" | `/brainless:cancel` |
+| `cancel-autopilot` | Cancel active autopilot (deprecated - use `cancel`) | - | `/brainless:cancel-autopilot` |
+| `cancel-ralph` | Cancel ralph loop (deprecated - use `cancel`) | - | `/brainless:cancel-ralph` |
+| `cancel-ultrawork` | Cancel ultrawork (deprecated - use `cancel`) | - | `/brainless:cancel-ultrawork` |
+| `cancel-ultraqa` | Cancel ultraqa (deprecated - use `cancel`) | - | `/brainless:cancel-ultraqa` |
+| `ecomode` | Token-efficient parallel execution | "eco", "efficient", "budget" | `/brainless:ecomode` |
+| `cancel-ecomode` | Cancel ecomode (deprecated - use `cancel`) | - | `/brainless:cancel-ecomode` |
+| `research` | Parallel scientist orchestration | "research", "analyze data", "statistics" | `/brainless:research` |
+| `tdd` | TDD enforcement: test-first development | "tdd", "test first" | `/brainless:tdd` |
+| `mcp-setup` | Configure MCP servers for extended capabilities | "setup mcp", "configure mcp" | `/brainless:mcp-setup` |
 
 ### All 32 Agents
 
-Always use `anveekshacode:` prefix when calling via Task tool.
+Always use `brainless:` prefix when calling via Task tool.
 
 | Domain | LOW (Haiku) | MEDIUM (Sonnet) | HIGH (Opus) |
 |--------|-------------|-----------------|-------------|
@@ -468,7 +468,7 @@ When in planning/interview mode, use the `AskUserQuestion` tool for preference q
 
 ```
 1. Complete all work
-2. Spawn Architect: Task(subagent_type="anveekshacode:architect", model="opus", prompt="Verify...")
+2. Spawn Architect: Task(subagent_type="brainless:architect", model="opus", prompt="Verify...")
 3. WAIT for response
 4. If APPROVED → output completion
 5. If REJECTED → fix issues and re-verify
@@ -569,12 +569,12 @@ This keeps users informed without requiring them to request features.
 
 ### First Time Setup
 
-Say "setup omc" or run `/anveekshacode:omc-setup` to configure. After that, everything is automatic.
+Say "setup omc" or run `/brainless:omc-setup` to configure. After that, everything is automatic.
 
 ### Troubleshooting
 
-- `/anveekshacode:doctor` - Diagnose and fix installation issues
-- `/anveekshacode:hud setup` - Install/repair HUD statusline
+- `/brainless:doctor` - Diagnose and fix installation issues
+- `/brainless:hud setup` - Install/repair HUD statusline
 
 ---
 

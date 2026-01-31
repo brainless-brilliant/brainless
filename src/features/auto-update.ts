@@ -1,7 +1,7 @@
 /**
  * Auto-Update System
  *
- * Provides version checking and auto-update functionality for anveekshacode.
+ * Provides version checking and auto-update functionality for brainlesscode.
  *
  * Features:
  * - Check for new versions from GitHub releases
@@ -17,7 +17,7 @@ import { execSync } from 'child_process';
 
 /** GitHub repository information */
 export const REPO_OWNER = 'Yeachan-Heo';
-export const REPO_NAME = 'anveekshacode';
+export const REPO_NAME = 'brainlesscode';
 export const GITHUB_API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`;
 export const GITHUB_RAW_URL = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}`;
 
@@ -127,15 +127,15 @@ export function getInstalledVersion(): VersionMetadata | null {
     // Try to detect version from package.json if installed via npm
     try {
       // Check if we can find the package in node_modules
-      const result = execSync('npm list -g anveekshacode --json', {
+      const result = execSync('npm list -g brainlesscode --json', {
         encoding: 'utf-8',
         timeout: 5000,
         stdio: 'pipe'
       });
       const data = JSON.parse(result);
-      if (data.dependencies?.['anveekshacode']?.version) {
+      if (data.dependencies?.['brainlesscode']?.version) {
         return {
-          version: data.dependencies['anveekshacode'].version,
+          version: data.dependencies['brainlesscode'].version,
           installedAt: new Date().toISOString(),
           installMethod: 'npm'
         };
@@ -184,7 +184,7 @@ export async function fetchLatestRelease(): Promise<ReleaseInfo> {
   const response = await fetch(`${GITHUB_API_URL}/releases/latest`, {
     headers: {
       'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'anveekshacode-updater'
+      'User-Agent': 'brainlesscode-updater'
     }
   });
 
@@ -192,7 +192,7 @@ export async function fetchLatestRelease(): Promise<ReleaseInfo> {
     // No releases found - try to get version from package.json in repo
     const pkgResponse = await fetch(`${GITHUB_RAW_URL}/main/package.json`, {
       headers: {
-        'User-Agent': 'anveekshacode-updater'
+        'User-Agent': 'brainlesscode-updater'
       }
     });
 
@@ -306,7 +306,7 @@ export async function performUpdate(options?: {
       if (isWindows) {
         // Use npm for Windows updates instead of bash script
         try {
-          execSync('npm install -g anveekshacode@latest', {
+          execSync('npm install -g brainlesscode@latest', {
             encoding: 'utf-8',
             stdio: options?.verbose ? 'inherit' : 'pipe',
             timeout: 120000, // 2 minute timeout for npm
@@ -330,7 +330,7 @@ export async function performUpdate(options?: {
         } catch (npmError) {
           throw new Error(
             'Auto-update via npm failed. Please run manually:\n' +
-            '  npm install -g anveekshacode@latest\n' +
+            '  npm install -g brainlesscode@latest\n' +
             `Error: ${npmError instanceof Error ? npmError.message : npmError}`
           );
         }
@@ -389,19 +389,19 @@ export async function performUpdate(options?: {
  */
 export function formatUpdateNotification(checkResult: UpdateCheckResult): string {
   if (!checkResult.updateAvailable) {
-    return `anveekshacode is up to date (v${checkResult.currentVersion ?? 'unknown'})`;
+    return `brainlesscode is up to date (v${checkResult.currentVersion ?? 'unknown'})`;
   }
 
   const lines = [
     '╔═══════════════════════════════════════════════════════════╗',
-    '║           anveekshacode Update Available!              ║',
+    '║           brainlesscode Update Available!              ║',
     '╚═══════════════════════════════════════════════════════════╝',
     '',
     `  Current version: ${checkResult.currentVersion ?? 'unknown'}`,
     `  Latest version:  ${checkResult.latestVersion}`,
     '',
     '  To update, run: /update',
-    '  Or run: curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/scripts/install.sh | bash',
+    '  Or run: curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/brainlesscode/main/scripts/install.sh | bash',
     ''
   ];
 

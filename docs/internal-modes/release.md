@@ -1,18 +1,18 @@
 ---
-description: Automated release workflow for anveekshacode
+description: Automated release workflow for brainless
 ---
 
 # Release Skill
 
-Automate the release process for anveekshacode.
+Automate the release process for brainless.
 
 ## Usage
 
 ```
-/anveekshacode:release <version>
+/brainless:release <version>
 ```
 
-Example: `/anveekshacode:release 2.4.0` or `/anveekshacode:release patch` or `/anveekshacode:release minor`
+Example: `/brainless:release 2.4.0` or `/brainless:release patch` or `/brainless:release minor`
 
 ## Release Checklist
 
@@ -56,8 +56,8 @@ gh release create v<version> --title "v<version> - <title>" --notes "<release no
 ```
 
 ### 7. Verify
-- [ ] npm: https://www.npmjs.com/package/anveekshacode
-- [ ] GitHub: https://github.com/Yeachan-Heo/anveekshacode/releases
+- [ ] npm: https://www.npmjs.com/package/brainless
+- [ ] GitHub: https://github.com/Yeachan-Heo/brainless/releases
 
 ## Version Files Reference
 

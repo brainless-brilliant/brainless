@@ -1,6 +1,6 @@
 # Agent Architecture: OpenCode vs Claude Code
 
-This document explains the architectural differences between OpenCode's swappable master agent system and Claude Code's skill-based routing, and how anveekshacode bridges this gap elegantly.
+This document explains the architectural differences between OpenCode's swappable master agent system and Claude Code's skill-based routing, and how brainless bridges this gap elegantly.
 
 ---
 

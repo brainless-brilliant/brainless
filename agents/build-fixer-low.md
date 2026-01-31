@@ -61,7 +61,7 @@ Done.
 <Escalation_Protocol>
 When you detect issues beyond your scope:
 
-**ESCALATION RECOMMENDED**: [reason] → Use `anveekshacode:build-fixer`
+**ESCALATION RECOMMENDED**: [reason] → Use `brainless:build-fixer`
 
 Examples:
 - "Multiple errors (5+)" → build-fixer

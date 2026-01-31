@@ -28,17 +28,17 @@ Brainless AI Workforce transforms Claude Code into an intelligent multi-agent sy
 
 ```bash
 # Install via npm
-npm install -g @anveeksha/workforce
+npm install -g @brainless/workforce
 
 # Or as a Claude Code plugin
-claude /install-plugin @anveeksha/workforce
+claude /install-plugin @brainless/workforce
 ```
 
 ## Quick Start
 
 ```bash
 # Run setup wizard
-anveeksha install
+brainless install
 
 # Or use the short alias
 avk install
@@ -62,7 +62,7 @@ Then in Claude Code:
 Automatically analyzes your project and provisions the right team:
 
 ```bash
-anveeksha provision
+brainless provision
 ```
 
 Detects 50+ technologies including:
@@ -90,10 +90,10 @@ Tasks are automatically routed to the optimal model tier based on complexity.
 
 ### CLI Commands
 ```bash
-anveeksha install     # Install to Claude Code
-anveeksha provision   # Scan project and provision workforce
-anveeksha info        # Show available agents
-anveeksha update      # Check for updates
+brainless install     # Install to Claude Code
+brainless provision   # Scan project and provision workforce
+brainless info        # Show available agents
+brainless update      # Check for updates
 ```
 
 ### Slash Commands (in Claude Code)
@@ -113,7 +113,7 @@ import {
   createWorkforceSession,
   scanProject,
   assembleTeam 
-} from '@anveeksha/workforce';
+} from '@brainless/workforce';
 
 // Create orchestration session
 const session = createWorkforceSession();
@@ -135,7 +135,7 @@ Run `/setup --local` or `/setup --global` to configure.
 
 ## Credits & Acknowledgments
 
-This project is built upon and inspired by **[anveekshacode](https://github.com/anthropics/claude-code-plugins/tree/main/anveekshacode)** by **Yeochan Heo**.
+This project is built upon and inspired by **[brainless](https://github.com/anthropics/claude-code-plugins/tree/main/brainless)** by **Yeochan Heo**.
 
 We extend our gratitude for the excellent foundation that enabled us to push the boundaries further with:
 - 🤖 **PM-managed autonomous team orchestration**
@@ -152,5 +152,5 @@ MIT License
 <p align="center">
   <strong>© Brainless Technologies Pvt. Ltd.</strong><br>
   <em>Empowering developers with intelligent AI workforce</em><br><br>
-  <sub>Built upon the foundation of anveekshacode by Yeochan Heo</sub>
+  <sub>Built upon the foundation of brainless by Yeochan Heo</sub>
 </p>

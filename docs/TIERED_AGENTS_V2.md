@@ -119,9 +119,9 @@ Output escalation recommendation:
 
 | Variant | Model | Tools | Focus |
 |---------|-------|-------|-------|
-| anveeksha-junior-low | Haiku | Read, Glob, Grep, Edit, Write, Bash, TodoWrite | Single-file, trivial changes |
-| anveeksha-junior | Sonnet | Same | Multi-step, moderate complexity |
-| anveeksha-junior-high | Opus | Same | Multi-file, complex refactoring |
+| brainless-junior-low | Haiku | Read, Glob, Grep, Edit, Write, Bash, TodoWrite | Single-file, trivial changes |
+| brainless-junior | Sonnet | Same | Multi-step, moderate complexity |
+| brainless-junior-high | Opus | Same | Multi-file, complex refactoring |
 
 **Shared Constraints**:
 - Task tool BLOCKED (no delegation)
@@ -132,19 +132,19 @@ Output escalation recommendation:
 **Tier-Specific Behaviors**:
 
 ```markdown
-## anveeksha-junior-low
+## brainless-junior-low
 - Single-file edits only
 - Trivial changes (typos, simple additions)
 - Skip TodoWrite for <2 step tasks
 - Escalate if: multi-file changes, complex logic, architectural decisions
 
-## anveeksha-junior (medium)
+## brainless-junior (medium)
 - Multi-step tasks within a module
 - Standard complexity
 - Always use TodoWrite
 - Escalate if: system-wide changes, cross-module dependencies
 
-## anveeksha-junior-high
+## brainless-junior-high
 - Multi-file refactoring
 - Complex architectural changes
 - Deep analysis before changes
@@ -282,7 +282,7 @@ Escalate when: [specific conditions]
 
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
-**ESCALATION RECOMMENDED**: [reason] → Use anveeksha-brainless:[higher-tier]
+**ESCALATION RECOMMENDED**: [reason] → Use brainless-brainless:[higher-tier]
 </Escalation_Protocol>
 ```
 

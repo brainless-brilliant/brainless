@@ -10,12 +10,12 @@ Save important context to `.brainless/notepad.md` that survives conversation com
 
 | Command | Action |
 |---------|--------|
-| `/anveekshacode:note <content>` | Add to Working Memory with timestamp |
-| `/anveekshacode:note --priority <content>` | Add to Priority Context (always loaded) |
-| `/anveekshacode:note --manual <content>` | Add to MANUAL section (never pruned) |
-| `/anveekshacode:note --show` | Display current notepad contents |
-| `/anveekshacode:note --prune` | Remove entries older than 7 days |
-| `/anveekshacode:note --clear` | Clear Working Memory (keep Priority + MANUAL) |
+| `/brainless:note <content>` | Add to Working Memory with timestamp |
+| `/brainless:note --priority <content>` | Add to Priority Context (always loaded) |
+| `/brainless:note --manual <content>` | Add to MANUAL section (never pruned) |
+| `/brainless:note --show` | Display current notepad contents |
+| `/brainless:note --prune` | Remove entries older than 7 days |
+| `/brainless:note --clear` | Clear Working Memory (keep Priority + MANUAL) |
 
 ## Sections
 
@@ -37,11 +37,11 @@ Save important context to `.brainless/notepad.md` that survives conversation com
 ## Examples
 
 ```
-/anveekshacode:note Found auth bug in UserContext - missing useEffect dependency
-/anveekshacode:note --priority Project uses TypeScript strict mode, all files in src/
-/anveekshacode:note --manual Contact: api-team@company.com for backend questions
-/anveekshacode:note --show
-/anveekshacode:note --prune
+/brainless:note Found auth bug in UserContext - missing useEffect dependency
+/brainless:note --priority Project uses TypeScript strict mode, all files in src/
+/brainless:note --manual Contact: api-team@company.com for backend questions
+/brainless:note --show
+/brainless:note --prune
 ```
 
 ## Behavior

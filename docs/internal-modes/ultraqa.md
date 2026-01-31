@@ -18,11 +18,11 @@ Parse the goal from arguments. Supported formats:
 
 | Invocation | Goal Type | What to Check |
 |------------|-----------|---------------|
-| `/anveekshacode:ultraqa --tests` | tests | All test suites pass |
-| `/anveekshacode:ultraqa --build` | build | Build succeeds with exit 0 |
-| `/anveekshacode:ultraqa --lint` | lint | No lint errors |
-| `/anveekshacode:ultraqa --typecheck` | typecheck | No TypeScript errors |
-| `/anveekshacode:ultraqa --custom "pattern"` | custom | Custom success pattern in output |
+| `/brainless:ultraqa --tests` | tests | All test suites pass |
+| `/brainless:ultraqa --build` | build | Build succeeds with exit 0 |
+| `/brainless:ultraqa --lint` | lint | No lint errors |
+| `/brainless:ultraqa --typecheck` | typecheck | No TypeScript errors |
+| `/brainless:ultraqa --custom "pattern"` | custom | Custom success pattern in output |
 
 If no structured goal provided, interpret the argument as a custom goal.
 
@@ -38,7 +38,7 @@ If no structured goal provided, interpret the argument as a custom goal.
    - `--custom`: Run appropriate command and check for pattern
    - `--interactive`: Use qa-tester for interactive CLI/service testing:
      ```
-     Task(subagent_type="anveekshacode:qa-tester", model="sonnet", prompt="TEST:
+     Task(subagent_type="brainless:qa-tester", model="sonnet", prompt="TEST:
      Goal: [describe what to verify]
      Service: [how to start]
      Test cases: [specific scenarios to verify]")
@@ -50,7 +50,7 @@ If no structured goal provided, interpret the argument as a custom goal.
 
 3. **ARCHITECT DIAGNOSIS**: Spawn architect to analyze failure
    ```
-   Task(subagent_type="anveekshacode:architect", model="opus", prompt="DIAGNOSE FAILURE:
+   Task(subagent_type="brainless:architect", model="opus", prompt="DIAGNOSE FAILURE:
    Goal: [goal type]
    Output: [test/build output]
    Provide root cause and specific fix recommendations.")
@@ -58,7 +58,7 @@ If no structured goal provided, interpret the argument as a custom goal.
 
 4. **FIX ISSUES**: Apply architect's recommendations
    ```
-   Task(subagent_type="anveekshacode:executor", model="sonnet", prompt="FIX:
+   Task(subagent_type="brainless:executor", model="sonnet", prompt="FIX:
    Issue: [architect diagnosis]
    Files: [affected files]
    Apply the fix precisely as recommended.")
@@ -106,7 +106,7 @@ Track state in `.brainless/ultraqa-state.json`:
 
 ## Cancellation
 
-User can cancel with `/anveekshacode:cancel-ultraqa` which clears the state file.
+User can cancel with `/brainless:cancel-ultraqa` which clears the state file.
 
 ## Important Rules
 

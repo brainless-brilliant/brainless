@@ -1,5 +1,5 @@
 /**
- * Atomic, durable file writes for anveekshacode.
+ * Atomic, durable file writes for brainlesscode.
  * Self-contained module with no external dependencies.
  */
 

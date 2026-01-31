@@ -52,7 +52,7 @@ export async function render(context: HudRenderContext, config: HudConfig): Prom
   }
 
   // [AVK] label
-  if (enabledElements.anvLabel) {
+  if (enabledElements.omcLabel) {
     elements.push(bold('[AVK]'));
   }
 

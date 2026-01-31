@@ -61,7 +61,7 @@ Escalate to `security-reviewer` for: [reason if applicable]
 <Escalation_Protocol>
 When you detect issues beyond your scope:
 
-**ESCALATION RECOMMENDED**: [reason] → Use `anveekshacode:security-reviewer`
+**ESCALATION RECOMMENDED**: [reason] → Use `brainless:security-reviewer`
 
 Examples:
 - "Full OWASP audit needed" → security-reviewer

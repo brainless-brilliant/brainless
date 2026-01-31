@@ -33,9 +33,9 @@ After running this command, you are free to stop working. The persistent mode ho
 
 ## Note on Linked Modes
 
-Since v3.0, Ralph automatically activates Ultrawork for parallel execution. When you cancel Ralph, the linked Ultrawork is also cancelled. If you started Ultrawork separately (not via Ralph), use `/anveekshacode:cancel-ultrawork` to cancel it independently.
+Since v3.0, Ralph automatically activates Ultrawork for parallel execution. When you cancel Ralph, the linked Ultrawork is also cancelled. If you started Ultrawork separately (not via Ralph), use `/brainless:cancel-ultrawork` to cancel it independently.
 
 ## To Start Fresh
 
-- `/anveekshacode:ralph "task"` - Start ralph with ultrawork (default)
-- `/anveekshacode:ultrawork "task"` - Start ultrawork only (standalone)
+- `/brainless:ralph "task"` - Start ralph with ultrawork (default)
+- `/brainless:ultrawork "task"` - Start ultrawork only (standalone)

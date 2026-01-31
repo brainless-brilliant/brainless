@@ -1,15 +1,15 @@
 # Local Plugin Installation
 
-How to install anveekshacode from a local development directory as a Claude Code plugin.
+How to install brainless from a local development directory as a Claude Code plugin.
 
 ## Quick Install
 
 ```bash
 # 1. Add local directory as a marketplace
-claude plugin marketplace add /path/to/anveekshacode
+claude plugin marketplace add /path/to/brainless
 
 # 2. Install the plugin from the local marketplace
-claude plugin install anveekshacode@anveekshacode
+claude plugin install brainless@brainless
 
 # 3. Restart Claude Code to pick up the plugin
 ```
@@ -21,19 +21,19 @@ claude plugin install anveekshacode@anveekshacode
 claude plugin marketplace list
 
 # Update marketplace (re-read from source)
-claude plugin marketplace update anveekshacode
+claude plugin marketplace update brainless
 
 # Update the installed plugin
-claude plugin update anveekshacode@anveekshacode
+claude plugin update brainless@brainless
 
 # List installed plugins
 claude plugin list
 
 # Uninstall
-claude plugin uninstall anveekshacode@anveekshacode
+claude plugin uninstall brainless@brainless
 
 # Remove marketplace
-claude plugin marketplace remove anveekshacode
+claude plugin marketplace remove brainless
 ```
 
 ## Plugin Structure
@@ -42,7 +42,7 @@ The plugin requires a `plugin.json` manifest:
 
 ```json
 {
-  "name": "anveekshacode",
+  "name": "brainless",
   "version": "3.4.0",
   "description": "Multi-agent orchestration system for Claude Code",
   "hooks": {
@@ -65,10 +65,10 @@ After making changes to the plugin:
 npm run build
 
 # 2. Update the marketplace cache
-claude plugin marketplace update anveekshacode
+claude plugin marketplace update brainless
 
 # 3. Update the installed plugin
-claude plugin update anveekshacode@anveekshacode
+claude plugin update brainless@brainless
 
 # 4. Restart Claude Code session
 ```

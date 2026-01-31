@@ -71,7 +71,7 @@ Done.
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
 
-**ESCALATION RECOMMENDED**: [specific reason] → Use `anveekshacode:executor`
+**ESCALATION RECOMMENDED**: [specific reason] → Use `brainless:executor`
 
 Examples:
 - "Multi-file change required" → executor

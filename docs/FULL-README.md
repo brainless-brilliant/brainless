@@ -6,19 +6,19 @@
 
 <div align="center">
 
-![anveekshacode](https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode-website/main/social-preview.png)
+![brainless](https://raw.githubusercontent.com/Yeachan-Heo/brainless-website/main/social-preview.png)
 
-# anveekshacode
+# brainless
 
-[![Version](https://img.shields.io/badge/version-3.4.2-ff6b6b)](https://github.com/Yeachan-Heo/anveekshacode)
-[![npm version](https://img.shields.io/npm/v/anveeksha?color=cb3837)](https://www.npmjs.com/package/anveekshacode)
+[![Version](https://img.shields.io/badge/version-3.4.2-ff6b6b)](https://github.com/Yeachan-Heo/brainless)
+[![npm version](https://img.shields.io/npm/v/brainless?color=cb3837)](https://www.npmjs.com/package/brainless)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
 **Multi-agent orchestration system for [Claude Code](https://docs.anthropic.com/claude-code)**
 
-[Install](#quick-install) • [Usage](#usage) • [Agents](#the-32-specialized-agents) • [Architecture](docs/ARCHITECTURE.md) • [Website](https://yeachan-heo.github.io/anveekshacode-website)
+[Install](#quick-install) • [Usage](#usage) • [Agents](#the-32-specialized-agents) • [Architecture](docs/ARCHITECTURE.md) • [Website](https://yeachan-heo.github.io/brainless-website)
 
 </div>
 
@@ -46,7 +46,7 @@
 <remember priority>API client at src/api/client.ts</remember>
 
 # Or save notes manually
-/anveekshacode:note Database schema uses PostgreSQL with Prisma ORM
+/brainless:note Database schema uses PostgreSQL with Prisma ORM
 ```
 
 ### 📋 Ralph Loop PRD Support
@@ -57,19 +57,19 @@
 - **Progress tracking** with learnings and patterns
 - **Completion guarantee** - loop continues until ALL stories pass
 - **Three powerful modes:**
-  - `/anveekshacode:ralph` - Self-referential loop until completion
-  - `/anveekshacode:ultrawork` + `/anveekshacode:ralph` - Maximum intensity + completion guarantee
-  - `/anveekshacode:ultraqa` - Autonomous test-verify-fix cycles
+  - `/brainless:ralph` - Self-referential loop until completion
+  - `/brainless:ultrawork` + `/brainless:ralph` - Maximum intensity + completion guarantee
+  - `/brainless:ultraqa` - Autonomous test-verify-fix cycles
 
 ```bash
 # Initialize a structured task
-/anveekshacode:ralph-init implement user authentication with OAuth
+/brainless:ralph-init implement user authentication with OAuth
 
 # Maximum intensity with completion guarantee
-/anveekshacode:ultrawork refactor the entire API layer
+/brainless:ultrawork refactor the entire API layer
 
 # Autonomous QA cycling
-/anveekshacode:ultraqa all tests must pass with 90%+ coverage
+/brainless:ultraqa all tests must pass with 90%+ coverage
 ```
 
 See [CHANGELOG.md](CHANGELOG.md) for full details.
@@ -152,7 +152,7 @@ Background agent resumption with context preservation via `resumeSession()`.
 Execute complex tasks with **up to 5 concurrent workers** for 3-5x speedup:
 
 ```bash
-/anveekshacode:ultrapilot "build a fullstack todo app"
+/brainless:ultrapilot "build a fullstack todo app"
 ```
 
 **How it works:**
@@ -172,7 +172,7 @@ Execute complex tasks with **up to 5 concurrent workers** for 3-5x speedup:
 N coordinated agents with atomic task claiming from shared pool:
 
 ```bash
-/anveekshacode:swarm 5:executor "fix all TypeScript errors"
+/brainless:swarm 5:executor "fix all TypeScript errors"
 ```
 
 **Features:**
@@ -186,7 +186,7 @@ N coordinated agents with atomic task claiming from shared pool:
 Chain agents with data passing between stages:
 
 ```bash
-/anveekshacode:pipeline explore:haiku -> architect:opus -> executor:sonnet
+/brainless:pipeline explore:haiku -> architect:opus -> executor:sonnet
 ```
 
 **Built-in Presets:**
@@ -204,7 +204,7 @@ Chain agents with data passing between stages:
 Maximum parallelism with **30-50% token savings**:
 
 ```bash
-/anveekshacode:ecomode "refactor the authentication system"
+/brainless:ecomode "refactor the authentication system"
 ```
 
 Smart model routing:
@@ -217,20 +217,20 @@ Smart model routing:
 Smart cancellation that auto-detects active mode:
 
 ```bash
-/anveekshacode:cancel
+/brainless:cancel
 # Or just say: "stop", "cancel", "abort"
 ```
 
 **Auto-detects and cancels:** autopilot, ultrapilot, ralph, ultrawork, ultraqa, ecomode, swarm, pipeline
 
-**Deprecation notice:** Individual cancel commands (`cancel-ralph`, `cancel-ultraqa`, `cancel-ultrawork`, `cancel-ecomode`) still work but are deprecated. Use `/anveekshacode:cancel` instead.
+**Deprecation notice:** Individual cancel commands (`cancel-ralph`, `cancel-ultraqa`, `cancel-ultrawork`, `cancel-ecomode`) still work but are deprecated. Use `/brainless:cancel` instead.
 
 ### 🔍 Explore-High Agent
 
 Opus-powered architectural search for complex codebase exploration:
 
 ```bash
-Task(subagent_type="anveekshacode:explore-high",
+Task(subagent_type="brainless:explore-high",
      model="opus",
      prompt="Find all authentication-related code patterns...")
 ```
@@ -247,10 +247,10 @@ Choose **ONE** installation method below. Do not mix methods.
 
 ```bash
 # From terminal:
-claude plugin install anveeksha
+claude plugin install brainless
 
 # Or from within Claude Code:
-/anveekshacode:plugin anveeksha
+/brainless:plugin brainless
 ```
 
 Uses Node.js hooks from the plugin directory. Integrates directly with Claude Code's plugin system.
@@ -258,7 +258,7 @@ Uses Node.js hooks from the plugin directory. Integrates directly with Claude Co
 ### Option B: Curl One-Liner (Deprecated)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/brainless/main/scripts/install.sh | bash
 ```
 
 > **Deprecated**: This method installs bash hooks to `~/.claude/` which can conflict with plugin installations. Use the plugin method above instead.
@@ -266,7 +266,7 @@ curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/scri
 ### Option C: Via npm (Windows & Cross-Platform)
 
 ```bash
-npm install -g anveekshacode
+npm install -g brainless
 ```
 
 > **Windows Users**: This is the recommended installation method. Requires Node.js 20+.
@@ -276,8 +276,8 @@ npm install -g anveekshacode
 ### Manual Install (macOS/Linux)
 
 ```bash
-git clone https://github.com/Yeachan-Heo/anveeksha.git
-cd anveeksha
+git clone https://github.com/Yeachan-Heo/brainless.git
+cd brainless
 chmod +x scripts/install.sh
 ./scripts/install.sh
 ```
@@ -293,7 +293,7 @@ chmod +x scripts/install.sh
 Configure omc for the current project only:
 
 ```
-/anveekshacode:omc-default
+/brainless:omc-default
 ```
 
 - Creates `./.claude/CLAUDE.md` in your current project
@@ -306,7 +306,7 @@ Configure omc for the current project only:
 Configure omc for all Claude Code sessions:
 
 ```
-/anveekshacode:omc-default-global
+/brainless:omc-default-global
 ```
 
 - Creates `~/.claude/CLAUDE.md` globally
@@ -338,7 +338,7 @@ Without running one of these commands, Claude operates with basic capabilities. 
 - **First time**: Run after installation (choose project or global)
 - **After updates**: Re-run to get the latest configuration
 - **Different machines**: Run on each machine where you use Claude Code
-- **New projects**: Run `/anveekshacode:omc-default` in each project that needs omc
+- **New projects**: Run `/brainless:omc-default` in each project that needs omc
 
 ### Configuration Precedence
 
@@ -348,7 +348,7 @@ If both configurations exist, **project-scoped takes precedence** over global:
 ./.claude/CLAUDE.md  (project)   →  Overrides  →  ~/.claude/CLAUDE.md  (global)
 ```
 
-> **NOTE**: After updating the plugin (via `npm update`, `git pull`, or Claude Code's plugin update), you MUST re-run `/anveekshacode:omc-default` or `/anveekshacode:omc-default-global` to apply the latest CLAUDE.md changes. The plugin update does NOT automatically update your CLAUDE.md files.
+> **NOTE**: After updating the plugin (via `npm update`, `git pull`, or Claude Code's plugin update), you MUST re-run `/brainless:omc-default` or `/brainless:omc-default-global` to apply the latest CLAUDE.md changes. The plugin update does NOT automatically update your CLAUDE.md files.
 
 ---
 
@@ -359,7 +359,7 @@ If both configurations exist, **project-scoped takes precedence** over global:
 The repository is also a Claude Code plugin with this structure:
 
 ```
-anveekshacode/
+brainless/
 ├── .claude-plugin/
 │   └── plugin.json            # Plugin manifest
 ├── agents/                    # 32 specialized agents (tiered: architect, executor, explore, etc.)
@@ -389,18 +389,18 @@ The installer adds to your Claude Code config (`~/.claude/`):
 │   ├── planner.md             # Strategic planner (Opus)
 │   └── qa-tester.md           # CLI/service testing (Sonnet)
 ├── commands/
-│   ├── orchestrate.md      # /anveekshacode:orchestrate command
-│   ├── omc-default.md      # /anveekshacode:omc-default command (project-scoped)
-│   ├── omc-default-global.md # /anveekshacode:omc-default-global command (global)
-│   ├── ultrawork.md        # /anveekshacode:ultrawork command
-│   ├── deepsearch.md       # /anveekshacode:deepsearch command
-│   ├── analyze.md          # /anveekshacode:analyze command
-│   ├── plan.md             # /anveekshacode:plan command (planner)
-│   ├── review.md           # /anveekshacode:review command (critic)
-│   ├── planner.md          # /anveekshacode:planner command
-│   ├── orchestrator.md     # /anveekshacode:orchestrator command
-│   ├── ralph-loop.md       # /anveekshacode:ralph-loop command
-│   └── cancel-ralph.md     # /anveekshacode:cancel-ralph command
+│   ├── orchestrate.md      # /brainless:orchestrate command
+│   ├── omc-default.md      # /brainless:omc-default command (project-scoped)
+│   ├── omc-default-global.md # /brainless:omc-default-global command (global)
+│   ├── ultrawork.md        # /brainless:ultrawork command
+│   ├── deepsearch.md       # /brainless:deepsearch command
+│   ├── analyze.md          # /brainless:analyze command
+│   ├── plan.md             # /brainless:plan command (planner)
+│   ├── review.md           # /brainless:review command (critic)
+│   ├── planner.md          # /brainless:planner command
+│   ├── orchestrator.md     # /brainless:orchestrator command
+│   ├── ralph-loop.md       # /brainless:ralph-loop command
+│   └── cancel-ralph.md     # /brainless:cancel-ralph command
 ├── skills/
 │   ├── ultrawork/SKILL.md  # Maximum performance mode
 │   ├── deepinit/SKILL.md   # Hierarchical AGENTS.md generation
@@ -423,23 +423,23 @@ claude
 
 | Command | Description |
 |---------|-------------|
-| `/anveekshacode:orchestrate <task>` | Activate multi-agent orchestration mode |
-| `/anveekshacode:omc-default` | Configure omc for current project (./.claude/CLAUDE.md) |
-| `/anveekshacode:omc-default-global` | Configure omc globally (~/.claude/CLAUDE.md) |
-| `/anveekshacode:ultrawork <task>` | Maximum performance mode with parallel agents |
-| `/anveekshacode:ralph-init <task>` | Initialize PRD (Product Requirements Document) for structured task tracking |
-| `/anveekshacode:ralph <task>` | Self-referential loop until task completion |
-| `/anveekshacode:ultraqa <goal>` | Autonomous QA cycling workflow (test → verify → fix → repeat) |
-| `/anveekshacode:cancel-ralph` | Cancel active Ralph Loop |
-| `/anveekshacode:cancel-ultraqa` | Cancel active UltraQA cycling workflow |
-| `/anveekshacode:note <content>` | Save notes to notepad.md for compaction resilience |
-| `/anveekshacode:deepsearch <query>` | Thorough multi-strategy codebase search |
-| `/anveekshacode:deepinit [path]` | Index codebase with hierarchical AGENTS.md files |
-| `/anveekshacode:analyze <target>` | Deep analysis and investigation |
-| `/anveekshacode:plan <description>` | Start planning session with planner |
-| `/anveekshacode:review [plan-path]` | Review a plan with critic |
-| `/anveekshacode:planner <task>` | Strategic planning with interview workflow |
-| `/anveekshacode:doctor` | Diagnose and fix installation issues |
+| `/brainless:orchestrate <task>` | Activate multi-agent orchestration mode |
+| `/brainless:omc-default` | Configure omc for current project (./.claude/CLAUDE.md) |
+| `/brainless:omc-default-global` | Configure omc globally (~/.claude/CLAUDE.md) |
+| `/brainless:ultrawork <task>` | Maximum performance mode with parallel agents |
+| `/brainless:ralph-init <task>` | Initialize PRD (Product Requirements Document) for structured task tracking |
+| `/brainless:ralph <task>` | Self-referential loop until task completion |
+| `/brainless:ultraqa <goal>` | Autonomous QA cycling workflow (test → verify → fix → repeat) |
+| `/brainless:cancel-ralph` | Cancel active Ralph Loop |
+| `/brainless:cancel-ultraqa` | Cancel active UltraQA cycling workflow |
+| `/brainless:note <content>` | Save notes to notepad.md for compaction resilience |
+| `/brainless:deepsearch <query>` | Thorough multi-strategy codebase search |
+| `/brainless:deepinit [path]` | Index codebase with hierarchical AGENTS.md files |
+| `/brainless:analyze <target>` | Deep analysis and investigation |
+| `/brainless:plan <description>` | Start planning session with planner |
+| `/brainless:review [plan-path]` | Review a plan with critic |
+| `/brainless:planner <task>` | Strategic planning with interview workflow |
+| `/brainless:doctor` | Diagnose and fix installation issues |
 
 ### Examples
 
@@ -447,34 +447,34 @@ claude
 # In Claude Code:
 
 # Activate orchestration for a task
-/anveekshacode:orchestrate refactor the authentication module
+/brainless:orchestrate refactor the authentication module
 
 # Configure for current project
-/anveekshacode:omc-default
+/brainless:omc-default
 
 # Or configure globally for all projects
-/anveekshacode:omc-default-global
+/brainless:omc-default-global
 
 # Use ultrawork for maximum performance
-/anveekshacode:ultrawork implement user dashboard with charts
+/brainless:ultrawork implement user dashboard with charts
 
 # Initialize structured task with PRD
-/anveekshacode:ralph-init implement user authentication with OAuth
+/brainless:ralph-init implement user authentication with OAuth
 
 # Maximum intensity with completion guarantee
-/anveekshacode:ultrawork-ralph migrate database schema to PostgreSQL
+/brainless:ultrawork-ralph migrate database schema to PostgreSQL
 
 # Autonomous QA cycling
-/anveekshacode:ultraqa all tests must pass with 90%+ coverage
+/brainless:ultraqa all tests must pass with 90%+ coverage
 
 # Save important discoveries
-/anveekshacode:note Project uses Bun runtime instead of Node.js
+/brainless:note Project uses Bun runtime instead of Node.js
 
 # Deep search
-/anveekshacode:deepsearch API endpoints that handle user data
+/brainless:deepsearch API endpoints that handle user data
 
 # Deep analysis
-/anveekshacode:analyze performance bottleneck in the database layer
+/brainless:analyze performance bottleneck in the database layer
 ```
 
 ### Magic Keywords
@@ -611,7 +611,7 @@ Oh-my-claudecode includes 19 lifecycle hooks that enhance Claude Code's behavior
 
 Skills are automatically activated via slash commands or magic keywords.
 
-**Note:** Individual cancel commands (`cancel-ralph`, `cancel-ultraqa`, `cancel-ultrawork`, `cancel-ecomode`, `cancel-autopilot`) are deprecated in v3.4.0. Use the unified `/anveekshacode:cancel` command instead, which auto-detects the active mode.
+**Note:** Individual cancel commands (`cancel-ralph`, `cancel-ultraqa`, `cancel-ultrawork`, `cancel-ecomode`, `cancel-autopilot`) are deprecated in v3.4.0. Use the unified `/brainless:cancel` command instead, which auto-detects the active mode.
 
 ---
 
@@ -749,7 +749,7 @@ Your custom system prompt here...
 ## Uninstall
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/scripts/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Yeachan-Heo/brainless/main/scripts/uninstall.sh | bash
 ```
 
 Or manually:
@@ -766,11 +766,11 @@ rm ~/.claude/commands/{orchestrate,omc-default,omc-default-global,ultrawork,deep
 For programmatic use with the Claude Agent SDK:
 
 ```bash
-npm install anveekshacode @anthropic-ai/claude-agent-sdk
+npm install brainless @anthropic-ai/claude-agent-sdk
 ```
 
 ```typescript
-import { createOmcSession } from 'anveekshacode';
+import { createOmcSession } from 'brainless';
 import { query } from '@anthropic-ai/claude-agent-sdk';
 
 const session = createOmcSession();
@@ -896,7 +896,7 @@ The original oh-my-opencode used multiple AI providers. This project uses Claude
 | **19 Lifecycle Hooks** | rules-injector, omc-orchestrator, auto-slash-command, keyword-detector, ralph-loop, todo-continuation, notepad, post-tool-use, context-window-limit-recovery, preemptive-compaction, session-recovery, directory-readme-injector, comment-checker, thinking-block-validator, empty-message-sanitizer, edit-error-recovery, non-interactive-env, agent-usage-reminder, background-notification |
 | **37 Builtin Skills** | orchestrate, autopilot, ultrawork, ultrapilot, swarm, pipeline, ecomode, ralph, ralph-init, ultraqa, planner, plan, ralplan, review, deepinit, deepsearch, analyze, research, frontend-ui-ux, git-master, tdd, learner, note, cancel (unified), cancel-autopilot, cancel-ralph, cancel-ultraqa, cancel-ultrawork, cancel-ecomode, omc-default, omc-default-global, omc-setup, doctor, help, hud, release, mcp-setup |
 | **Magic Keywords** | `ultrawork`, `search`, `analyze`, `ultrathink` trigger enhanced modes |
-| **Slash Commands** | All skills available via `/anveekshacode:skill-name` (e.g., `/anveekshacode:ultrawork`, `/anveekshacode:ralph`, `/anveekshacode:plan`) |
+| **Slash Commands** | All skills available via `/brainless:skill-name` (e.g., `/brainless:ultrawork`, `/brainless:ralph`, `/brainless:plan`) |
 | **Compaction-Resilient Memory** | Three-tier notepad system (Priority Context, Working Memory, MANUAL) |
 | **Remember Tag Auto-Capture** | Agents can persist discoveries with `<remember>` tags |
 | **PRD Support** | Structured task tracking with user stories and acceptance criteria |
@@ -924,7 +924,7 @@ The original oh-my-opencode used multiple AI providers. This project uses Claude
 ### Architecture Differences
 
 ```
-oh-my-opencode (Original)          anveekshacode (Port)
+oh-my-opencode (Original)          brainless (Port)
 ─────────────────────────          ────────────────────────
 ┌─────────────────────┐            ┌─────────────────────┐
 │   OpenCode Plugin   │            │    Claude Code      │
@@ -972,7 +972,7 @@ If you're coming from oh-my-opencode:
 2. **LSP Workflows**: All LSP tools are available! Use `lsp_servers` to check which servers are installed
 3. **AST Searches**: Use `ast_grep_search` with pattern syntax (e.g., `function $NAME($$$)`)
 4. **Background Tasks**: Claude Code's `Task` tool with `run_in_background` works similarly
-5. **Planning**: Use `/anveekshacode:plan` command to start a planning session with planner
+5. **Planning**: Use `/brainless:plan` command to start a planning session with planner
 
 </details>
 

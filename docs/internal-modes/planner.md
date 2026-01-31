@@ -107,7 +107,7 @@ This command delegates to the `planner` agent (Opus model) which follows the ful
 
 ```
 Task(
-  subagent_type="anveekshacode:planner",
+  subagent_type="brainless:planner",
   model="opus",
   prompt="PLANNING REQUEST: {{ARGUMENTS}}
 
@@ -141,7 +141,7 @@ Quality requirements:
 ## Example Workflow
 
 ```
-User: /anveekshacode:planner add user authentication
+User: /brainless:planner add user authentication
 
 Planner: What's the primary scope for this authentication feature?
 

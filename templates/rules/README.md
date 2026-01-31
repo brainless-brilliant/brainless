@@ -21,7 +21,7 @@ This directory contains rule templates that you can copy to your project's `.cla
 
 ## Auto-Discovery
 
-When you place rules in `.claude/rules/`, they are automatically discovered by anveekshacode and injected into the context for all agents working in your project.
+When you place rules in `.claude/rules/`, they are automatically discovered by brainless and injected into the context for all agents working in your project.
 
 ## Example
 

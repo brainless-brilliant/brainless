@@ -11,12 +11,12 @@ Orchestrate parallel scientist agents for comprehensive research workflows with 
 ## Usage Examples
 
 ```
-/anveekshacode:research <goal>                    # Standard research with user checkpoints
-/anveekshacode:research AUTO: <goal>              # Fully autonomous until complete
-/anveekshacode:research status                    # Check current research session status
-/anveekshacode:research resume                    # Resume interrupted research session
-/anveekshacode:research list                      # List all research sessions
-/anveekshacode:research report <session-id>       # Generate report for session
+/brainless:research <goal>                    # Standard research with user checkpoints
+/brainless:research AUTO: <goal>              # Fully autonomous until complete
+/brainless:research status                    # Check current research session status
+/brainless:research resume                    # Resume interrupted research session
+/brainless:research list                      # List all research sessions
+/brainless:research report <session-id>       # Generate report for session
 ```
 
 ## Research Protocol
@@ -36,13 +36,13 @@ Fire independent stages in parallel via Task tool:
 
 ```
 // Stage 1 - Simple data gathering
-Task(subagent_type="anveekshacode:scientist-low", model="haiku", prompt="[RESEARCH_STAGE:1] Investigate...")
+Task(subagent_type="brainless:scientist-low", model="haiku", prompt="[RESEARCH_STAGE:1] Investigate...")
 
 // Stage 2 - Standard analysis
-Task(subagent_type="anveekshacode:scientist", model="sonnet", prompt="[RESEARCH_STAGE:2] Analyze...")
+Task(subagent_type="brainless:scientist", model="sonnet", prompt="[RESEARCH_STAGE:2] Analyze...")
 
 // Stage 3 - Complex reasoning
-Task(subagent_type="anveekshacode:scientist-high", model="opus", prompt="[RESEARCH_STAGE:3] Deep analysis of...")
+Task(subagent_type="brainless:scientist-high", model="opus", prompt="[RESEARCH_STAGE:3] Deep analysis of...")
 ```
 
 ### Smart Model Routing
@@ -86,7 +86,7 @@ Sessions are stored at `.brainless/research/{session-id}/` with:
 ## Cancellation
 
 ```
-/anveekshacode:cancel-research
+/brainless:cancel-research
 ```
 
 Or say: "stop research", "cancel research", "abort"

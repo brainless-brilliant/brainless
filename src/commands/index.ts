@@ -121,7 +121,7 @@ export function listCommands(): string[] {
  *
  * @example
  * ```typescript
- * import { expandCommand } from 'anveekshacode';
+ * import { expandCommand } from 'brainlesscode';
  *
  * const prompt = expandCommand('ralph', 'Build a REST API');
  * // Returns the full ralph template with "Build a REST API" substituted
@@ -150,7 +150,7 @@ export function expandCommand(name: string, args: string = ''): ExpandedCommand 
  *
  * @example
  * ```typescript
- * import { expandCommandPrompt } from 'anveekshacode';
+ * import { expandCommandPrompt } from 'brainlesscode';
  * import { query } from '@anthropic-ai/claude-agent-sdk';
  *
  * const prompt = expandCommandPrompt('ultrawork', 'Refactor the auth module');

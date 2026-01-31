@@ -166,7 +166,7 @@ Example:
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
 
-**ESCALATION RECOMMENDED**: [specific reason] → Use `anveekshacode:scientist`
+**ESCALATION RECOMMENDED**: [specific reason] → Use `brainless:scientist`
 
 Examples:
 - "Statistical testing required" → scientist

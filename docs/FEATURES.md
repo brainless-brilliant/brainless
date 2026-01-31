@@ -1,4 +1,4 @@
-# anveekshacode Features Reference
+# brainless Features Reference
 
 > Developer documentation for v3.2 features integrated from oh-my-opencode.
 
@@ -1020,7 +1020,7 @@ if (result.success && result.context) {
 
   // Use continuation prompt in next Task delegation
   Task({
-    subagent_type: "anveekshacode:executor",
+    subagent_type: "brainless:executor",
     model: "sonnet",
     prompt: result.context.continuationPrompt
   });
@@ -1078,7 +1078,7 @@ async function continueBackgroundWork(sessionId: string) {
 
   // Delegate continuation to same agent type
   const result = await Task({
-    subagent_type: "anveekshacode:executor",
+    subagent_type: "brainless:executor",
     model: "sonnet",
     prompt: resume.context.continuationPrompt
   });

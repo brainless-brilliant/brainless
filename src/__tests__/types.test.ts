@@ -61,7 +61,7 @@ describe('Type Tests', () => {
         },
       };
 
-      expect(config.agents?.anv?.model).toBe('claude-sonnet-4-5');
+      expect(config.agents?.omc?.model).toBe('claude-sonnet-4-5');
       expect(config.agents?.architect?.enabled).toBe(true);
     });
 

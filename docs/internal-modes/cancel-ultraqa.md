@@ -20,8 +20,8 @@ After running this command, the QA cycling will stop.
 
 ## To Start Fresh
 
-- `/anveekshacode:ultraqa --tests` - Run until all tests pass
-- `/anveekshacode:ultraqa --build` - Run until build succeeds
-- `/anveekshacode:ultraqa --lint` - Run until no lint errors
-- `/anveekshacode:ultraqa --typecheck` - Run until no type errors
-- `/anveekshacode:ultraqa --custom "pattern"` - Run until pattern matches
+- `/brainless:ultraqa --tests` - Run until all tests pass
+- `/brainless:ultraqa --build` - Run until build succeeds
+- `/brainless:ultraqa --lint` - Run until no lint errors
+- `/brainless:ultraqa --typecheck` - Run until no type errors
+- `/brainless:ultraqa --custom "pattern"` - Run until pattern matches

@@ -44,7 +44,7 @@ interface UsageApiResponse {
  * Get the cache file path
  */
 function getCachePath(): string {
-  return join(homedir(), '.claude/plugins/anveekshacode/.usage-cache.json');
+  return join(homedir(), '.claude/plugins/brainlesscode/.usage-cache.json');
 }
 
 /**

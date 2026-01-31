@@ -61,8 +61,8 @@ This is the **only command** you need to know. It downloads the configuration an
 
 ## Need More Help?
 
-- **Documentation**: https://github.com/anveeksha/workforce
-- **Issues**: https://github.com/anveeksha/workforce/issues
+- **Documentation**: https://github.com/brainless/workforce
+- **Issues**: https://github.com/brainless/workforce/issues
 
 ---
 

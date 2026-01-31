@@ -1,13 +1,13 @@
 # PROJECT KNOWLEDGE BASE
 
-**Project:** anveekshacode
+**Project:** brainless
 **Version:** 3.4.0
 **Purpose:** Multi-agent orchestration system for Claude Code CLI
 **Inspired by:** oh-my-opencode
 
 ## OVERVIEW
 
-anveekshacode is an enhancement system for Claude Code (Anthropic's official CLI) that adds multi-agent orchestration, persistence mechanisms, and advanced productivity features. Think "oh-my-zsh" for Claude Code.
+brainless is an enhancement system for Claude Code (Anthropic's official CLI) that adds multi-agent orchestration, persistence mechanisms, and advanced productivity features. Think "oh-my-zsh" for Claude Code.
 
 **Key Features:**
 - **🚀 NEW: Intelligent Model Routing** - Orchestrator analyzes complexity and routes to optimal model (Haiku/Sonnet/Opus)
@@ -34,7 +34,7 @@ The orchestrator (always Opus) analyzes task complexity BEFORE delegation:
 ## STRUCTURE
 
 ```
-anveekshacode/
+brainless/
 ├── src/
 │   ├── agents/              # 12 agent definitions
 │   │   ├── definitions.ts   # Agent registry & configs
@@ -200,15 +200,15 @@ Settings live in `~/.claude/settings.json`:
 
 | Command | Description |
 |---------|-------------|
-| `/anveekshacode:default <task>` | Activate multi-agent orchestration |
-| `/anveekshacode:ultrawork <task>` | Maximum performance mode |
-| `/anveekshacode:plan <description>` | Start planning with Planner |
-| `/anveekshacode:review [plan]` | Review plan with Critic |
-| `/anveekshacode:ralph-loop <task>` | Self-referential loop |
-| `/anveekshacode:cancel-ralph` | Cancel active Ralph Loop |
-| `/anveekshacode:orchestrator <task>` | Complex task coordination |
-| `/anveekshacode:deepsearch <query>` | Thorough codebase search |
-| `/anveekshacode:analyze <target>` | Deep analysis |
+| `/brainless:default <task>` | Activate multi-agent orchestration |
+| `/brainless:ultrawork <task>` | Maximum performance mode |
+| `/brainless:plan <description>` | Start planning with Planner |
+| `/brainless:review [plan]` | Review plan with Critic |
+| `/brainless:ralph-loop <task>` | Self-referential loop |
+| `/brainless:cancel-ralph` | Cancel active Ralph Loop |
+| `/brainless:orchestrator <task>` | Complex task coordination |
+| `/brainless:deepsearch <query>` | Thorough codebase search |
+| `/brainless:analyze <target>` | Deep analysis |
 
 ## COMPLEXITY HOTSPOTS
 
@@ -222,7 +222,7 @@ Settings live in `~/.claude/settings.json`:
 ## NOTES
 
 - **Claude Code Version**: Requires Claude Code CLI
-- **Installation**: `npx anveekshacode install`
+- **Installation**: `npx brainless install`
 - **Updates**: Silent auto-update checks
 - **Compatibility**: Designed for Claude Code, not OpenCode
 - **State Persistence**: Uses ~/.claude/.brainless/ directory

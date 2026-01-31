@@ -24,7 +24,7 @@ Execute this bash command to download fresh CLAUDE.md to local project config:
 
 ```bash
 # Download fresh CLAUDE.md to project-local .claude/
-curl -fsSL "https://raw.githubusercontent.com/anveeksha/workforce/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
+curl -fsSL "https://raw.githubusercontent.com/brainless/workforce/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
 echo "✅ CLAUDE.md downloaded successfully to .claude/CLAUDE.md" || \
 echo "❌ Failed to download CLAUDE.md"
 ```
@@ -35,18 +35,18 @@ echo "❌ Failed to download CLAUDE.md"
 
 **FALLBACK** if curl fails:
 Tell user to manually download from:
-https://raw.githubusercontent.com/anveeksha/workforce/main/docs/CLAUDE.md
+https://raw.githubusercontent.com/brainless/workforce/main/docs/CLAUDE.md
 
 ### Step 3: Verify Plugin Installation
 
 The Brainless plugin provides all hooks automatically via the plugin system. Verify the plugin is enabled:
 
 ```bash
-grep -q "anveeksha" ~/.claude/settings.json && echo "Plugin enabled" || echo "Plugin NOT enabled"
+grep -q "brainless" ~/.claude/settings.json && echo "Plugin enabled" || echo "Plugin NOT enabled"
 ```
 
 If plugin is not enabled, instruct user:
-> Run: `claude /install-plugin @anveeksha/workforce` to enable the plugin.
+> Run: `claude /install-plugin @brainless/workforce` to enable the plugin.
 
 ### Step 4: Confirm Success
 

@@ -63,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated counts: 32 agents, 31+ skills → 40 skills
 
 - **Website Repository**:
-  - Updated anveekshacode-website to v3.4.0
+  - Updated brainless-website to v3.4.0
   - Added ultrapilot, swarm, pipeline, ecomode features
   - Updated agent count from 28 to 32
 
@@ -252,7 +252,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.3.7] - 2026-01-22
 
 ### Added
-- MCP server configuration skill (`/anveekshacode:mcp-setup`) for Context7, Exa, Filesystem, GitHub (#74)
+- MCP server configuration skill (`/brainless:mcp-setup`) for Context7, Exa, Filesystem, GitHub (#74)
 - MCP setup integrated into omc-setup wizard
 
 ### Fixed
@@ -288,7 +288,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Session locking with PID verification for safe concurrent access
   - Security: Socket mode 0600, path validation, symlink protection, signal escalation
 
-- **Research Command** (`/anveekshacode:research`): Orchestrate parallel scientist agents for complex research
+- **Research Command** (`/brainless:research`): Orchestrate parallel scientist agents for complex research
   - Multi-stage decomposition (3-7 independent stages)
   - Smart model routing: LOW (Haiku) / MEDIUM (Sonnet) / HIGH (Opus)
   - Parallel execution with 5 agent concurrency limit
@@ -352,12 +352,12 @@ python_repl(action="execute", researchSessionID="analysis",
 ## [3.2.0] - 2026-01-21
 
 ### Added
-- **Autopilot Command** (`/anveekshacode:autopilot`): Full autonomous execution from idea to working code
+- **Autopilot Command** (`/brainless:autopilot`): Full autonomous execution from idea to working code
   - 5-phase workflow: Expansion → Planning → Execution → QA → Validation
   - Magic keywords: "autopilot", "build me", "create me", "I want a/an"
   - Parallel validation with 3 architects (functional, security, quality)
   - Resume support with progress preservation
-- **Cancel-autopilot Skill** (`/anveekshacode:cancel-autopilot`): Graceful cancellation with state preservation
+- **Cancel-autopilot Skill** (`/brainless:cancel-autopilot`): Graceful cancellation with state preservation
 - **8 new specialized agents registered**: security-reviewer, security-reviewer-low, build-fixer, build-fixer-low, tdd-guide, tdd-guide-low, code-reviewer, code-reviewer-low
 - **Autopilot HUD element**: Real-time phase progress display
 
@@ -413,12 +413,12 @@ python_repl(action="execute", researchSessionID="analysis",
 
 ### Changed
 
-- **Fully-qualified command names**: Documentation now uses `/anveekshacode:omc-setup` and `/anveekshacode:help` for namespace consistency
+- **Fully-qualified command names**: Documentation now uses `/brainless:omc-setup` and `/brainless:help` for namespace consistency
 - **Commands folder populated**: All user-facing commands now have full content (copied from skills)
 - **Separated commands vs skills**:
   - 20 commands (user-facing): analyze, cancel-ralph, cancel-ultraqa, cancel-ultrawork, deepinit, deepsearch, doctor, help, hud, learner, note, omc-setup, plan, ralph, ralph-init, ralplan, release, review, ultraqa, ultrawork
   - 6 skills-only (internal): orchestrate, frontend-ui-ux, git-master, omc-default, omc-default-global, planner
-- **Consolidated planner into plan**: `planner` is now skill-only; users invoke via `/anveekshacode:plan`
+- **Consolidated planner into plan**: `planner` is now skill-only; users invoke via `/brainless:plan`
 
 ---
 
@@ -430,8 +430,8 @@ This is a **breaking release** that renames the entire project and all agent nam
 
 ### Breaking Changes
 
-- **Package Renamed**: `anveeksha` → `anveekshacode`
-  - Installation: `npx anveekshacode install` (previously `npx anveeksha install`)
+- **Package Renamed**: `brainless` → `brainless`
+  - Installation: `npx brainless install` (previously `npx brainless install`)
   - All references updated in documentation and code
 
 - **Agent Names Changed**: Greek mythology → Intuitive names
@@ -440,14 +440,14 @@ This is a **breaking release** that renames the entire project and all agent nam
   - `oracle` → `architect` (architecture & debugging)
   - `metis` → `analyst` (pre-planning analysis)
   - `mnemosyne` → `learner` (learned skills system)
-  - `anveeksha-junior` → `executor` (focused execution)
+  - `brainless-junior` → `executor` (focused execution)
   - `librarian` → `researcher` (documentation research)
   - `frontend-engineer` → `designer` (UI/UX work)
   - `document-writer` → `writer` (technical documentation)
   - `multimodal-looker` → `vision` (visual analysis)
   - `orchestrator-sisyphus` → `orchestrator` (task coordination)
 
-- **Directory Structure**: `.sisyphus/` → `.brainless/` (anveekshacode)
+- **Directory Structure**: `.sisyphus/` → `.brainless/` (brainless)
   - State files now in `~/.claude/.brainless/`
   - Runtime plans in `.brainless/plans/`
   - Session notes in `.brainless/notepads/`
@@ -456,15 +456,15 @@ This is a **breaking release** that renames the entire project and all agent nam
   - All environment variable prefixes updated for consistency
 
 - **Slash Commands Updated**: Agent-referencing commands now use new names
-  - `/anveekshacode:plan` now uses `planner` agent (was `prometheus`)
-  - `/anveekshacode:review` now uses `critic` agent (was `momus`)
-  - `/anveekshacode:mnemosyne` → `/anveekshacode:learner` for skill extraction
+  - `/brainless:plan` now uses `planner` agent (was `prometheus`)
+  - `/brainless:review` now uses `critic` agent (was `momus`)
+  - `/brainless:mnemosyne` → `/brainless:learner` for skill extraction
 
 ### Migration Guide
 
 For existing users upgrading from 2.x:
 
-1. **Reinstall**: Run `npx anveekshacode install` to update hooks and configs
+1. **Reinstall**: Run `npx brainless install` to update hooks and configs
 2. **State Migration**: Old `.sisyphus/` directories will continue to work, but new state saves to `.brainless/`
 3. **Agent References**: Update any custom scripts/configs that referenced old agent names
 4. **Environment Variables**: Rename any `SISYPHUS_*` variables to `OMC_*`
@@ -480,7 +480,7 @@ The new intuitive names (`planner`, `architect`, `critic`) make the system immed
 
 ### Note on Historical Entries
 
-All changelog entries below v3.0.0 reference the old names (`prometheus`, `anveeksha-junior`, etc.) - this is intentional and accurate for those versions.
+All changelog entries below v3.0.0 reference the old names (`prometheus`, `brainless-junior`, etc.) - this is intentional and accurate for those versions.
 
 ---
 
@@ -497,9 +497,9 @@ Real-time visualization of the Sisyphus orchestration system via Claude Code's s
 ### Added
 
 - **Mnemosyne - Learned Skills** (`src/hooks/mnemosyne/`)
-  - `/anveekshacode:mnemosyne` command to extract reusable skills from conversations
+  - `/brainless:mnemosyne` command to extract reusable skills from conversations
   - Automatic skill injection based on trigger keywords in user messages
-  - **Hybrid storage**: User-level (`~/.claude/skills/anveeksha-learned/`) + Project-level (`.sisyphus/skills/`)
+  - **Hybrid storage**: User-level (`~/.claude/skills/brainless-learned/`) + Project-level (`.sisyphus/skills/`)
   - YAML frontmatter format for skill metadata (triggers, tags, quality scores)
   - Quality gate validation for skill extraction
   - Pattern detection for extractable moments (problem-solution, technique, workaround, optimization)
@@ -512,14 +512,14 @@ Real-time visualization of the Sisyphus orchestration system via Claude Code's s
   - **Display presets**: minimal, focused (default), full
   - **Elements**: ralph loop progress, PRD story, ultrawork status, context usage, agents, background tasks, todos
   - **Color coding**: Green (healthy), Yellow (warning), Red (critical)
-  - `/anveekshacode:hud` command to configure display options
+  - `/brainless:hud` command to configure display options
   - Auto-refresh every ~300ms during active sessions
   - Type-coded agent visualization with model tier colors
 
 - **New Commands**
-  - `/anveekshacode:mnemosyne` - Extract learned skills from current conversation
-  - `/anveekshacode:hud [preset]` - Configure HUD display (minimal/focused/full)
-  - `/anveekshacode:hud status` - Show detailed HUD status
+  - `/brainless:mnemosyne` - Extract learned skills from current conversation
+  - `/brainless:hud [preset]` - Configure HUD display (minimal/focused/full)
+  - `/brainless:hud status` - Show detailed HUD status
 
 - **New Test Suites**
   - `src/__tests__/mnemosyne/` - 41 tests for learned skills system
@@ -536,7 +536,7 @@ Real-time visualization of the Sisyphus orchestration system via Claude Code's s
 
 ### Breaking Changes
 
-- Renamed `/anveekshacode:claudeception` to `/anveekshacode:mnemosyne`
+- Renamed `/brainless:claudeception` to `/brainless:mnemosyne`
 - Renamed config from `claudeception.json` to `mnemosyne.json`
 - Module path changed from `hooks/learned-skills` to `hooks/mnemosyne`
 
@@ -547,7 +547,7 @@ Real-time visualization of the Sisyphus orchestration system via Claude Code's s
 ### Added
 
 - **Help Command** (`commands/help.md`)
-  - Comprehensive `/anveekshacode:help` command to guide users on plugin usage
+  - Comprehensive `/brainless:help` command to guide users on plugin usage
   - Quick reference for all 19 commands and 19 agents
   - Example workflows for common tasks
   - Tips for effective usage and best practices
@@ -603,12 +603,12 @@ Implements structured task tracking inspired by the original [Ralph](https://git
   - Pattern extraction and learning retrieval for context injection
 
 - **New Commands**
-  - `/anveekshacode:ralph-init <task>` - Scaffold a PRD from task description with auto-generated user stories
-  - `/anveekshacode:ultrawork-ralph <task>` - Maximum intensity mode with completion guarantee (ultrawork + ralph loop)
-  - `/anveekshacode:ultraqa <goal>` - Autonomous QA cycling workflow (test → verify → fix → repeat)
-  - `/anveekshacode:anveeksha-default` - Configure Sisyphus in local project `.claude/CLAUDE.md`
-  - `/anveekshacode:anveeksha-default-global` - Configure Sisyphus globally in `~/.claude/CLAUDE.md`
-  - `/anveekshacode:note <content>` - Save notes to notepad.md for compaction resilience
+  - `/brainless:ralph-init <task>` - Scaffold a PRD from task description with auto-generated user stories
+  - `/brainless:ultrawork-ralph <task>` - Maximum intensity mode with completion guarantee (ultrawork + ralph loop)
+  - `/brainless:ultraqa <goal>` - Autonomous QA cycling workflow (test → verify → fix → repeat)
+  - `/brainless:brainless-default` - Configure Sisyphus in local project `.claude/CLAUDE.md`
+  - `/brainless:brainless-default-global` - Configure Sisyphus globally in `~/.claude/CLAUDE.md`
+  - `/brainless:note <content>` - Save notes to notepad.md for compaction resilience
 
 - **New Agent Tiers**
   - `qa-tester-high` (Opus) - Complex integration testing
@@ -627,7 +627,7 @@ Implements structured task tracking inspired by the original [Ralph](https://git
 ### Changed
 
 - **Ralph Loop Enhanced**
-  - Auto-initializes PRD when user runs `/anveekshacode:ralph-loop` without existing `prd.json`
+  - Auto-initializes PRD when user runs `/brainless:ralph-loop` without existing `prd.json`
   - PRD-based completion: loop ends when ALL stories have `passes: true`
   - Context injection includes current story, patterns, and recent learnings
   - Updated continuation prompts with structured story information
@@ -649,7 +649,7 @@ Implements structured task tracking inspired by the original [Ralph](https://git
 - **Recursion guard in `addPattern`** - Prevents infinite loops on repeated initialization failures
 - **Todo-continuation infinite loop** - Added max-attempts counter (5) to prevent agent getting stuck
 - **UltraQA/Ralph-Loop conflict** - Added mutual exclusion to prevent both loops running simultaneously
-- **Agent name prefixing** - Standardized all Task() calls to use `anveeksha-brainless:` prefix
+- **Agent name prefixing** - Standardized all Task() calls to use `brainless-brainless:` prefix
 - **VERSION constant mismatch** - Fixed installer VERSION from 2.4.1 to 2.6.0
 - **Completion promise inconsistency** - Standardized to `TASK_COMPLETE`
 - **Non-existent /start-work command** - Removed references to command that doesn't exist
@@ -788,7 +788,7 @@ Started: 2026-01-19T...
 ### Refactored
 - **Merged sisyphus+orchestrator+ultrawork into default mode** - 80% behavior overlap consolidated
   - Default mode is now an intelligent orchestrator
-  - `/anveekshacode:orchestrator` command deprecated (use default mode or `/anveekshacode:ultrawork`)
+  - `/brainless:orchestrator` command deprecated (use default mode or `/brainless:ultrawork`)
   - Skill composition replaces agent swapping
 - **Removed deprecated orchestrator command** - Deleted `commands/orchestrator.md` and `orchestratorSkill` (1352 lines)
 - **Updated attribution** - Changed from "Port of" to "Inspired by" oh-my-opencode (70% divergence)
@@ -827,7 +827,7 @@ The orchestrator (Opus) now analyzes task complexity BEFORE delegation and route
     - `metis`: impact → Haiku, deps → Sonnet, risk analysis → Opus
     - `explore`: simple search → Haiku, complex → Sonnet
     - `document-writer`: simple docs → Haiku, complex → Sonnet
-    - `anveeksha-junior`: simple fix → Haiku, module work → Sonnet, risky → Opus
+    - `brainless-junior`: simple fix → Haiku, module work → Sonnet, risky → Opus
 
 - **Complexity Signal Detection**
   - Lexical: word count, keywords (architecture, debugging, risk, simple)
@@ -864,7 +864,7 @@ Task(subagent_type="oracle", model="opus", prompt="Force Opus for this task")
   - `post-tool-verifier.sh`: PostToolUse hook for verification after tools, with failure detection
   - Enhanced `persistent-mode.sh`: Stop hook now includes build/test/git/background task verification
   - `claude-sisyphus.sh`: CLI wrapper that uses `--append-system-prompt` for direct system prompt injection
-  - `anveeksha-aliases.sh`: Shell aliases (`claude-s`, `claudew`) for easy activation
+  - `brainless-aliases.sh`: Shell aliases (`claude-s`, `claudew`) for easy activation
 
 ### Changed
 - **Stop Hook** now enforces additional verification requirements:
@@ -974,10 +974,10 @@ Task(subagent_type="oracle", model="opus", prompt="Force Opus for this task")
 
 ---
 
-[2.6.0]: https://github.com/Yeachan-Heo/anveeksha/compare/v2.5.0...v2.6.0
-[2.0.1]: https://github.com/Yeachan-Heo/anveeksha/compare/v2.0.0...v2.0.1
-[1.11.0]: https://github.com/Yeachan-Heo/anveeksha/compare/v1.10.0...v1.11.0
-[1.10.0]: https://github.com/Yeachan-Heo/anveeksha/compare/v1.9.0...v1.10.0
-[1.9.0]: https://github.com/Yeachan-Heo/anveeksha/compare/v1.8.0...v1.9.0
-[1.8.0]: https://github.com/Yeachan-Heo/anveeksha/compare/v1.7.0...v1.8.0
-[1.7.0]: https://github.com/Yeachan-Heo/anveeksha/releases/tag/v1.7.0
+[2.6.0]: https://github.com/Yeachan-Heo/brainless/compare/v2.5.0...v2.6.0
+[2.0.1]: https://github.com/Yeachan-Heo/brainless/compare/v2.0.0...v2.0.1
+[1.11.0]: https://github.com/Yeachan-Heo/brainless/compare/v1.10.0...v1.11.0
+[1.10.0]: https://github.com/Yeachan-Heo/brainless/compare/v1.9.0...v1.10.0
+[1.9.0]: https://github.com/Yeachan-Heo/brainless/compare/v1.8.0...v1.9.0
+[1.8.0]: https://github.com/Yeachan-Heo/brainless/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/Yeachan-Heo/brainless/releases/tag/v1.7.0

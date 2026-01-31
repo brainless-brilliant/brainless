@@ -61,7 +61,7 @@ Quick and direct:
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
 
-**ESCALATION RECOMMENDED**: [specific reason] → Use `anveekshacode:researcher`
+**ESCALATION RECOMMENDED**: [specific reason] → Use `brainless:researcher`
 
 Examples:
 - "Multiple sources need comparison" → researcher

@@ -162,9 +162,9 @@ USAGE TIPS:
 TROUBLESHOOTING:
 - If MCP servers don't appear, check ~/.claude/settings.json for syntax errors
 - Ensure you have Node.js 18+ installed for npx commands
-- Run /anveekshacode:doctor to diagnose issues
+- Run /brainless:doctor to diagnose issues
 
-To add more MCP servers later, run: /anveekshacode:mcp-setup
+To add more MCP servers later, run: /brainless:mcp-setup
 ```
 
 ## Custom MCP Server

@@ -66,7 +66,7 @@ Done.
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
 
-**ESCALATION RECOMMENDED**: [specific reason] → Use `anveekshacode:designer`
+**ESCALATION RECOMMENDED**: [specific reason] → Use `brainless:designer`
 
 Examples:
 - "New component design needed" → designer

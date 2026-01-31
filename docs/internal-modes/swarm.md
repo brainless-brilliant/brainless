@@ -16,7 +16,7 @@ Spawn N coordinated agents working on a shared task list with atomic claiming. L
 ## Usage Pattern
 
 ```
-/anveekshacode:swarm N:agent-type "task description"
+/brainless:swarm N:agent-type "task description"
 ```
 
 ### Parameters
@@ -28,10 +28,10 @@ Spawn N coordinated agents working on a shared task list with atomic claiming. L
 ### Examples
 
 ```
-/anveekshacode:swarm 5:executor "fix all TypeScript errors"
-/anveekshacode:swarm 3:build-fixer "fix build errors in src/"
-/anveekshacode:swarm 4:designer "implement responsive layouts for all components"
-/anveekshacode:swarm 2:architect "analyze and document all API endpoints"
+/brainless:swarm 5:executor "fix all TypeScript errors"
+/brainless:swarm 3:build-fixer "fix build errors in src/"
+/brainless:swarm 4:designer "implement responsive layouts for all components"
+/brainless:swarm 2:architect "analyze and document all API endpoints"
 ```
 
 ## How It Works
@@ -227,7 +227,7 @@ When no pending tasks remain, exit cleanly.
 
 Use unified cancel command:
 ```
-/anveekshacode:cancel
+/brainless:cancel
 ```
 
 This:

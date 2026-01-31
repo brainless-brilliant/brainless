@@ -1,6 +1,6 @@
 # Migration Guide
 
-This guide covers all migration paths for anveekshacode. Find your current version below.
+This guide covers all migration paths for brainless. Find your current version below.
 
 ---
 
@@ -18,7 +18,7 @@ This guide covers all migration paths for anveekshacode. Find your current versi
 
 Your old commands still work! But now you don't need them.
 
-**Before 3.0:** Explicitly invoke 25+ commands like `/anveekshacode:ralph "task"`, `/anveekshacode:ultrawork "task"`
+**Before 3.0:** Explicitly invoke 25+ commands like `/brainless:ralph "task"`, `/brainless:ultrawork "task"`
 
 **After 3.0:** Just work naturally - Claude auto-activates the right behaviors. One-time setup: just say "setup omc"
 
@@ -26,17 +26,17 @@ Your old commands still work! But now you don't need them.
 
 The package has been renamed to better reflect its purpose and improve discoverability.
 
-- **Old**: `anveeksha`
-- **New**: `anveekshacode`
+- **Old**: `brainless`
+- **New**: `brainless`
 
 #### NPM Commands
 
 ```bash
 # Old
-npm install -g anveeksha
+npm install -g brainless
 
 # New
-npm install -g anveekshacode
+npm install -g brainless
 ```
 
 ### What Changed
@@ -47,13 +47,13 @@ You had to remember and explicitly invoke specific commands for each mode:
 
 ```bash
 # 2.x workflow: Multiple commands, lots to remember
-/anveekshacode:ralph "implement user authentication"       # Persistence mode
-/anveekshacode:ultrawork "refactor the API layer"          # Maximum parallelism
-/anveekshacode:planner "plan the new dashboard"            # Planning interview
-/anveekshacode:deepsearch "find database schema files"     # Deep search
-/anveekshacode:git-master "commit these changes"           # Git expertise
-/anveekshacode:deepinit ./src                              # Index codebase
-/anveekshacode:analyze "why is this test failing?"         # Deep analysis
+/brainless:ralph "implement user authentication"       # Persistence mode
+/brainless:ultrawork "refactor the API layer"          # Maximum parallelism
+/brainless:planner "plan the new dashboard"            # Planning interview
+/brainless:deepsearch "find database schema files"     # Deep search
+/brainless:git-master "commit these changes"           # Git expertise
+/brainless:deepinit ./src                              # Index codebase
+/brainless:analyze "why is this test failing?"         # Deep analysis
 ```
 
 #### After (3.0): Auto-Activation + Keywords
@@ -81,7 +81,7 @@ All agent names have been updated from Greek mythology references to intuitive, 
 | oracle | architect |
 | metis | analyst |
 | mnemosyne | learner |
-| anveeksha-junior | executor |
+| brainless-junior | executor |
 | orchestrator-sisyphus | coordinator |
 | librarian | researcher |
 | frontend-engineer | designer |
@@ -103,7 +103,7 @@ Directory structures have been renamed for consistency with the new package name
 - **New**: `~/.brainless/`
 
 #### Skills Directory
-- **Old**: `~/.claude/skills/anveeksha-learned/`
+- **Old**: `~/.claude/skills/brainless-learned/`
 - **New**: `~/.claude/skills/omc-learned/`
 
 #### Config Files
@@ -132,20 +132,20 @@ All 2.x commands continue to work. Here's what changed:
 
 | 2.x Command | 3.0 Equivalent | Works? |
 |-------------|----------------|--------|
-| `/anveekshacode:ralph "task"` | Say "don't stop until done" OR use `ralph` keyword | ✅ YES (both ways) |
-| `/anveekshacode:ultrawork "task"` | Say "fast" or "parallel" OR use `ulw` keyword | ✅ YES (both ways) |
-| `/anveekshacode:ultrawork-ralph` | Say "ralph ulw:" prefix | ✅ YES (keyword combo) |
-| `/anveekshacode:planner "task"` | Say "plan this" OR use `plan` keyword | ✅ YES (both ways) |
-| `/anveekshacode:plan "description"` | Start planning naturally | ✅ YES |
-| `/anveekshacode:review [path]` | Invoke normally | ✅ YES (unchanged) |
-| `/anveekshacode:deepsearch "query"` | Say "find" or "search" | ✅ YES (auto-detect) |
-| `/anveekshacode:analyze "target"` | Say "analyze" or "investigate" | ✅ YES (auto-detect) |
-| `/anveekshacode:deepinit [path]` | Invoke normally | ✅ YES (unchanged) |
-| `/anveekshacode:git-master` | Say "git", "commit", "atomic commit" | ✅ YES (auto-detect) |
-| `/anveekshacode:frontend-ui-ux` | Say "UI", "styling", "component", "design" | ✅ YES (auto-detect) |
-| `/anveekshacode:note "content"` | Say "remember this" or "save this" | ✅ YES (auto-detect) |
-| `/anveekshacode:cancel-ralph` | Say "stop", "cancel", or "abort" | ✅ YES (auto-detect) |
-| `/anveekshacode:doctor` | Invoke normally | ✅ YES (unchanged) |
+| `/brainless:ralph "task"` | Say "don't stop until done" OR use `ralph` keyword | ✅ YES (both ways) |
+| `/brainless:ultrawork "task"` | Say "fast" or "parallel" OR use `ulw` keyword | ✅ YES (both ways) |
+| `/brainless:ultrawork-ralph` | Say "ralph ulw:" prefix | ✅ YES (keyword combo) |
+| `/brainless:planner "task"` | Say "plan this" OR use `plan` keyword | ✅ YES (both ways) |
+| `/brainless:plan "description"` | Start planning naturally | ✅ YES |
+| `/brainless:review [path]` | Invoke normally | ✅ YES (unchanged) |
+| `/brainless:deepsearch "query"` | Say "find" or "search" | ✅ YES (auto-detect) |
+| `/brainless:analyze "target"` | Say "analyze" or "investigate" | ✅ YES (auto-detect) |
+| `/brainless:deepinit [path]` | Invoke normally | ✅ YES (unchanged) |
+| `/brainless:git-master` | Say "git", "commit", "atomic commit" | ✅ YES (auto-detect) |
+| `/brainless:frontend-ui-ux` | Say "UI", "styling", "component", "design" | ✅ YES (auto-detect) |
+| `/brainless:note "content"` | Say "remember this" or "save this" | ✅ YES (auto-detect) |
+| `/brainless:cancel-ralph` | Say "stop", "cancel", or "abort" | ✅ YES (auto-detect) |
+| `/brainless:doctor` | Invoke normally | ✅ YES (unchanged) |
 | All other commands | Work exactly as before | ✅ YES |
 
 ### Magic Keywords
@@ -192,7 +192,7 @@ If in planning       → End planning interview
 If multiple active   → Stop the most recent
 ```
 
-No more `/anveekshacode:cancel-ralph` - just say "cancel"!
+No more `/brainless:cancel-ralph` - just say "cancel"!
 
 ### Migration Steps
 
@@ -201,13 +201,13 @@ Follow these steps to migrate your existing setup:
 #### 1. Uninstall Old Package
 
 ```bash
-npm uninstall -g anveeksha
+npm uninstall -g brainless
 ```
 
 #### 2. Install New Package
 
 ```bash
-npm install -g anveekshacode
+npm install -g brainless
 ```
 
 #### 3. Rename Local Project Directories
@@ -226,7 +226,7 @@ mv .sisyphus .anv
 mv ~/.sisyphus ~/.anv
 
 # Skills directory
-mv ~/.claude/skills/anveeksha-learned ~/.claude/skills/omc-learned
+mv ~/.claude/skills/brainless-learned ~/.claude/skills/omc-learned
 
 # Config directory
 mv ~/.claude/sisyphus ~/.claude/omc
@@ -246,7 +246,7 @@ Update your shell configuration files (`.bashrc`, `.zshrc`, etc.):
 #### 6. Update Scripts and Configurations
 
 Search for and update any references to:
-- Package name: `anveeksha` → `anveekshacode`
+- Package name: `brainless` → `brainless`
 - Agent names: Use the mapping table above
 - Commands: Use the new slash commands
 - Directory paths: Update `.sisyphus` → `.anv`
@@ -268,7 +268,7 @@ After migration, verify your setup:
 
 1. **Check installation**:
    ```bash
-   npm list -g anveekshacode
+   npm list -g brainless
    ```
 
 2. **Verify directories exist**:
@@ -278,7 +278,7 @@ After migration, verify your setup:
    ```
 
 3. **Test a simple command**:
-   Run `/anveekshacode:help` in Claude Code to ensure the plugin is loaded correctly.
+   Run `/brainless:help` in Claude Code to ensure the plugin is loaded correctly.
 
 ### New Features in 3.0
 
@@ -287,7 +287,7 @@ After migration, verify your setup:
 **No commands to memorize.** Work naturally:
 
 ```
-Before: "OK, I need to use /anveekshacode:ultrawork for speed..."
+Before: "OK, I need to use /brainless:ultrawork for speed..."
 After:  "I'm in a hurry, go fast!"
         ↓
         Claude: "I'm activating ultrawork mode..."
@@ -309,7 +309,7 @@ Your request              Claude's action
 
 You don't ask for delegation - it happens automatically.
 
-#### 3. Learned Skills (`/anveekshacode:learner`)
+#### 3. Learned Skills (`/brainless:learner`)
 
 Extract reusable insights from problem-solving:
 
@@ -334,7 +334,7 @@ See what Claude is doing in the status bar:
 [OMC] ralph:3/10 | US-002 | ultrawork skill:planner | ctx:67% | agents:2 | todos:2/5
 ```
 
-Run `/anveekshacode:hud setup` to install. Presets: minimal, focused, full.
+Run `/brainless:hud setup` to install. Presets: minimal, focused, full.
 
 #### 5. Three-Tier Memory System
 
@@ -348,10 +348,10 @@ Permanently loaded on session start
 Never lost through compaction
 ```
 
-Or use `/anveekshacode:note` to save discoveries manually:
+Or use `/brainless:note` to save discoveries manually:
 
 ```bash
-/anveekshacode:note Project uses PostgreSQL with Prisma ORM
+/brainless:note Project uses PostgreSQL with Prisma ORM
 ```
 
 #### 6. Structured Task Tracking (PRD Support)
@@ -359,7 +359,7 @@ Or use `/anveekshacode:note` to save discoveries manually:
 **Ralph Loop now uses Product Requirements Documents:**
 
 ```bash
-/anveekshacode:ralph-init "implement OAuth with multiple providers"
+/brainless:ralph-init "implement OAuth with multiple providers"
     ↓
 Auto-creates PRD with user stories
     ↓
@@ -452,7 +452,7 @@ Background agents can be resumed with full context via `resume-session` tool.
 Version 3.1 is a drop-in upgrade. No migration required!
 
 ```bash
-npm update -g anveekshacode
+npm update -g brainless
 ```
 
 All existing configurations, plans, and workflows continue working unchanged.
@@ -480,7 +480,7 @@ Version 3.4.0 introduces powerful parallel execution modes and advanced workflow
 Execute complex tasks with up to 5 concurrent workers for 3-5x speedup:
 
 ```bash
-/anveekshacode:ultrapilot "build a fullstack todo app"
+/brainless:ultrapilot "build a fullstack todo app"
 ```
 
 **Key Features:**
@@ -496,7 +496,7 @@ Execute complex tasks with up to 5 concurrent workers for 3-5x speedup:
 N coordinated agents with atomic task claiming:
 
 ```bash
-/anveekshacode:swarm 5:executor "fix all TypeScript errors"
+/brainless:swarm 5:executor "fix all TypeScript errors"
 ```
 
 **Key Features:**
@@ -510,7 +510,7 @@ N coordinated agents with atomic task claiming:
 Chain agents with data passing between stages:
 
 ```bash
-/anveekshacode:pipeline explore:haiku -> architect:opus -> executor:sonnet
+/brainless:pipeline explore:haiku -> architect:opus -> executor:sonnet
 ```
 
 **Built-in Presets:**
@@ -526,7 +526,7 @@ Chain agents with data passing between stages:
 Maximum parallelism with 30-50% token savings:
 
 ```bash
-/anveekshacode:ecomode "refactor the authentication system"
+/brainless:ecomode "refactor the authentication system"
 ```
 
 **Smart model routing:**
@@ -539,7 +539,7 @@ Maximum parallelism with 30-50% token savings:
 Smart cancellation that auto-detects active mode:
 
 ```bash
-/anveekshacode:cancel
+/brainless:cancel
 # Or just say: "stop", "cancel", "abort"
 ```
 
@@ -547,20 +547,20 @@ Smart cancellation that auto-detects active mode:
 
 **Deprecation Notice:**
 Individual cancel commands are deprecated but still work:
-- `/anveekshacode:cancel-ralph` (deprecated)
-- `/anveekshacode:cancel-ultraqa` (deprecated)
-- `/anveekshacode:cancel-ultrawork` (deprecated)
-- `/anveekshacode:cancel-ecomode` (deprecated)
-- `/anveekshacode:cancel-autopilot` (deprecated)
+- `/brainless:cancel-ralph` (deprecated)
+- `/brainless:cancel-ultraqa` (deprecated)
+- `/brainless:cancel-ultrawork` (deprecated)
+- `/brainless:cancel-ecomode` (deprecated)
+- `/brainless:cancel-autopilot` (deprecated)
 
-Use `/anveekshacode:cancel` instead.
+Use `/brainless:cancel` instead.
 
 #### 6. Explore-High Agent
 
 Opus-powered architectural search for complex codebase exploration:
 
 ```typescript
-Task(subagent_type="anveekshacode:explore-high",
+Task(subagent_type="brainless:explore-high",
      model="opus",
      prompt="Find all authentication-related code patterns...")
 ```
@@ -592,14 +592,14 @@ When multiple execution mode keywords are present:
 **Explicit mode keywords:** `ulw`, `ultrawork`, `eco`, `ecomode`
 **Generic keywords:** `fast`, `parallel`
 
-Users set their default mode preference via `/anveekshacode:omc-setup`.
+Users set their default mode preference via `/brainless:omc-setup`.
 
 ### Migration Steps
 
 Version 3.4.0 is a drop-in upgrade. No migration required!
 
 ```bash
-npm update -g anveekshacode
+npm update -g brainless
 ```
 
 All existing configurations, plans, and workflows continue working unchanged.
@@ -668,17 +668,17 @@ After upgrading, verify new features:
 
 1. **Check installation**:
    ```bash
-   npm list -g anveekshacode
+   npm list -g brainless
    ```
 
 2. **Test ultrapilot**:
    ```bash
-   /anveekshacode:ultrapilot "create a simple React component"
+   /brainless:ultrapilot "create a simple React component"
    ```
 
 3. **Test unified cancel**:
    ```bash
-   /anveekshacode:cancel
+   /brainless:cancel
    ```
 
 4. **Check state directory**:
@@ -727,7 +727,7 @@ Expected timeline: Q1 2026
 
 ### Stay Updated
 
-- Watch the [GitHub repository](https://github.com/Yeachan-Heo/anveeksha) for announcements
+- Watch the [GitHub repository](https://github.com/Yeachan-Heo/brainless) for announcements
 - Check [CHANGELOG.md](../CHANGELOG.md) for detailed release notes
 - Join discussions in GitHub Issues
 
@@ -739,7 +739,7 @@ Expected timeline: Q1 2026
 
 **2.x Workflow:**
 ```
-/anveekshacode:ultrawork "implement the todo list feature"
+/brainless:ultrawork "implement the todo list feature"
 ```
 
 **3.0+ Workflow:**
@@ -755,7 +755,7 @@ Claude: "I'm activating ultrawork for maximum parallelism"
 
 **2.x Workflow:**
 ```
-/anveekshacode:ralph "debug the memory leak"
+/brainless:ralph "debug the memory leak"
 ```
 
 **3.0+ Workflow:**
@@ -771,7 +771,7 @@ Claude: "I'm activating ralph-loop to ensure completion"
 
 **2.x Workflow:**
 ```
-/anveekshacode:planner "design the new authentication system"
+/brainless:planner "design the new authentication system"
 ```
 
 **3.0+ Workflow:**
@@ -789,7 +789,7 @@ Interview begins automatically
 
 **2.x Workflow:**
 ```
-/anveekshacode:cancel-ralph
+/brainless:cancel-ralph
 ```
 
 **3.0+ Workflow:**
@@ -805,10 +805,10 @@ Interview begins automatically
 
 ### Project-Scoped Configuration (Recommended)
 
-Apply anveekshacode to current project only:
+Apply brainless to current project only:
 
 ```
-/anveekshacode:omc-default
+/brainless:omc-default
 ```
 
 Creates: `./.claude/CLAUDE.md`
@@ -818,7 +818,7 @@ Creates: `./.claude/CLAUDE.md`
 Apply to all Claude Code sessions:
 
 ```
-/anveekshacode:omc-default-global
+/brainless:omc-default-global
 ```
 
 Creates: `~/.claude/CLAUDE.md`
@@ -836,10 +836,10 @@ A: No. Keywords are optional shortcuts. Claude auto-detects intent without them.
 A: No. All commands continue to work across minor versions (3.0 → 3.1). Major version changes (3.x → 4.0) will provide migration paths.
 
 **Q: What if I like explicit commands?**
-A: Keep using them! `/anveekshacode:ralph`, `/anveekshacode:ultrawork`, `/anveekshacode:planner` all still work.
+A: Keep using them! `/brainless:ralph`, `/brainless:ultrawork`, `/brainless:planner` all still work.
 
 **Q: How do I know what Claude is doing?**
-A: Claude announces major behaviors: "I'm activating ralph-loop..." or set up `/anveekshacode:hud` for real-time status.
+A: Claude announces major behaviors: "I'm activating ralph-loop..." or set up `/brainless:hud` for real-time status.
 
 **Q: Where's the full command list?**
 A: See [README.md](../README.md) for full command reference. All commands still work.
@@ -851,11 +851,11 @@ A: Keywords are explicit shortcuts. Natural language triggers auto-detection. Bo
 
 ## Need Help?
 
-- **Diagnose issues**: Run `/anveekshacode:doctor`
-- **See all commands**: Run `/anveekshacode:help`
-- **View real-time status**: Run `/anveekshacode:hud setup`
+- **Diagnose issues**: Run `/brainless:doctor`
+- **See all commands**: Run `/brainless:help`
+- **View real-time status**: Run `/brainless:hud setup`
 - **Review detailed changelog**: See [CHANGELOG.md](../CHANGELOG.md)
-- **Report bugs**: [GitHub Issues](https://github.com/Yeachan-Heo/anveeksha/issues)
+- **Report bugs**: [GitHub Issues](https://github.com/Yeachan-Heo/brainless/issues)
 
 ---
 
@@ -868,4 +868,4 @@ Now that you understand the migration:
 3. **For advanced usage**: Check [docs/ARCHITECTURE.md](ARCHITECTURE.md) for deep dives
 4. **For team onboarding**: Share this guide with teammates
 
-Welcome to anveekshacode!
+Welcome to brainless!

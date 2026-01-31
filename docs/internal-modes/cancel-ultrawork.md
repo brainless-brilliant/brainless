@@ -16,7 +16,7 @@ The Ultrawork mode has been cancelled. Clearing state files.
 cat .brainless/ultrawork-state.json 2>/dev/null | jq -r '.linked_to_ralph // false'
 ```
 
-**If linked_to_ralph is true**: Use `/anveekshacode:cancel-ralph` instead to cancel both Ralph and its linked Ultrawork.
+**If linked_to_ralph is true**: Use `/brainless:cancel-ralph` instead to cancel both Ralph and its linked Ultrawork.
 
 **Otherwise**, execute this command to cancel Ultrawork:
 
@@ -31,10 +31,10 @@ After running this command, ultrawork mode will be deactivated and the HUD will 
 ## Note on Linked Modes
 
 Since v3.0, Ralph automatically activates Ultrawork. If you see `linked_to_ralph: true` in the ultrawork state, it means Ultrawork was auto-activated by Ralph. In this case:
-- Use `/anveekshacode:cancel-ralph` to cancel both modes
+- Use `/brainless:cancel-ralph` to cancel both modes
 - If you only cancel ultrawork, Ralph will continue but without parallel execution benefits
 
 ## To Start Fresh
 
-- `/anveekshacode:ultrawork "task"` - Start ultrawork only (standalone)
-- `/anveekshacode:ralph "task"` - Start ralph with ultrawork (default)
+- `/brainless:ultrawork "task"` - Start ultrawork only (standalone)
+- `/brainless:ralph "task"` - Start ralph with ultrawork (default)

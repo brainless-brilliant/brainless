@@ -2,8 +2,8 @@
  * Configuration Loader
  *
  * Handles loading and merging configuration from multiple sources:
- * - User config: ~/.config/anveeksha/config.jsonc
- * - Project config: .claude/anveeksha.jsonc
+ * - User config: ~/.config/brainless/config.jsonc
+ * - Project config: .claude/brainless.jsonc
  * - Environment variables
  *
  * © Brainless Technologies Pvt. Ltd.
@@ -93,8 +93,8 @@ export function getConfigPaths(): { user: string; project: string } {
   const userConfigDir = process.env.XDG_CONFIG_HOME ?? join(homedir(), '.config');
 
   return {
-    user: join(userConfigDir, 'anveeksha', 'config.jsonc'),
-    project: join(process.cwd(), '.claude', 'anveeksha.jsonc')
+    user: join(userConfigDir, 'brainless', 'config.jsonc'),
+    project: join(process.cwd(), '.claude', 'brainless.jsonc')
   };
 }
 

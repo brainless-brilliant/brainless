@@ -1,5 +1,5 @@
 ---
-description: One-time setup for anveekshacode (the ONLY command you need to learn)
+description: One-time setup for brainless (the ONLY command you need to learn)
 ---
 
 # OMC Setup
@@ -10,7 +10,7 @@ This is the **only command you need to learn**. After running this, everything e
 
 Use the AskUserQuestion tool to prompt the user:
 
-**Question:** "Where should I configure anveekshacode?"
+**Question:** "Where should I configure brainless?"
 
 **Options:**
 1. **Local (this project)** - Creates `.claude/CLAUDE.md` in current project directory. Best for project-specific configurations.
@@ -25,7 +25,7 @@ Use the AskUserQuestion tool to prompt the user:
 mkdir -p .claude
 
 # Download fresh CLAUDE.md from GitHub
-curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
+curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/brainless/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
 echo "Downloaded CLAUDE.md to .claude/CLAUDE.md"
 ```
 
@@ -33,7 +33,7 @@ echo "Downloaded CLAUDE.md to .claude/CLAUDE.md"
 
 ```bash
 # Download fresh CLAUDE.md to global config
-curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/docs/CLAUDE.md" -o ~/.claude/CLAUDE.md && \
+curl -fsSL "https://raw.githubusercontent.com/Yeachan-Heo/brainless/main/docs/CLAUDE.md" -o ~/.claude/CLAUDE.md && \
 echo "Downloaded CLAUDE.md to ~/.claude/CLAUDE.md"
 ```
 
@@ -51,7 +51,7 @@ This will:
 ## Step 4: Verify Plugin Installation
 
 ```bash
-grep -q "anveekshacode" ~/.claude/settings.json && echo "Plugin verified" || echo "Plugin NOT found - run: claude /install-plugin anveekshacode"
+grep -q "brainless" ~/.claude/settings.json && echo "Plugin verified" || echo "Plugin NOT found - run: claude /install-plugin brainless"
 ```
 
 ## Step 5: Offer MCP Server Configuration
@@ -62,7 +62,7 @@ Ask user: "Would you like to configure MCP servers for enhanced capabilities? (C
 
 If yes, invoke the mcp-setup skill:
 ```
-/anveekshacode:mcp-setup
+/brainless:mcp-setup
 ```
 
 If no, skip to next step.
@@ -105,7 +105,7 @@ Just include these words naturally in your request:
 Combine them: "ralph ulw: migrate the database"
 
 MCP SERVERS:
-Run /anveekshacode:mcp-setup to add tools like web search, GitHub, etc.
+Run /brainless:mcp-setup to add tools like web search, GitHub, etc.
 
 HUD STATUSLINE:
 The status bar now shows OMC state. Restart Claude Code to see it.
@@ -145,4 +145,4 @@ Your workflow won't break - it just got easier!
 ## Fallback
 
 If curl fails, tell user to manually download from:
-https://raw.githubusercontent.com/Yeachan-Heo/anveekshacode/main/docs/CLAUDE.md
+https://raw.githubusercontent.com/Yeachan-Heo/brainless/main/docs/CLAUDE.md

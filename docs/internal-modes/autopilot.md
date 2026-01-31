@@ -33,7 +33,7 @@ Spawn the Analyst agent:
 
 ```
 Task(
-  subagent_type="anveekshacode:analyst",
+  subagent_type="brainless:analyst",
   model="opus",
   prompt="REQUIREMENTS ANALYSIS
 
@@ -55,7 +55,7 @@ After Analyst completes, spawn Architect:
 
 ```
 Task(
-  subagent_type="anveekshacode:architect",
+  subagent_type="brainless:architect",
   model="opus",
   prompt="TECHNICAL SPECIFICATION
 
@@ -123,7 +123,7 @@ During execution, you MUST follow these rules:
 ```
 // Example: Delegate implementation
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="sonnet",
   prompt="IMPLEMENT: [specific task from plan]
 

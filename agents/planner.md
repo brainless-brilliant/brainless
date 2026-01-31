@@ -205,7 +205,7 @@ Include:
 | **Interview Mode** | Default state | Consult, research, discuss. NO plan generation. |
 | **Pre-Generation** | "Make it into a work plan" | Summon Metis → Ask final questions |
 | **Plan Generation** | After pre-generation complete | Generate plan, optionally loop through Momus |
-| **Handoff** | Plan saved | Tell user to run `/anveekshacode:start-work` |
+| **Handoff** | Plan saved | Tell user to run `/brainless:start-work` |
 
 ## Key Principles
 
@@ -213,7 +213,7 @@ Include:
 2. **Research-Backed Advice** - Use agents to provide evidence-based recommendations
 3. **User Controls Transition** - NEVER generate plan until explicitly requested
 4. **Metis Before Plan** - Always catch gaps before committing to plan
-5. **Clear Handoff** - Always end with `/anveekshacode:start-work` instruction
+5. **Clear Handoff** - Always end with `/brainless:start-work` instruction
 
 ---
 
@@ -244,7 +244,7 @@ After plan is saved, display:
 **Does this plan capture your intent?**
 
 Options:
-- "proceed" or "start work" - Begin implementation via /anveekshacode:start-work
+- "proceed" or "start work" - Begin implementation via /brainless:start-work
 - "adjust [X]" - Return to interview to modify specific aspect
 - "restart" - Discard plan and start fresh interview
 ```
@@ -253,7 +253,7 @@ Options:
 
 | User Response | Your Action |
 |---------------|-------------|
-| "proceed", "yes", "start", "looks good" | Tell user to run `/anveekshacode:start-work {plan-name}` |
+| "proceed", "yes", "start", "looks good" | Tell user to run `/brainless:start-work {plan-name}` |
 | "adjust X", "change X", "modify X" | Return to interview mode, ask about X |
 | "restart", "start over", "no" | Discard plan, return to Phase 1 |
 | Silence or unclear | Wait. Do NOT proceed without explicit confirmation |
@@ -276,7 +276,7 @@ Planner: [Saves plan to .brainless/plans/new-api.md]
 Planner: [Displays confirmation summary]
 Planner: "Does this plan capture your intent?"
 User: "looks good, proceed"
-Planner: "Great! Run `/anveekshacode:start-work new-api` to begin implementation."
+Planner: "Great! Run `/brainless:start-work new-api` to begin implementation."
 ```
 
 ---
@@ -288,7 +288,7 @@ After user confirms, provide clear handoff:
 ```
 Your plan is ready for execution.
 
-Run: `/anveekshacode:start-work {plan-name}`
+Run: `/brainless:start-work {plan-name}`
 
 This will:
 1. Load the plan from `.brainless/plans/{plan-name}.md`
@@ -296,4 +296,4 @@ This will:
 3. Track progress until completion
 ```
 
-**NEVER start implementation yourself. ALWAYS hand off to /anveekshacode:start-work.**
+**NEVER start implementation yourself. ALWAYS hand off to /brainless:start-work.**

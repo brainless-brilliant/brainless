@@ -125,4 +125,4 @@ const team = assembleTeam(scanResult, {
 
 ---
 
-*Part of anveekshacode Workforce Provisioning System*
+*Part of brainless Workforce Provisioning System*

@@ -24,12 +24,12 @@ Execute a pipeline of agents where each stage receives context from previous sta
 Use predefined pipelines for common workflows:
 
 ```
-/anveekshacode:pipeline review <task>
-/anveekshacode:pipeline implement <task>
-/anveekshacode:pipeline debug <issue>
-/anveekshacode:pipeline research <topic>
-/anveekshacode:pipeline refactor <target>
-/anveekshacode:pipeline security <scope>
+/brainless:pipeline review <task>
+/brainless:pipeline implement <task>
+/brainless:pipeline debug <issue>
+/brainless:pipeline research <topic>
+/brainless:pipeline refactor <target>
+/brainless:pipeline security <scope>
 ```
 
 ### Custom Pipelines
@@ -37,8 +37,8 @@ Use predefined pipelines for common workflows:
 Define your own agent sequence:
 
 ```
-/anveekshacode:pipeline explore -> architect -> executor "add authentication"
-/anveekshacode:pipeline explore:haiku -> architect:opus -> executor:sonnet "optimize performance"
+/brainless:pipeline explore -> architect -> executor "add authentication"
+/brainless:pipeline explore:haiku -> architect:opus -> executor:sonnet "optimize performance"
 ```
 
 ### With Parallel Stages
@@ -46,7 +46,7 @@ Define your own agent sequence:
 Run agents in parallel then merge:
 
 ```
-/anveekshacode:pipeline [explore, researcher] -> architect -> executor "implement OAuth"
+/brainless:pipeline [explore, researcher] -> architect -> executor "implement OAuth"
 ```
 
 ## Built-in Pipeline Definitions
@@ -182,7 +182,7 @@ Configuration:
 
 Stop active pipeline:
 ```
-/anveekshacode:cancel
+/brainless:cancel
 ```
 
 The unified cancel command auto-detects active pipeline and cleans up state.
@@ -191,24 +191,24 @@ The unified cancel command auto-detects active pipeline and cleans up state.
 
 ### Example 1: Feature Implementation
 ```
-/anveekshacode:pipeline review "add rate limiting to API"
+/brainless:pipeline review "add rate limiting to API"
 ```
 Triggers: explore → architect → critic → executor
 
 ### Example 2: Bug Fix
 ```
-/anveekshacode:pipeline debug "login fails with OAuth"
+/brainless:pipeline debug "login fails with OAuth"
 ```
 Triggers: explore → architect → build-fixer
 
 ### Example 3: Custom Chain
 ```
-/anveekshacode:pipeline explore:haiku -> architect:opus -> executor:sonnet -> tdd-guide:sonnet "refactor auth module"
+/brainless:pipeline explore:haiku -> architect:opus -> executor:sonnet -> tdd-guide:sonnet "refactor auth module"
 ```
 
 ### Example 4: Research-Driven Implementation
 ```
-/anveekshacode:pipeline research "implement GraphQL subscriptions"
+/brainless:pipeline research "implement GraphQL subscriptions"
 ```
 Triggers: parallel(researcher, explore) → architect → writer
 

@@ -1,7 +1,7 @@
 {
-  "name": "@anveeksha/workforce",
-  "version": "4.0.0",
-  "description": "Anveeksha AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts. Inspired by oh-my-claudecode.",
+  "name": "@brainless-brilliant/brainless",
+  "version": "1.0.0",
+  "description": "AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,9 +12,9 @@
     }
   },
   "bin": {
-    "anveeksha": "dist/cli/index.js",
-    "avk": "dist/cli/index.js",
-    "avk-analytics": "dist/cli/analytics.js"
+    "brainless": "dist/cli/index.js",
+    "bl": "dist/cli/index.js",
+    "bl-analytics": "dist/cli/analytics.js"
   },
   "files": [
     "dist",
@@ -71,16 +71,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anveeksha/workforce.git"
+    "url": "git+https://github.com/brainless-brilliant/brainless.git"
   },
-  "homepage": "https://anveeksha.in/workforce",
+  "homepage": "https://github.com/brainless-brilliant/brainless",
   "bugs": {
-    "url": "https://github.com/anveeksha/workforce/issues"
+    "url": "https://github.com/brainless-brilliant/brainless/issues"
   },
   "author": {
-    "name": "Anveeksha Technologies Pvt. Ltd.",
-    "email": "contact@anveeksha.in",
-    "url": "https://anveeksha.in"
+    "name": "brainless-brilliant",
+    "email": "atmanbhatt7@gmail.com",
+    "url": "https://github.com/brainless-brilliant"
   },
   "contributors": [
     {
@@ -89,14 +89,14 @@
       "note": "Original author of oh-my-claudecode - the foundation this project builds upon"
     },
     {
-      "name": "Anveeksha Technologies",
-      "url": "https://anveeksha.in",
+      "name": "brainless-brilliant",
+      "url": "https://github.com/brainless-brilliant",
       "note": "Extended with autonomous team orchestration, PM agents, debate protocol, and activity transcripts"
     }
   ],
   "license": "MIT",
   "keywords": [
-    "anveeksha",
+    "brainless",
     "ai-workforce",
     "claude",
     "claude-code",
@@ -115,4 +115,5 @@
     "access": "public"
   }
 }
+
 

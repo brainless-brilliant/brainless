@@ -459,7 +459,7 @@ describe('Installer Constants', () => {
     });
 
     it('should return true when CLAUDE_PLUGIN_ROOT is set', () => {
-      process.env.CLAUDE_PLUGIN_ROOT = '/home/user/.claude/plugins/marketplaces/anveekshacode';
+      process.env.CLAUDE_PLUGIN_ROOT = '/home/user/.claude/plugins/marketplaces/brainlesscode';
       expect(isRunningAsPlugin()).toBe(true);
     });
 

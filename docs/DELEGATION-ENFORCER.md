@@ -24,13 +24,13 @@ The enforcer runs as a pre-tool-use hook that intercepts `Task` and `Agent` tool
 ```typescript
 // Before enforcement
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   prompt="Implement feature X"
 )
 
 // After enforcement (automatic)
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="sonnet",  // ← Automatically injected
   prompt="Implement feature X"
 )
@@ -59,7 +59,7 @@ If you explicitly specify a model, it's always preserved:
 ```typescript
 // Explicit model is never overridden
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="haiku",  // ← Explicitly using haiku instead of default sonnet
   prompt="Quick lookup"
 )
@@ -74,7 +74,7 @@ Task(
 Enforces model parameter for a single agent delegation call.
 
 ```typescript
-import { enforceModel } from 'anveeksha';
+import { enforceModel } from 'brainless';
 
 const input = {
   description: 'Implement feature',
@@ -92,7 +92,7 @@ console.log(result.injected); // true
 Get the default model for an agent type.
 
 ```typescript
-import { getModelForAgent } from 'anveeksha';
+import { getModelForAgent } from 'brainless';
 
 getModelForAgent('executor'); // 'sonnet'
 getModelForAgent('executor-low'); // 'haiku'
@@ -104,7 +104,7 @@ getModelForAgent('executor-high'); // 'opus'
 Check if a tool invocation is an agent delegation call.
 
 ```typescript
-import { isAgentCall } from 'anveeksha';
+import { isAgentCall } from 'brainless';
 
 isAgentCall('Task', { subagent_type: 'executor', ... }); // true
 isAgentCall('Bash', { command: 'ls' }); // false
@@ -115,7 +115,7 @@ isAgentCall('Bash', { command: 'ls' }); // false
 The enforcer automatically integrates with the pre-tool-use hook:
 
 ```typescript
-import { processHook } from 'anveeksha';
+import { processHook } from 'brainless';
 
 const hookInput = {
   toolName: 'Task',
@@ -181,13 +181,13 @@ When enabled, you'll see warnings like:
 ```typescript
 // Every delegation needs explicit model
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="sonnet",
   prompt="Implement X"
 )
 
 Task(
-  subagent_type="anveekshacode:executor-low",
+  subagent_type="brainless:executor-low",
   model="haiku",
   prompt="Quick lookup"
 )
@@ -198,12 +198,12 @@ Task(
 ```typescript
 // Model automatically injected from definition
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   prompt="Implement X"
 )
 
 Task(
-  subagent_type="anveekshacode:executor-low",
+  subagent_type="brainless:executor-low",
   prompt="Quick lookup"
 )
 ```
@@ -213,7 +213,7 @@ Task(
 ```typescript
 // Use haiku for a simple executor task
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="haiku",  // Override default sonnet
   prompt="Find definition of X"
 )

@@ -250,7 +250,7 @@ export type SisyphusSession = WorkforceSession;
  *
  * @example
  * ```typescript
- * import { createWorkforceSession } from '@anveeksha/workforce';
+ * import { createWorkforceSession } from '@brainless-brilliant/brainless';
  * import { query } from '@anthropic-ai/claude-agent-sdk';
  *
  * const session = createWorkforceSession();

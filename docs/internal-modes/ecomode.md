@@ -49,12 +49,12 @@ Ecomode routes tasks to lower-tier agents:
 
 ## Setting as Default
 
-Run `/anveekshacode:omc-setup` to set ecomode as your default parallel execution mode.
+Run `/brainless:omc-setup` to set ecomode as your default parallel execution mode.
 
 When set as default, saying "fast" or "parallel" will activate ecomode instead of ultrawork.
 
 ## Cancellation
 
-- `/anveekshacode:cancel-ecomode` - Cancel ecomode only
-- `/anveekshacode:cancel` - Cancel any active mode (auto-detects)
+- `/brainless:cancel-ecomode` - Cancel ecomode only
+- `/brainless:cancel` - Cancel any active mode (auto-detects)
 - Say "stop" or "cancel" - Unified cancellation

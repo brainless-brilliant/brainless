@@ -66,7 +66,7 @@ No lengthy analysis. Quick and precise.
 <Escalation_Protocol>
 When you detect tasks beyond your scope, output:
 
-**ESCALATION RECOMMENDED**: [specific reason] → Use `anveekshacode:architect-medium` or `anveekshacode:architect`
+**ESCALATION RECOMMENDED**: [specific reason] → Use `brainless:architect-medium` or `brainless:architect`
 
 Examples:
 - "Cross-file dependencies detected" → architect-medium

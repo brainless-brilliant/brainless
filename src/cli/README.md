@@ -4,10 +4,10 @@ Command-line interface for Oh-My-ClaudeCode analytics, token tracking, cost repo
 
 ## Installation
 
-After installing anveekshacode:
+After installing brainless:
 
 ```bash
-npm install -g anveekshacode
+npm install -g brainless
 ```
 
 The `omc-analytics` command will be available globally.

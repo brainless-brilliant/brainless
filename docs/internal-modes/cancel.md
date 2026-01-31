@@ -25,13 +25,13 @@ The skill checks state files to determine what's active and cancels in order of 
 
 Basic cancellation (auto-detects mode):
 ```
-/anveekshacode:cancel
+/brainless:cancel
 ```
 
 Force clear ALL state files:
 ```
-/anveekshacode:cancel --force
-/anveekshacode:cancel --all
+/brainless:cancel --force
+/brainless:cancel --all
 ```
 
 ## User Arguments
@@ -53,7 +53,7 @@ Force clear ALL state files:
 
 | Mode | Progress Preserved | Resume |
 |------|-------------------|--------|
-| Autopilot | Yes (phase, spec, plan) | `/anveekshacode:autopilot` |
+| Autopilot | Yes (phase, spec, plan) | `/brainless:autopilot` |
 | All Others | No | N/A |
 
 ## Dependency-Aware Cleanup

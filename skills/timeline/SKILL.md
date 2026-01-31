@@ -81,7 +81,7 @@ To generate the timeline:
 5. Add icons based on action type
 
 ```typescript
-import { formatTimeline } from '@anveeksha/workforce';
+import { formatTimeline } from '@brainless/workforce';
 
 // Generate timeline for current session
 const timeline = formatTimeline();

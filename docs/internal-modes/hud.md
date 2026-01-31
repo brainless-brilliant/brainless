@@ -10,12 +10,12 @@ Configure the OMC HUD (Heads-Up Display) for the statusline.
 
 | Command | Description |
 |---------|-------------|
-| `/anveekshacode:hud` | Show current HUD status (auto-setup if needed) |
-| `/anveekshacode:hud setup` | Install/repair HUD statusline |
-| `/anveekshacode:hud minimal` | Switch to minimal display |
-| `/anveekshacode:hud focused` | Switch to focused display (default) |
-| `/anveekshacode:hud full` | Switch to full display |
-| `/anveekshacode:hud status` | Show detailed HUD status |
+| `/brainless:hud` | Show current HUD status (auto-setup if needed) |
+| `/brainless:hud setup` | Install/repair HUD statusline |
+| `/brainless:hud minimal` | Switch to minimal display |
+| `/brainless:hud focused` | Switch to focused display (default) |
+| `/brainless:hud full` | Switch to full display |
+| `/brainless:hud status` | Show detailed HUD status |
 
 ## Auto-Setup
 
@@ -37,15 +37,15 @@ ls ~/.claude/hud/omc-hud.mjs 2>/dev/null && echo "EXISTS" || echo "MISSING"
 **Step 2:** Check if the plugin is built (CRITICAL - common issue!):
 ```bash
 # Find the latest version and check if dist/hud/index.js exists
-PLUGIN_VERSION=$(ls ~/.claude/plugins/cache/omc/anveekshacode/ 2>/dev/null | sort -V | tail -1)
+PLUGIN_VERSION=$(ls ~/.claude/plugins/cache/omc/brainless/ 2>/dev/null | sort -V | tail -1)
 if [ -n "$PLUGIN_VERSION" ]; then
-  ls ~/.claude/plugins/cache/omc/anveekshacode/$PLUGIN_VERSION/dist/hud/index.js 2>/dev/null && echo "BUILT" || echo "NOT_BUILT"
+  ls ~/.claude/plugins/cache/omc/brainless/$PLUGIN_VERSION/dist/hud/index.js 2>/dev/null && echo "BUILT" || echo "NOT_BUILT"
 fi
 ```
 
 **If NOT_BUILT**, the plugin needs to be compiled. Run:
 ```bash
-cd ~/.claude/plugins/cache/omc/anveekshacode/$PLUGIN_VERSION && npm install
+cd ~/.claude/plugins/cache/omc/brainless/$PLUGIN_VERSION && npm install
 ```
 This will install dependencies and build the TypeScript code automatically (via the `prepare` script).
 
@@ -72,8 +72,8 @@ import { join } from "node:path";
 async function main() {
   const home = homedir();
 
-  // 1. Try plugin cache first (marketplace: omc, plugin: anveekshacode)
-  const pluginCacheBase = join(home, ".claude/plugins/cache/omc/anveekshacode");
+  // 1. Try plugin cache first (marketplace: omc, plugin: brainless)
+  const pluginCacheBase = join(home, ".claude/plugins/cache/omc/brainless");
   if (existsSync(pluginCacheBase)) {
     try {
       const versions = readdirSync(pluginCacheBase);
@@ -90,10 +90,10 @@ async function main() {
 
   // 2. Development paths
   const devPaths = [
-    join(home, "Workspace/anveeksha/dist/hud/index.js"),
-    join(home, "workspace/anveeksha/dist/hud/index.js"),
-    join(home, "Workspace/anveekshacode/dist/hud/index.js"),
-    join(home, "workspace/anveekshacode/dist/hud/index.js"),
+    join(home, "Workspace/brainless/dist/hud/index.js"),
+    join(home, "workspace/brainless/dist/hud/index.js"),
+    join(home, "Workspace/brainless/dist/hud/index.js"),
+    join(home, "workspace/brainless/dist/hud/index.js"),
   ];
 
   for (const devPath of devPaths) {
@@ -133,7 +133,7 @@ Use the Edit tool to add/update this field while preserving other settings.
 
 **Step 5:** Clean up old HUD scripts (if any):
 ```bash
-rm -f ~/.claude/hud/anveeksha-hud.mjs 2>/dev/null
+rm -f ~/.claude/hud/brainless-hud.mjs 2>/dev/null
 ```
 
 **Step 6:** Tell the user to restart Claude Code for changes to take effect.
@@ -222,9 +222,9 @@ You can manually edit the config file:
 ## Troubleshooting
 
 If the HUD is not showing:
-1. Run `/anveekshacode:hud setup` to auto-install and configure
+1. Run `/brainless:hud setup` to auto-install and configure
 2. Restart Claude Code after setup completes
-3. If still not working, run `/anveekshacode:doctor` for full diagnostics
+3. If still not working, run `/brainless:doctor` for full diagnostics
 
 Manual verification:
 - HUD script: `~/.claude/hud/omc-hud.mjs`

@@ -32,7 +32,7 @@ Determine if task is suitable for parallel execution:
 - File boundaries are clear
 - Dependencies between subtasks are minimal
 
-**If NOT parallelizable:** Fall back to regular `/anveekshacode:autopilot`
+**If NOT parallelizable:** Fall back to regular `/brainless:autopilot`
 
 ## Phase 1: Decomposition
 
@@ -66,7 +66,7 @@ Spawn workers using Task tool with `run_in_background: true`:
 
 ```
 Task(
-  subagent_type="anveekshacode:executor",
+  subagent_type="brainless:executor",
   model="sonnet",
   run_in_background=true,
   prompt="ULTRAPILOT WORKER [1/5]
@@ -100,7 +100,7 @@ Spawn Architect for full system verification:
 
 ```
 Task(
-  subagent_type="anveekshacode:architect",
+  subagent_type="brainless:architect",
   model="opus",
   prompt="ULTRAPILOT VALIDATION
 

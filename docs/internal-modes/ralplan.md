@@ -181,7 +181,7 @@ Based on Critic's verdict, the skill either approves the plan or continues itera
 **If verdict is OKAY:**
 - Mark plan as approved
 - Log approval with iteration count
-- Prepare plan for execution with `/anveekshacode:ralph` or manual orchestration
+- Prepare plan for execution with `/brainless:ralph` or manual orchestration
 - Set state `active: false, current_phase: "complete"`
 
 **If verdict is REJECT:**
@@ -257,7 +257,7 @@ CRITIC_FEEDBACK:
 
 To stop an active ralplan session:
 
-- Use `/anveekshacode:cancel-ralph` (automatically detects ralplan via state file)
+- Use `/brainless:cancel-ralph` (automatically detects ralplan via state file)
 - Or manually delete `.brainless/ralplan-state.json`
 
 ## Skill Workflow

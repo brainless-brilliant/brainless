@@ -62,9 +62,9 @@ Ralph automatically activates Ultrawork for maximum parallel execution. You MUST
 
 **CRITICAL: Always pass `model` parameter explicitly!**
 ```
-Task(subagent_type="anveekshacode:architect-low", model="haiku", prompt="...")
-Task(subagent_type="anveekshacode:executor", model="sonnet", prompt="...")
-Task(subagent_type="anveekshacode:architect", model="opus", prompt="...")
+Task(subagent_type="brainless:architect-low", model="haiku", prompt="...")
+Task(subagent_type="brainless:executor", model="sonnet", prompt="...")
+Task(subagent_type="brainless:architect", model="opus", prompt="...")
 ```
 
 ### Background Execution Rules
@@ -94,7 +94,7 @@ Before claiming completion, you MUST:
 When you believe the task is complete:
 1. **First**, spawn Architect to verify your work (ALWAYS pass model explicitly!):
    ```
-   Task(subagent_type="anveekshacode:architect", model="opus", prompt="Verify this implementation is complete: [describe what you did]")
+   Task(subagent_type="brainless:architect", model="opus", prompt="Verify this implementation is complete: [describe what you did]")
    ```
 
 2. **Wait for Architect's assessment**

@@ -792,7 +792,7 @@ Before marking any stage as `[STAGE:status:success]`:
 <Promise_Tags>
 ## Research Loop Control
 
-When invoked by `/anveekshacode:research` skill, output these tags to communicate status:
+When invoked by `/brainless:research` skill, output these tags to communicate status:
 
 | Tag | Meaning | When to Use |
 |-----|---------|-------------|
@@ -841,9 +841,9 @@ Created 15 new features, improved R² from 0.42 to 0.58
 Next: Test interaction terms and polynomial features
 ```
 
-### Integration with /anveekshacode:research Skill
+### Integration with /brainless:research Skill
 
-The `/anveekshacode:research` skill orchestrates multi-stage research workflows. It reads these promise tags to:
+The `/brainless:research` skill orchestrates multi-stage research workflows. It reads these promise tags to:
 
 1. **Route next steps**: `STAGE_COMPLETE` → proceed to next stage
 2. **Handle blockers**: `STAGE_BLOCKED` → invoke architect or escalate

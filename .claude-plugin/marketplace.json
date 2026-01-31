@@ -1,24 +1,25 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "anveeksha",
-  "description": "Anveeksha AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution",
+  "name": "brainless-brilliant",
+  "description": "AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution",
   "owner": {
-    "name": "Anveeksha Technologies Pvt. Ltd.",
-    "email": "contact@anveeksha.in"
+    "name": "brainless-brilliant",
+    "email": "atmanbhatt7@gmail.com"
   },
   "plugins": [
     {
-      "name": "workforce",
-      "description": "Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts. Built on oh-my-claudecode by Yeochan Heo.",
-      "version": "4.0.0",
+      "name": "brainless",
+      "description": "brainless - Let the agents do the thinking. Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts. Built on oh-my-claudecode by Yeochan Heo.",
+      "version": "1.0.0",
       "author": {
-        "name": "Anveeksha Technologies Pvt. Ltd.",
-        "email": "contact@anveeksha.in"
+        "name": "brainless-brilliant",
+        "email": "atmanbhatt7@gmail.com"
       },
       "source": "./",
       "category": "productivity",
-      "homepage": "https://anveeksha.in/workforce",
+      "homepage": "https://github.com/brainless-brilliant/brainless",
       "tags": ["multi-agent", "orchestration", "pm-agent", "debate-protocol", "transcript", "autonomous-team"]
     }
   ]
 }
+

@@ -56,7 +56,7 @@ Read decisions from two sources:
 2. **Debate resolutions:** `.brainless/debates/*.json` → `resolution` object
 
 ```typescript
-import { getDecisions } from '@anveeksha/workforce';
+import { getDecisions } from '@brainless/workforce';
 
 const decisions = getDecisions();
 // Returns array of Decision objects with phase, topic, chosen, rationale, made_by

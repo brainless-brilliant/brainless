@@ -130,5 +130,5 @@ If code helps, show it - but as illustration of the principle, not copy-paste ma
 
 ## Related Commands
 
-- /anveekshacode:note - Save quick notes that survive compaction (less formal than skills)
-- /anveekshacode:ralph - Start a development loop with learning capture
+- /brainless:note - Save quick notes that survive compaction (less formal than skills)
+- /brainless:ralph - Start a development loop with learning capture

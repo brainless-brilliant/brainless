@@ -1,21 +1,21 @@
-# Claude AI Instructions for anveekshacode
+# Claude AI Instructions for brainless
 
 This file provides context for Claude when working on this repository via GitHub Actions.
 
 ## Repository Overview
 
-anveekshacode is a Claude Code plugin that provides multi-agent orchestration capabilities.
+brainless is a Claude Code plugin that provides multi-agent orchestration capabilities.
 
 ### Key Features
 - **32 specialized agents** with intelligent model routing (Haiku/Sonnet/Opus tiers)
-- **40 slash commands** including /anveekshacode:ultrawork, /anveekshacode:chillwork, /anveekshacode:deepinit, /anveekshacode:planner, /anveekshacode:ralph
+- **40 slash commands** including /brainless:ultrawork, /brainless:chillwork, /brainless:deepinit, /brainless:planner, /brainless:ralph
 - **Smart delegation** - automatically routes tasks to appropriate specialist agents
 - **Background execution** - runs long-running tasks asynchronously
 - **Cost optimization** - chillwork mode prefers cheaper model tiers
 
 ### Installation
 ```bash
-/plugin marketplace add Yeachan-Heo/anveekshacode
+/plugin marketplace add Yeachan-Heo/brainless
 ```
 
 ## Code Structure
@@ -35,8 +35,8 @@ tests/                   # Test files
 ## When Responding to Issues
 
 ### Installation Issues
-- Recommend running `/anveekshacode:doctor` to diagnose problems
-- Check if user installed via correct method: `/plugin marketplace add Yeachan-Heo/anveekshacode`
+- Recommend running `/brainless:doctor` to diagnose problems
+- Check if user installed via correct method: `/plugin marketplace add Yeachan-Heo/brainless`
 - Common issues: outdated Claude Code version, missing dependencies
 
 ### Bug Reports
