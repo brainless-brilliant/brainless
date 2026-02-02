@@ -1,12 +1,12 @@
-# Brainless - AI Workforce Orchestration
+# Brainless - Brilliant AI Workforce Orchestration
 
-**Intelligent, self-assembling AI agent teams with memory and escalation protocols.**
+**A Claude Code plugin for intelligent, self-assembling AI agent teams with memory and escalation protocols.**
 
 ---
 
 ## What is Brainless?
 
-Brainless is a production-ready AI workforce orchestration system that dynamically assembles specialist agent teams, learns from experience, and resolves issues internally before escalating to users.
+Brainless is a production-ready AI workforce orchestration plugin for [Claude Code](https://claude.ai/code) that dynamically assembles specialist agent teams, learns from experience, and resolves issues internally before escalating to users.
 
 ### Key Features
 
@@ -32,19 +32,37 @@ Brainless is a production-ready AI workforce orchestration system that dynamical
 
 ---
 
-## Quick Start
+## Installation
 
-### Installation
+### For Claude Code
 
+1. Clone this repository:
 ```bash
-npm install -g @brainless-brilliant/brainless
+git clone https://github.com/brainless-brilliant/brainless.git
+cd brainless
 ```
 
-### Basic Usage
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the plugin:
+```bash
+npm run build
+```
+
+4. Link to Claude Code's plugins directory (follow Claude Code plugin installation guide)
+
+---
+
+## Usage
+
+Once installed, Brainless works automatically when you use Claude Code:
 
 ```bash
-# Run with team assembly
-brainless "Build OAuth2 authentication with security audit"
+# In Claude Code, just start working
+"Build OAuth2 authentication with security audit"
 ```
 
 **Output**:
@@ -115,19 +133,19 @@ Future Teams Learn
 
 ## Configuration
 
-### Optional: Haiku API Key (Improves Recommendations)
-
-```bash
-export ANTHROPIC_API_KEY=sk-...
-```
-
-Without API key, the system falls back to keyword-based classification (still functional).
-
 ### Debug Mode
 
+Enable detailed logging:
+
 ```bash
-export AVK_DEBUG=true
+export BRAINLESS_DEBUG=true
 ```
+
+This shows:
+- Team assembly details
+- Memory search results
+- Escalation routing
+- Internal agent communication
 
 ---
 
@@ -174,7 +192,7 @@ Example: **Elena** (Security Lead) - "Assuming everything is a SQL injection"
 ### Build from Source
 
 ```bash
-git clone https://github.com/yourusername/brainless.git
+git clone https://github.com/brainless-brilliant/brainless.git
 cd brainless
 npm install
 npm run build
@@ -199,16 +217,16 @@ All tests passing ✅
 
 ## Credits & Inspiration
 
-Brainless is built on the foundation of [oh-my-claudecode](https://github.com/cyanheads/oh-my-claudecode) (originally `sisyphus`). We're deeply grateful for their pioneering work in agentic coding systems.
+Brainless is built on the foundation of [oh-my-opencode](https://github.com/code-yeongyu/oh-my-opencode) originally developed as `sisyphus`. We're deeply grateful for their pioneering work in agentic coding systems.
 
 **What we added**:
 - Dynamic team assembly with AI classification
 - 29 named agent personas
 - Escalation protocol with internal resolution
-- Memory layer integration (inspired by [claude-mem](https://github.com/yourusername/claude-mem))
+- Memory layer integration (inspired by [claude-mem](https://github.com/cyanheads/claude-mem))
 - Continuous learning from task history
 
-While the core architecture originated from oh-my-claudecode, the abstractions we introduced (runtime teams, escalation, memory influence) represent a fundamental evolution of the orchestration model.
+While the core architecture originated from oh-my-opencode, the abstractions we introduced (runtime teams, escalation, memory influence) represent a fundamental evolution of the orchestration model.
 
 ---
 
@@ -266,6 +284,7 @@ Contributions welcome! Please:
 
 ---
 
-**Built with ❤️ by the Brainless team**
+**Built with ❤️**
 
 *"Why settle for anything less than A+?"*
+
