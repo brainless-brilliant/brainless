@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-02-02T16:40:20.926Z",
+  "backgroundTasks": [
+    {
+      "id": "task-1769881276108-9iae5v",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-01-31T17:41:16.110Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.918Z"
+    },
+    {
+      "id": "task-1769881276113-dwfk2k",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-01-31T17:41:16.113Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.919Z"
+    },
+    {
+      "id": "task-1769881276113-olv8er",
+      "description": "Test task",
+      "agentType": "executor-low",
+      "startedAt": "2026-01-31T17:41:16.114Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.919Z"
+    },
+    {
+      "id": "task-1769881276114-26j5y1",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-01-31T17:41:16.114Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.919Z"
+    },
+    {
+      "id": "task-1769881276115-wc9con",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-31T17:41:16.115Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.919Z"
+    },
+    {
+      "id": "task-1769881276117-otomzt",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-01-31T17:41:16.117Z",
+      "status": "failed",
+      "completedAt": "2026-02-02T16:40:20.919Z"
+    },
+    {
+      "id": "task-1770050420918-q4itax",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-02-02T16:40:20.919Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1770050420922-z7ivh9",
+      "description": "Test task",
+      "agentType": "brainless:executor",
+      "startedAt": "2026-02-02T16:40:20.922Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1770050420923-4m4vx8",
+      "description": "Test task",
+      "agentType": "executor-low",
+      "startedAt": "2026-02-02T16:40:20.924Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1770050420925-eiu5zu",
+      "description": "Test",
+      "agentType": "architect",
+      "startedAt": "2026-02-02T16:40:20.925Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1770050420925-xse1rx",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-02-02T16:40:20.926Z",
+      "status": "running"
+    },
+    {
+      "id": "task-1770050420926-vqm7hk",
+      "description": "Test",
+      "agentType": "executor",
+      "startedAt": "2026-02-02T16:40:20.926Z",
+      "status": "running"
+    }
+  ]
+}
