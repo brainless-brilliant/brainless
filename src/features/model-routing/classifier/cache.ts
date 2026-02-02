@@ -73,12 +73,17 @@ export class LRUCache {
   prune(): number {
     const now = Date.now();
     let pruned = 0;
+    const keysToDelete: string[] = [];
     
-    for (const [key, entry] of this.cache) {
+    this.cache.forEach((entry, key) => {
       if (now > entry.expiresAt) {
-        this.cache.delete(key);
-        pruned++;
+        keysToDelete.push(key);
       }
+    });
+    
+    for (const key of keysToDelete) {
+      this.cache.delete(key);
+      pruned++;
     }
     
     return pruned;
