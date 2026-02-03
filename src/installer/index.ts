@@ -166,13 +166,14 @@ function loadCommandDefinitions(): Record<string, string> {
 }
 
 /**
- * Load CLAUDE.md content from /docs/CLAUDE.md
+ * Load CLAUDE.md content from /templates/CLAUDE.brainless.md
+ * This is the plugin-specific section that gets merged into user's CLAUDE.md
  */
 function loadClaudeMdContent(): string {
-  const claudeMdPath = join(getPackageDir(), 'docs', 'CLAUDE.md');
+  const claudeMdPath = join(getPackageDir(), 'templates', 'CLAUDE.brainless.md');
 
   if (!existsSync(claudeMdPath)) {
-    console.error(`FATAL: CLAUDE.md not found: ${claudeMdPath}`);
+    console.error(`FATAL: CLAUDE.brainless.md not found: ${claudeMdPath}`);
     process.exit(1);
   }
 
@@ -182,7 +183,7 @@ function loadClaudeMdContent(): string {
 /**
  * Install OMC agents, commands, skills, and hooks
  */
-export function install(options: InstallOptions = {}): InstallResult {
+export async function install(options: InstallOptions = {}): Promise<InstallResult> {
   const result: InstallResult = {
     success: false,
     message: '',
@@ -308,19 +309,36 @@ export function install(options: InstallOptions = {}): InstallResult {
       // NOTE: SKILL_DEFINITIONS removed - skills now only installed via COMMAND_DEFINITIONS
       // to avoid duplicate entries in Claude Code's available skills list
 
-      // Install CLAUDE.md (only if it doesn't exist)
+      //Install CLAUDE.md with smart merging
       const claudeMdPath = join(CLAUDE_CONFIG_DIR, 'CLAUDE.md');
-      const homeMdPath = join(homedir(), 'CLAUDE.md');
-
-      if (!existsSync(homeMdPath)) {
+      const pluginClaudeMd = loadClaudeMdContent();
+      
+      try {
+        const { performCLAUDEmdMerge } = await import('./claude-md-merger.js');
+        const mergeResult = await performCLAUDEmdMerge(
+          pluginClaudeMd,
+          claudeMdPath,
+          { verbose: options.verbose || false }
+        );
+        
+        if (mergeResult.success) {
+          log(`CLAUDE.md: ${mergeResult.message}`);
+          if (mergeResult.backupPath) {
+            log(`  Backup: ${mergeResult.backupPath}`);
+          }
+        } else {
+          log(`Warning: ${mergeResult.message}`);
+          result.errors.push(mergeResult.message);
+        }
+      } catch (error) {
+        // Fallback to simple creation if merger fails
+        log('Warning: Smart merge failed, falling back to simple creation');
         if (!existsSync(claudeMdPath) || options.force) {
-          writeFileSync(claudeMdPath, loadClaudeMdContent());
-          log('Created CLAUDE.md');
+          writeFileSync(claudeMdPath, pluginClaudeMd);
+          log('Created CLAUDE.md (fallback)');
         } else {
           log('CLAUDE.md already exists, skipping');
         }
-      } else {
-        log('CLAUDE.md exists in home directory, skipping');
       }
 
       // Install hook scripts (platform-aware)

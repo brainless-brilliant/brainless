@@ -471,7 +471,7 @@ program
     }
 
     // Run installation
-    const result = installBrainless({
+    const result = await installBrainless({
       force: options.force,
       verbose: !options.quiet,
       skipClaudeCheck: options.skipClaudeCheck
@@ -537,7 +537,7 @@ program
     } else {
       console.error(chalk.red(`Installation failed: ${result.message}`));
       if (result.errors.length > 0) {
-        result.errors.forEach(err => console.error(chalk.red(`  - ${err}`)));
+        result.errors.forEach((err: string) => console.error(chalk.red(`  - ${err}`)));
       }
       process.exit(1);
     }
@@ -588,7 +588,7 @@ program
   .description('Run post-install setup (called automatically by npm)')
   .action(async () => {
     // Silent install - only show errors
-    const result = installBrainless({
+    const result = await installBrainless({
       force: false,
       verbose: false,
       skipClaudeCheck: true
