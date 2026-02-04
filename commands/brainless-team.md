@@ -1,98 +1,176 @@
 ---
-name: brainless-team
 description: Manually trigger team assembly for a task
-args:
-  - name: task
-    description: The task description to assemble a team for
-    required: true
+argument-hint: <task>
 ---
 
-# /brainless:team - Manual Team Assembly
+<command-instruction>
+You are executing the /brainless:team command. Your job is to assemble a specialized team for the user's task.
 
-Manually trigger team assembly to preview which specialists will be selected for your task.
+## STEP 0: DISPLAY ANALYZING MESSAGE (IMMEDIATE)
 
-## When to Use
-
-- **Preview team composition**: See who gets selected before starting work
-- **Understand agent selection**: Learn how the classifier routes tasks
-- **Test team assembly**: Verify the right specialists are chosen
-- **Manual delegation**: Start orchestration after team approval
-
-## How It Works
-
-When you run `/brainless:team "<task>"`, the system will:
-
-1. **Analyze the task** using the Haiku-powered classifier
-2. **Select specialists** from the registry of 29 agents based on:
-   - Task category (architecture, security, implementation, etc.)
-   - Required skills and expertise
-   - Complexity level
-3. **Display the team** with:
-   - Agent names and roles
-   - Their specializations/catchphrases
-   - Selection rationale
-   - Confidence score
-   - Source (haiku classifier / memory / fallback)
-
-4. **Wait for confirmation** before proceeding
-
-## Team Assembly Rules
-
-The classifier follows these principles:
-
-| Task Type | Specialists Selected |
-|-----------|---------------------|
-| Architecture/Design | Vikram, Priya, Rohan (architects) |
-| Security Review | Elena, Sam (security leads) |
-| Implementation | Jordan, Alex, Taylor (executors) |
-| QA/Testing | Maya, Oliver, Sophia (QA testers) |
-| Frontend/UI | Zoe, Liam, Aiden, Mia (designers) |
-| Documentation | Olivia, Ethan (writers) |
-| Research | Aria, Lucas, Isla (researchers) |
-| Data/Analytics | Noah, Emma, Leo (data specialists) |
-| Planning | Amelia, Ryan (planners) |
-| Business Logic | Chloe, Mason (analysts) |
-
-**Complex tasks** may select multiple specialists from different domains.
-
-## Memory Integration
-
-The team assembly learns from past success:
-- Tracks which teams worked well together
-- Remembers successful agent combinations
-- Adjusts recommendations based on project patterns
-
-## Examples
+Print this EXACTLY:
 
 ```
-/brainless:team "Build authentication API with JWT"
-→ Shows: Elena (security), Jordan (executor), Maya (QA)
-
-/brainless:team "Design dark mode landing page"
-→ Shows: Zoe (frontend), Vikram (architect)
-
-/brainless:team "Optimize database queries"
-→ Shows: Noah (data), Rohan (architect), Oliver (QA)
+🎯 Analyzing your question...
 ```
 
-## Output Format
+## STEP 1: CLASSIFY THE TASK
+
+Analyze the user's task description to determine:
+- **Primary category**: architecture / security / implementation / qa / frontend / documentation / research / data / planning / business-logic
+- **Complexity level**: simple / medium / complex
+- **Required specialists**: Which of the 29 agents best fit this task
+
+### Specialist Registry
+
+| Domain | Agents |
+|--------|--------|
+| Architecture/Design | Vikram, Priya, Rohan |
+| Security | Elena, Sam |
+| Implementation | Jordan, Alex, Taylor |
+| QA/Testing | Maya, Oliver, Sophia |
+| Frontend/UI | Zoe, Liam, Aiden, Mia |
+| Documentation | Olivia, Ethan |
+| Research | Aria, Lucas, Isla |
+| Data/Analytics | Noah, Emma, Leo |
+| Planning | Amelia, Ryan |
+| Business Logic | Chloe, Mason |
+
+### Selection Rules
+
+- **Simple tasks** (single concern): 1-2 specialists
+- **Medium tasks** (2-3 concerns): 2-3 specialists
+- **Complex tasks** (multiple concerns): 3-5 specialists
+- **Security-related**: ALWAYS include Elena or Sam
+- **Architecture-related**: ALWAYS include Vikram or Priya
+- **Implementation**: Match executor to task domain (frontend → Zoe/Liam, backend → Jordan/Alex)
+
+## STEP 2: SEARCH MEMORY (OPTIONAL)
+
+If the project has `.brainless/memory/` with past task patterns, check for:
+- Similar past tasks and which teams worked well
+- Failed team combinations to avoid
+- Project-specific agent preferences
+
+## STEP 3: DISPLAY TEAM ROSTER (MANDATORY OUTPUT)
+
+**You MUST print this output block. NO BASH COMMANDS. NO PERMISSION PROMPTS.**
+
+Print the team in this EXACT format:
 
 ```
-🎯 Building your dream team for this task...
+👥 Team of [N] assembled:
+   [emoji] **[Name]** ([Role]): "[Catchphrase]"
+   [emoji] **[Name]** ([Role]): "[Catchphrase]"
+   ...
+
+💡 Rationale: [1-2 sentence explanation of why these specialists]
+📊 Confidence: [X]% | Source: [haiku/memory/fallback]
+```
+
+### Agent Catchphrases
+
+| Agent | Emoji | Role | Catchphrase |
+|-------|-------|------|-------------|
+| Vikram | 🏗️ | Principal Architect | "CAP theorem in my sleep" |
+| Priya | 🎯 | Solutions Architect | "Complexity is the enemy" |
+| Rohan | 📐 | Systems Architect | "Distributed by design" |
+| Elena | 🔒 | Security Lead | "Assuming everything is a SQL injection" |
+| Sam | 🛡️ | Security Engineer | "Trust no input" |
+| Jordan | ⚙️ | Senior Engineer | "Ship it or skip it" |
+| Alex | 💻 | Staff Engineer | "Code is liability, features are assets" |
+| Taylor | 🔧 | Backend Engineer | "APIs are contracts" |
+| Maya | ✅ | QA Lead | "If it's not tested, it's broken" |
+| Oliver | 🧪 | Test Engineer | "Edge cases are the main cases" |
+| Sophia | 🔍 | QA Analyst | "Users will find a way" |
+| Zoe | 🎨 | Frontend Lead | "Pixels matter" |
+| Liam | 🖼️ | UI Engineer | "Responsive is non-negotiable" |
+| Aiden | 📱 | Mobile Engineer | "60fps or nothing" |
+| Mia | ✨ | UX Engineer | "Delightful by default" |
+| Olivia | 📝 | Tech Writer | "If it's not documented, it doesn't exist" |
+| Ethan | 📚 | Documentation Lead | "Write for the future you" |
+| Aria | 🔬 | Research Lead | "Data drives decisions" |
+| Lucas | 📊 | Data Scientist | "Correlation is not causation" |
+| Isla | 🧠 | ML Engineer | "Garbage in, garbage out" |
+| Noah | 📈 | Analytics Engineer | "Measure twice, query once" |
+| Emma | 💾 | Data Engineer | "Schema is destiny" |
+| Leo | 🗄️ | Database Admin | "Indexes are free until they're not" |
+| Amelia | 📋 | Product Manager | "Scope is a four-letter word" |
+| Ryan | 🚀 | DevOps Lead | "Automate everything" |
+| Chloe | 💼 | Business Analyst | "Requirements are negotiable" |
+| Mason | 📊 | Systems Analyst | "Edge cases define the system" |
+
+## STEP 4: ASK FOR CONFIRMATION
+
+After displaying the team, ask:
+
+```
+──────────────────────────────────────
+
+Proceed with this team? (yes/no)
+```
+
+Wait for user response before proceeding to any orchestration.
+
+## STEP 5: IF USER CONFIRMS
+
+If user says yes/proceed:
+- Begin orchestration using the assembled team
+- PM (if in team) takes coordinator role
+- Log activity to `.brainless/transcripts/`
+
+If user says no/different:
+- Ask what changes they'd like
+- Re-run team selection with adjustments
+
+---
+
+## EXAMPLES
+
+**Input:** `/brainless:team "Build authentication API with JWT"`
+
+**Output:**
+```
+🎯 Analyzing your question...
 
 👥 Team of 3 assembled:
-   🏗️ **Vikram** (Principal Architect): "CAP theorem in my sleep"
-   🔒 **Elena** (Security Lead): "Assuming everything is a SQL injection"  
-   ⚙️ **Alex** (Senior Engineer): "Ship it or skip it"
+   🔒 **Elena** (Security Lead): "Assuming everything is a SQL injection"
+   ⚙️ **Jordan** (Senior Engineer): "Ship it or skip it"
+   ✅ **Maya** (QA Lead): "If it's not tested, it's broken"
 
-💡 Rationale: Task involves system design and security review
-📊 Confidence: 87% | Source: haiku
+💡 Rationale: Authentication is security-critical. Need security review, solid backend implementation, and thorough testing.
+📊 Confidence: 92% | Source: haiku
 
 ──────────────────────────────────────
 
 Proceed with this team? (yes/no)
 ```
 
----
+**Input:** `/brainless:team "Design dark mode landing page"`
 
-**Tip**: Use this command to validate team selection before running `/team` for full orchestration!
+**Output:**
+```
+🎯 Analyzing your question...
+
+👥 Team of 2 assembled:
+   🎨 **Zoe** (Frontend Lead): "Pixels matter"
+   🏗️ **Vikram** (Principal Architect): "CAP theorem in my sleep"
+
+💡 Rationale: UI-focused task needs frontend expertise. Architect for component structure decisions.
+📊 Confidence: 85% | Source: haiku
+
+──────────────────────────────────────
+
+Proceed with this team? (yes/no)
+```
+
+</command-instruction>
+
+<current-context>
+<project-has-memory>
+!`test -d .brainless/memory && echo "yes" || echo "no"`
+</project-has-memory>
+<recent-teams>
+!`ls -la .brainless/transcripts/*.md 2>/dev/null | tail -3 || echo "no transcripts"`
+</recent-teams>
+</current-context>

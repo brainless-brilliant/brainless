@@ -3,96 +3,112 @@ name: transcript
 description: View agent activity transcript and audit trail
 ---
 
-# /transcript - Agent Activity Transcript
+<command-instruction>
+You are executing the /transcript command. Display the agent activity log.
 
-View a complete log of all agent activities in the current session.
+## STEP 1: CHECK FOR TRANSCRIPT FILES
 
-## What This Shows
+Look for transcripts in `.brainless/transcripts/`:
 
-When you invoke this command, read the transcript file at `.brainless/transcripts/activity.jsonl` and display:
-
-1. **Activity Table** - Chronological list of all agent actions
-2. **Summary** - Total activities, agents involved, decisions made
-3. **Timeline** (optional) - Visual tree view of activities
-
-## Usage
-
-```
-/transcript           # Show recent activities
-/transcript full      # Show all activities
-/transcript timeline  # Show timeline view
-/transcript summary   # Show summary only
+```bash
+ls -la .brainless/transcripts/*.md 2>/dev/null | head -10
 ```
 
-## Output Format
+If no transcripts found:
+```
+📭 No Transcripts Found
 
-### Table View (Default)
-```markdown
-# Agent Activity Transcript
+No agent activity has been recorded yet.
+Transcripts are created when you use /team for orchestration.
 
-Generated: 2026-01-25T10:30:00Z
-Total Activities: 12
+Run /team "your task" to start an orchestrated session.
+```
+Exit if no transcripts.
 
-| Time | Agent | Action | Summary |
-|------|-------|--------|---------|
-| 10:30 | pm | spawned | Orchestrating task: Build auth system |
-| 10:31 | analyst | spawned | Analyzing requirements |
-| 10:32 | analyst | completed | Found 5 requirements, 2 risks |
-| 10:33 | architect | spawned | Designing system architecture |
-| 10:35 | architect | proposed | Microservices with JWT auth |
-| 10:35 | security-reviewer | counter | Suggest session tokens instead |
-| 10:36 | pm | decided | Using JWT - better for stateless API |
-| 10:37 | planner | spawned | Creating implementation plan |
+## STEP 2: READ ACTIVITY LOG
+
+Read the most recent transcript file or `activity.jsonl` if present.
+
+Parse each activity record with fields:
+- `timestamp`: When it happened
+- `agent`: Which agent acted
+- `action`: What they did (spawned, completed, proposed, etc.)
+- `summary`: Brief description
+
+## STEP 3: DISPLAY TRANSCRIPT (MANDATORY OUTPUT)
+
+Format and display the transcript:
+
+```
+📋 Agent Activity Transcript
+═══════════════════════════════════════════════════
+Session: [session-id or filename]
+Generated: [current timestamp]
+Total Activities: [count]
+═══════════════════════════════════════════════════
+
+| Time  | Agent     | Action    | Summary                              |
+|-------|-----------|-----------|--------------------------------------|
+| 10:30 | pm        | spawned   | Orchestrating: Build auth system     |
+| 10:31 | analyst   | spawned   | Analyzing requirements               |
+| 10:32 | analyst   | completed | Found 5 requirements, 2 risks        |
+| 10:33 | architect | spawned   | Designing system architecture        |
+| 10:35 | architect | proposed  | Microservices with JWT auth          |
+| 10:35 | security  | counter   | Suggest session tokens instead       |
+| 10:36 | pm        | decided   | Using JWT - better for stateless API |
+| 10:37 | planner   | spawned   | Creating implementation plan         |
+| ...   | ...       | ...       | ...                                  |
+
+═══════════════════════════════════════════════════
+
+📊 Summary:
+   • Agents involved: [list]
+   • Decisions made: [count]
+   • Debates held: [count]
+   • Duration: [time]
+   • Status: [Active/Completed]
+
+═══════════════════════════════════════════════════
 ```
 
-### Timeline View (`/transcript timeline`)
-```
-10:30 ├── [pm] 🚀 spawned
-      │   └── Orchestrating task: Build auth system
-      │
-10:31 ├── [analyst] 🚀 spawned
-      │   └── Analyzing requirements
-      │
-10:32 ├── [analyst] ✅ completed
-      │   └── Found 5 requirements, 2 risks
-```
+## STEP 4: HANDLE VARIANTS
 
-### Summary View (`/transcript summary`)
-```markdown
-## Transcript Summary
+If user specifies a variant:
 
-- **Session ID:** abc123
-- **Total Activities:** 12
-- **Agents Involved:** pm, analyst, architect, planner, executor
-- **Decisions Made:** 3
-- **Debates Held:** 1
-- **Duration:** 15 minutes
-- **Status:** Active
-```
+### `/transcript full`
+Show all activities without limit.
 
-## How to Read
+### `/transcript timeline`
+Redirect to /timeline command.
 
-1. Look for the transcript directory: `.brainless/transcripts/`
-2. Read `activity.jsonl` - each line is a JSON activity record
-3. Parse and format as table/timeline
-4. Also check `decisions.jsonl` for decision records
+### `/transcript summary`
+Show only the summary section.
 
-## Action Icons
+## ACTION ICONS
 
-| Icon | Action | Meaning |
-|------|--------|---------|
-| 🚀 | spawned | Agent was started |
-| ✅ | completed | Agent finished successfully |
-| ❌ | failed | Agent encountered error |
-| ➡️ | delegated | Agent spawned another agent |
-| 💡 | proposed | Agent made a proposal |
-| 👍 | approved | PM approved a decision |
-| 👎 | rejected | PM rejected, needs revision |
-| 💬 | debated | Agents discussed a topic | 
-| ⚖️ | decided | PM made a decision |
-| ⏳ | gate_pending | Waiting for approval |
-| 🚪 | gate_passed | Approval passed |
+Use these icons based on action type:
 
----
+| Icon | Action     | Meaning                    |
+|------|------------|----------------------------|
+| 🚀   | spawned    | Agent was started          |
+| ✅   | completed  | Agent finished             |
+| ❌   | failed     | Agent error                |
+| ➡️   | delegated  | Spawned another agent      |
+| 💡   | proposed   | Made a proposal            |
+| 👍   | approved   | PM approved                |
+| 👎   | rejected   | PM rejected                |
+| 💬   | debated    | Discussion started         |
+| ⚖️   | decided    | Decision made              |
+| ⏳   | pending    | Waiting for approval       |
+| 🚪   | passed     | Gate passed                |
 
-© Brainless Technologies Pvt. Ltd.
+</command-instruction>
+
+<current-context>
+<transcript-files>
+!`ls -t .brainless/transcripts/*.md 2>/dev/null | head -5 || echo "none"`
+</transcript-files>
+<activity-log>
+!`test -f .brainless/transcripts/activity.jsonl && echo "exists" || echo "not found"`
+</activity-log>
+</current-context>

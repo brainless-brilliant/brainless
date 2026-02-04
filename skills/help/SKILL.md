@@ -3,68 +3,97 @@ name: help
 description: Guide on using Brainless AI Workforce
 ---
 
-# How Brainless Works
+<command-instruction>
+You are executing the /help command. Display the Brainless usage guide.
 
-**You don't need to learn any commands!** Brainless enhances Claude Code with intelligent behaviors that activate automatically.
+## STEP 1: DISPLAY HELP (MANDATORY OUTPUT)
 
-## What Happens Automatically
-
-| When You... | I Automatically... |
-|-------------|-------------------|
-| Give me a complex task | Parallelize and delegate to specialist agents |
-| Ask me to plan something | Start a planning interview |
-| Need something done completely | Persist until verified complete |
-| Work on UI/frontend | Activate design sensibility |
-| Say "stop" or "cancel" | Intelligently stop current operation |
-
-## Magic Keywords (Optional Shortcuts)
-
-You can include these words naturally in your request for explicit control:
-
-| Keyword | Effect | Example |
-|---------|--------|---------|
-| **ralph** | Persistence mode | "ralph: fix all the bugs" |
-| **ralplan** | Iterative planning | "ralplan this feature" |
-| **ulw** | Max parallelism | "ulw refactor the API" |
-| **plan** | Planning interview | "plan the new endpoints" |
-
-**Combine them:** "ralph ulw: migrate the database"
-
-## Stopping Things
-
-Just say:
-- "stop"
-- "cancel"
-- "abort"
-
-I'll figure out what to stop based on context.
-
-## First Time Setup
-
-If you haven't configured Brainless yet:
+Print this help guide EXACTLY:
 
 ```
-/brainless:setup
+📚 Brainless AI Workforce - Quick Guide
+═══════════════════════════════════════════════════
+
+🚀 AUTOMATIC BEHAVIORS
+
+You don't need commands! Brainless enhances Claude Code automatically:
+
+| When You...                    | I Automatically...                    |
+|--------------------------------|---------------------------------------|
+| Give a complex task            | Assemble a specialist team            |
+| Ask for security review        | Include Elena (Security Lead)         |
+| Request architecture design    | Include Vikram (Architect)            |
+| Need QA/testing                | Include Maya (QA Lead)                |
+| Work on frontend               | Include Zoe (Frontend Lead)           |
+
+═══════════════════════════════════════════════════
+
+📋 SLASH COMMANDS
+
+Core commands for explicit control:
+
+| Command                        | Purpose                               |
+|--------------------------------|---------------------------------------|
+| /brainless:team <task>         | Manually assemble team for task       |
+| /brainless:status              | View current configuration            |
+| /brainless:memory <query>      | Search project memory                 |
+| /brainless:init                | Initialize Brainless configuration    |
+| /brainless:config              | Show debug info and settings          |
+| /brainless:escalate <type>     | Manually escalate an issue            |
+
+Orchestration commands:
+
+| Command                        | Purpose                               |
+|--------------------------------|---------------------------------------|
+| /team <task>                   | Full PM-orchestrated execution        |
+| /transcript                    | View agent activity log               |
+| /timeline                      | Visual activity timeline              |
+| /decisions                     | View all decisions made               |
+
+═══════════════════════════════════════════════════
+
+👥 SPECIALISTS
+
+29 named specialists across domains:
+
+• **Architecture**: Vikram, Priya, Rohan
+• **Security**: Elena, Sam
+• **Implementation**: Jordan, Alex, Taylor
+• **QA/Testing**: Maya, Oliver, Sophia
+• **Frontend/UI**: Zoe, Liam, Aiden, Mia
+• **Documentation**: Olivia, Ethan
+• **Research**: Aria, Lucas, Isla
+• **Data**: Noah, Emma, Leo
+• **Planning**: Amelia, Ryan
+• **Business**: Chloe, Mason
+
+═══════════════════════════════════════════════════
+
+🚨 ESCALATION
+
+3-tier escalation keeps you in control:
+
+Tier 1 (Self) → Tier 2 (Specialist) → Tier 3 (You)
+
+Most issues resolve before reaching you!
+
+═══════════════════════════════════════════════════
+
+🔮 MEMORY
+
+Brainless learns from your project:
+• Successful team combinations saved
+• Past patterns influence future selection
+• Use /brainless:memory to search
+
+═══════════════════════════════════════════════════
+
+📖 Documentation: https://github.com/brainless-brilliant/brainless
+🐛 Issues: https://github.com/brainless-brilliant/brainless/issues
+
+═══════════════════════════════════════════════════
 ```
 
-This is the **only command** you need to know. It downloads the configuration and you're done.
+That's it - just display this help and stop.
 
-## Key Commands
-
-| Command | Purpose |
-|---------|---------|
-| `/setup` | Configure Brainless for your project |
-| `/default` | Set project defaults |
-| `/provision` | Provision AI workforce based on tech stack |
-| `/plan` | Start planning mode |
-| `/autopilot` | Autonomous execution mode |
-
-## Need More Help?
-
-- **Documentation**: https://github.com/brainless/workforce
-- **Issues**: https://github.com/brainless/workforce/issues
-
----
-
-*Brainless AI Workforce v4.0.0*
-*© Brainless Technologies Pvt. Ltd.*
+</command-instruction>

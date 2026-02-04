@@ -1,111 +1,173 @@
 ---
-name: brainless-memory
-description: Search project memory for patterns and learnings
-args:
-  - name: query
-    description: Search query (optional, shows summary if omitted)
-    required: false
+description: Search project memory for patterns and past learnings
+argument-hint: <query>
 ---
 
-# /brainless:memory - Memory Search
+<command-instruction>
+You are executing the /brainless:memory command. Your job is to search the project memory for relevant patterns and past learnings.
 
-Search project memory for patterns, past solutions, and learnings.
+## STEP 0: DISPLAY SEARCH MESSAGE (IMMEDIATE)
 
-## How Memory Works
-
-Brainless maintains a project memory system that captures:
-- **Successful task completions**: What worked and why
-- **Team compositions**: Which agents collaborated effectively
-- **Technical patterns**: Reusable solutions and approaches
-- **Failure learnings**: What didn't work and lessons learned
-
-Memory is stored in `~/.brainless/memory/` and automatically captures task outcomes.
-
-## Usage
-
-### With Query
-Search for specific topics:
-```
-/brainless:memory "authentication"
-/brainless:memory "database optimization"
-/brainless:memory "error handling"
-```
-
-### Without Query
-Shows general memory summary:
-```
-/brainless:memory
-```
-
-## Search Results
-
-When you search with a query, you'll see:
-
-### Relevant Entries
-```
-🧠 Memory Search: "authentication"
-
-Found 3 relevant entries:
-
-──────────────────────────────────────
-
-📍 Entry #1 [2026-02-01 14:30]
-Task: Build JWT authentication API
-Team: Elena (security), Jordan (executor), Maya (QA)
-Outcome: ✅ Success
-Learning: Always validate token expiry on both client and server
-
-──────────────────────────────────────
-
-📍 Entry #2 [2026-01-28 09:15]
-Task: Add OAuth integration
-Team: Elena, Alex, Oliver
-Outcome: ✅ Success
-Learning: Use PKCE flow for public clients
-
-──────────────────────────────────────
-```
-
-### Identified Patterns
-```
-🔍 Patterns Identified:
-- Authentication tasks always include Elena (security lead)
-- Complex integrations need both executor + QA pairing
-- OAuth requires architecture review before implementation
-```
-
-### Suggested Approach
-```
-💡 Suggested Approach:
-Based on successful past patterns:
-1. Start with security review (Elena)
-2. Implement with executor (Jordan/Alex)
-3. Verify with QA (Maya/Oliver)
-4. Add integration tests before merging
-```
-
-## Memory Capture
-
-Memory is automatically captured when:
-- Task completes successfully (with `TASK_COMPLETE` promise)
-- Executor or specialist agents finish work
-- PM marks orchestration phase complete
-
-Capture filter: Executor/specialist work only (not exploratory tasks)
-
-## Examples
+Print this EXACTLY:
 
 ```
-/brainless:memory "API design"
-→ Shows API-related learnings and patterns
+🔮 Searching memory for patterns...
+```
 
-/brainless:memory "performance optimization"
-→ Shows optimization approaches that worked
+## STEP 1: CHECK MEMORY DIRECTORY
 
-/brainless:memory
-→ Shows general stats and recent entries
+Check if `.brainless/memory/` exists and has content.
+
+### If no memory directory:
+
+```
+📭 No memory found
+
+The .brainless/memory/ directory doesn't exist yet.
+Memory is built automatically as you use Brainless:
+• Successful task patterns
+• Team combinations that worked
+• Escalation resolutions
+• Architecture decisions
+
+Run /brainless:init to set up the directory structure.
+```
+
+Exit after displaying.
+
+## STEP 2: SEARCH MEMORY FILES
+
+Search all `.md` files in `.brainless/memory/` for:
+- Keyword matches with user's query
+- Similar task descriptions
+- Related agent combinations
+- Relevant patterns
+
+### Search Algorithm
+
+1. Exact keyword match (highest priority)
+2. Semantic similarity (related terms)
+3. Agent/role mentions
+4. Date relevance (recent patterns weighted higher)
+
+## STEP 3: DISPLAY RESULTS (MANDATORY OUTPUT)
+
+**Print the results. NO BASH COMMANDS. NO PERMISSION PROMPTS.**
+
+### If matches found:
+
+```
+🔮 Memory Search Results
+═══════════════════════════════════════════════════
+Query: "[user's query]"
+Found: [N] relevant patterns
+
+📌 Pattern 1: [Title/Task Description]
+   Date: [date]
+   Team: [agents used]
+   Outcome: ✅ Success | ⚠️ Partial | ❌ Failed
+   Learning: [Key insight from this task]
+
+📌 Pattern 2: [Title/Task Description]
+   Date: [date]
+   Team: [agents used]
+   Outcome: ✅ Success | ⚠️ Partial | ❌ Failed
+   Learning: [Key insight]
+
+[... up to 5 results ...]
+
+═══════════════════════════════════════════════════
+
+💡 These patterns may influence future team assembly.
+```
+
+### If no matches:
+
+```
+🔮 Memory Search Results
+═══════════════════════════════════════════════════
+Query: "[user's query]"
+Found: 0 relevant patterns
+
+No matching patterns found for this query.
+
+💡 Suggestions:
+   • Try broader search terms
+   • Memory builds over time with usage
+   • Check /brainless:status for memory stats
+
+═══════════════════════════════════════════════════
 ```
 
 ---
 
-**Tip**: Check memory before starting similar tasks to learn from past successes!
+## EXAMPLES
+
+**Input:** `/brainless:memory "authentication"`
+
+**Output:**
+```
+🔮 Searching memory for patterns...
+
+🔮 Memory Search Results
+═══════════════════════════════════════════════════
+Query: "authentication"
+Found: 3 relevant patterns
+
+📌 Pattern 1: Build JWT authentication API
+   Date: 2026-02-01
+   Team: Elena (Security), Jordan (Backend), Maya (QA)
+   Outcome: ✅ Success
+   Learning: Security review before implementation caught 2 vulnerabilities
+
+📌 Pattern 2: Add OAuth2 social login
+   Date: 2026-01-28
+   Team: Elena (Security), Zoe (Frontend), Taylor (Backend)
+   Outcome: ✅ Success
+   Learning: Frontend + backend coordination needed for token flow
+
+📌 Pattern 3: Fix auth token expiry bug
+   Date: 2026-01-25
+   Team: Sam (Security), Alex (Backend)
+   Outcome: ⚠️ Partial
+   Learning: Edge case with refresh tokens needed follow-up
+
+═══════════════════════════════════════════════════
+
+💡 These patterns may influence future team assembly.
+```
+
+**Input:** `/brainless:memory "kubernetes"`
+
+**Output:**
+```
+🔮 Searching memory for patterns...
+
+🔮 Memory Search Results
+═══════════════════════════════════════════════════
+Query: "kubernetes"
+Found: 0 relevant patterns
+
+No matching patterns found for this query.
+
+💡 Suggestions:
+   • Try broader search terms like "deployment" or "infrastructure"
+   • Memory builds over time with usage
+   • Check /brainless:status for memory stats
+
+═══════════════════════════════════════════════════
+```
+
+</command-instruction>
+
+<current-context>
+<memory-exists>
+!`test -d .brainless/memory && echo "yes" || echo "no"`
+</memory-exists>
+<memory-files>
+!`ls .brainless/memory/*.md 2>/dev/null | head -10 || echo "none"`
+</memory-files>
+<memory-count>
+!`ls .brainless/memory/*.md 2>/dev/null | wc -l || echo "0"`
+</memory-count>
+</current-context>

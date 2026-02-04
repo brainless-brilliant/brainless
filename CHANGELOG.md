@@ -5,6 +5,50 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-02-04
+
+### ⚠️ BREAKING CHANGE: Command System Refactor
+
+Complete rewrite of all commands and skills to use Sisyphus-style `<command-instruction>` format. This is a major refactor that changes how Claude interprets and executes plugin commands.
+
+### Changed
+
+- **All 6 Commands** - Rewritten with `<command-instruction>` wrapper:
+  - `brainless-team.md` - Team assembly with direct output format
+  - `brainless-init.md` - Initialization with merge options
+  - `brainless-status.md` - Status display with project structure
+  - `brainless-memory.md` - Memory search with pattern display
+  - `brainless-escalate.md` - 3-tier escalation routing
+  - `brainless-config.md` - Debug info and configuration
+
+- **All 8 Skills** - Rewritten with role-based execution:
+  - `team/SKILL.md` - PM-orchestrated 7-phase execution
+  - `help/SKILL.md` - Quick reference guide
+  - `default/SKILL.md` - Project-scoped configuration
+  - `default-global/SKILL.md` - Global configuration
+  - `transcript/SKILL.md` - Activity log display
+  - `timeline/SKILL.md` - Visual timeline tree
+  - `decisions/SKILL.md` - Decision log viewer
+  - `provision/SKILL.md` - Tech stack scanning
+
+- **CLAUDE.md Template** - Expanded from 60 to 250+ lines:
+  - Phase-based behavioral instructions
+  - Intent classification rules
+  - Team assembly protocol
+  - 3-tier escalation matrix
+  - Memory integration rules
+  - Anti-patterns (BLOCKING violations)
+
+### Fixed
+
+- **Permission Prompts Eliminated** - Commands no longer trigger "Do you want to proceed?" prompts
+- **Direct Output** - Information displays immediately without bash wrappers
+- **Proper Execution** - Claude follows `<command-instruction>` tags for direct execution
+
+### Migration Guide
+
+No action needed. Update the plugin with `/plugin update` and run `/brainless:init` to get the new CLAUDE.md template.
+
 ## [1.1.2] - 2026-02-04
 
 ### Fixed

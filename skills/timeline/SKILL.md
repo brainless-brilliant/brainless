@@ -3,31 +3,44 @@ name: timeline
 description: Visual timeline of agent activities and decisions
 ---
 
-# /timeline - Agent Activity Timeline
+<command-instruction>
+You are executing the /timeline command. Display a visual timeline of agent activities.
 
-View a visual timeline of all agent activities in the current session.
+## STEP 1: CHECK FOR ACTIVITY DATA
 
-## What This Shows
+Look for activity data in `.brainless/transcripts/`:
 
-A chronological tree view showing:
-- Agent spawns and completions
-- Proposals and debates
-- Decisions with rationale
-- Cross-cutting concerns surfaced
-
-## Usage
-
-```
-/timeline           # Show recent activity timeline
-/timeline full      # Show complete timeline
-/timeline session   # Show current session only
+```bash
+ls -la .brainless/transcripts/ 2>/dev/null
 ```
 
-## How to Generate
+If no data found:
+```
+📭 No Timeline Data
 
-Read the activity log from `.brainless/transcripts/activity.jsonl` and format as a timeline:
+No agent activity has been recorded yet.
+Use /team "task" to start an orchestrated session.
+```
+Exit if no data.
+
+## STEP 2: PARSE ACTIVITIES
+
+Read activity records and group by:
+- Timestamp
+- Agent chains (who spawned whom)
+- Debates (group related proposals/counters)
+- Gates (waiting → passed)
+
+## STEP 3: DISPLAY TIMELINE (MANDATORY OUTPUT)
+
+Format as a visual tree:
 
 ```
+📊 Agent Activity Timeline
+═══════════════════════════════════════════════════
+Session: [session-id]
+═══════════════════════════════════════════════════
+
 10:30 ──┬── [PM] 🚀 Task received
         │   └── "Build user authentication system"
         │
@@ -52,42 +65,51 @@ Read the activity log from `.brainless/transcripts/activity.jsonl` and format as
         │
 10:38 ──┼── [PM → Planner] 🚀 Spawn planning
         │
+10:40 ──┼── [Planner → PM] ✅ Plan complete
+        │   └── 6 tasks, estimated 2 hours
+        │
+10:40 ──┼── [PM → SM] ➡️ Handoff to Scrum Master
+        │
+10:41 ──┼── [SM → Executor] 🚀 Sprint started
+        │   ├── Progress: ██░░░░░░░░ 20%
+        │   └── Current: Implementing login endpoint
+        │
 ...
+
+═══════════════════════════════════════════════════
 ```
 
-## Action Icons
+## TIMELINE ICONS
 
-| Icon | Meaning |
-|------|---------|
-| 🚀 | Agent spawned |
-| ✅ | Completed successfully |
-| ❌ | Failed/Error |
-| 💡 | Proposal made |
-| ↩️ | Counter-argument |
-| ⚠️ | Cross-cutting concern |
-| ⚖️ | Decision made |
-| ⏳ | Waiting (gate pending) |
-| 🚪 | Gate passed |
-| 💬 | Debate started |
+| Icon | Meaning                    |
+|------|----------------------------|
+| 🚀   | Agent spawned              |
+| ✅   | Completed successfully     |
+| ❌   | Failed/Error               |
+| 💡   | Proposal made              |
+| ↩️   | Counter-argument           |
+| ⚠️   | Cross-cutting concern      |
+| ⚖️   | Decision made              |
+| ⏳   | Waiting (gate pending)     |
+| 🚪   | Gate passed                |
+| 💬   | Debate started             |
+| ➡️   | Delegation/Handoff         |
 
-## Implementation
+## STEP 4: HANDLE VARIANTS
 
-To generate the timeline:
+### `/timeline full`
+Show complete timeline without truncation.
 
-1. Read `.brainless/transcripts/activity.jsonl`
-2. Parse each JSON line as an activity
-3. Group related activities (debates, gates)
-4. Format with tree connectors (├── │ └──)
-5. Add icons based on action type
+### `/timeline session`
+Show current session only (most recent).
 
-```typescript
-import { formatTimeline } from '@brainless/workforce';
+### `/timeline debates`
+Show only debate sections.
 
-// Generate timeline for current session
-const timeline = formatTimeline();
-console.log(timeline);
-```
+</command-instruction>
 
----
-
-© Brainless Technologies Pvt. Ltd.
+<current-context>
+<activity-files>
+!`ls -t .brainless/transcripts/*.md 2>/dev/null | head -3 || echo "none"`
+</activity-files>
+</current-context>

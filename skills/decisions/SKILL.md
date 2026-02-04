@@ -3,82 +3,117 @@ name: decisions
 description: View all decisions made during orchestration
 ---
 
-# /decisions - Decision Log Viewer
+<command-instruction>
+You are executing the /decisions command. Display all decisions made during orchestration.
 
-View all decisions made by PM and agents during orchestration.
+## STEP 1: CHECK FOR DECISION DATA
 
-## What This Shows
+Look for decision records in:
+- `.brainless/decisions/` - Decision JSON files
+- `.brainless/debates/` - Debate resolution records
 
-A table of all decisions with:
-- Phase where decision was made
-- Topic/question decided
-- Options considered
-- Chosen option
-- Rationale
-- Who decided (PM or consensus)
-
-## Usage
-
-```
-/decisions          # Show all decisions
-/decisions recent   # Show last 10 decisions
-/decisions debates  # Show only decisions from debates
+```bash
+ls -la .brainless/decisions/*.json .brainless/debates/*.md 2>/dev/null
 ```
 
-## Output Format
+If no data found:
+```
+📭 No Decisions Recorded
 
-```markdown
-# Decision Log
+No orchestration decisions have been made yet.
+Use /team "task" to start an orchestrated session.
+```
+Exit if no data.
 
-| # | Phase | Topic | Decision | By | Rationale |
-|---|-------|-------|----------|----|-----------| 
-| 1 | designing | Auth method | JWT tokens | PM | Better for stateless microservices API |
-| 2 | designing | Token storage | HttpOnly cookies | PM | Mitigates XSS attacks, balances security with usability |
-| 3 | designing | DB choice | PostgreSQL | Architect | Team familiarity, ACID compliance needed |
-| 4 | planning | Test strategy | TDD approach | PM | Ensures quality, matches team workflow |
-| 5 | executing | Error handling | Custom exceptions | Executor | Better debugging, cleaner code |
+## STEP 2: PARSE DECISIONS
 
-## Decisions from Debates
+Read decision records with fields:
+- `id`: Unique decision ID
+- `timestamp`: When decided
+- `phase`: Orchestration phase (designing, planning, etc.)
+- `topic`: What was decided
+- `options`: Options considered
+- `chosen`: Selected option
+- `rationale`: Reasoning
+- `made_by`: Who decided (pm, architect, consensus)
+- `debate_id`: If from a debate
+- `consensus`: Whether agents agreed
 
-### Debate: "JWT vs Session tokens"
-- **Participants:** Architect, Security-Reviewer
-- **Decision:** JWT with short expiry + refresh tokens
-- **Rationale:** Balances scalability needs with security concerns
-- **Consensus:** No (PM override)
-- **Dissenters:** Security-Reviewer
+## STEP 3: DISPLAY DECISIONS (MANDATORY OUTPUT)
+
+```
+⚖️ Decision Log
+═══════════════════════════════════════════════════
+Session: [session-id]
+Total Decisions: [count]
+═══════════════════════════════════════════════════
+
+| #  | Phase     | Topic              | Decision         | By        | Rationale                            |
+|----|-----------|--------------------|--------------------|-----------|--------------------------------------|
+| 1  | designing | Auth method        | JWT tokens         | PM        | Better for stateless microservices   |
+| 2  | designing | Token storage      | HttpOnly cookies   | PM        | Mitigates XSS, balances security     |
+| 3  | designing | Database           | PostgreSQL         | Architect | Team familiarity, ACID compliance    |
+| 4  | planning  | Test strategy      | TDD approach       | PM        | Ensures quality, matches workflow    |
+| 5  | executing | Error handling     | Custom exceptions  | Executor  | Better debugging, cleaner code       |
+
+═══════════════════════════════════════════════════
+
+💬 Decisions from Debates
+───────────────────────────────────────────────────
+
+### Debate #1: "JWT vs Session tokens"
+
+**Participants:** Architect, Security-Reviewer
+**Decision:** JWT with short expiry + refresh tokens
+**Rationale:** Balances scalability with security
+**Consensus:** No (PM override)
+**Dissenters:** Security-Reviewer
+
+───────────────────────────────────────────────────
+
+### Debate #2: "REST vs GraphQL"
+
+**Participants:** Architect, Frontend Lead
+**Decision:** REST API
+**Rationale:** Simpler caching, team experience
+**Consensus:** Yes
+
+═══════════════════════════════════════════════════
 ```
 
-## Implementation
+## STEP 4: HANDLE VARIANTS
 
-Read decisions from two sources:
+### `/decisions recent`
+Show only last 10 decisions.
 
-1. **Orchestration decisions:** `.brainless/orchestration/orch_*.json` → `decisions` array
-2. **Debate resolutions:** `.brainless/debates/*.json` → `resolution` object
+### `/decisions debates`
+Show only decisions that came from debates.
 
-```typescript
-import { getDecisions } from '@brainless/workforce';
+### `/decisions phase <phase>`
+Filter by orchestration phase (designing, planning, executing, etc.)
 
-const decisions = getDecisions();
-// Returns array of Decision objects with phase, topic, chosen, rationale, made_by
-```
+## DECISION FIELDS EXPLAINED
 
-## Decision Details
+| Field     | Description                              |
+|-----------|------------------------------------------|
+| `id`      | Unique decision identifier               |
+| `timestamp` | When decision was made                 |
+| `phase`   | Orchestration phase                      |
+| `topic`   | What was being decided                   |
+| `options` | All options that were considered         |
+| `chosen`  | The selected option                      |
+| `rationale` | Why this option was chosen             |
+| `made_by` | Who made the decision                    |
+| `debate_id` | If decision came from a debate         |
+| `consensus` | Whether agents agreed or PM overrode  |
 
-Each decision includes:
+</command-instruction>
 
-| Field | Description |
-|-------|-------------|
-| `id` | Unique decision ID |
-| `timestamp` | When decision was made |
-| `phase` | Orchestration phase (designing, planning, etc.) |
-| `topic` | What was being decided |
-| `options` | All options considered |
-| `chosen` | The selected option |
-| `rationale` | Why this option was chosen |
-| `made_by` | Who made the decision (pm, architect, etc.) |
-| `debate_id` | If decision came from a debate |
-| `consensus` | Whether agents agreed or PM overrode |
-
----
-
-© Brainless Technologies Pvt. Ltd.
+<current-context>
+<decision-files>
+!`ls .brainless/decisions/*.json 2>/dev/null | wc -l || echo "0"`
+</decision-files>
+<debate-files>
+!`ls .brainless/debates/*.md 2>/dev/null | wc -l || echo "0"`
+</debate-files>
+</current-context>

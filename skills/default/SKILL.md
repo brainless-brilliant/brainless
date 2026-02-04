@@ -3,77 +3,81 @@ name: default
 description: Configure Brainless in local project (.claude/CLAUDE.md)
 ---
 
-# Brainless Default (Project-Scoped)
+<command-instruction>
+You are executing the /default command. Your job is to configure Brainless for the current project.
 
-## Task: Configure Brainless Default Mode (Project-Scoped)
+## STEP 1: CREATE PROJECT DIRECTORY (IMMEDIATE)
 
-**CRITICAL**: This skill ALWAYS downloads fresh CLAUDE.md from GitHub to your local project. DO NOT use the Write tool - use bash curl exclusively.
-
-### Step 1: Create Local .claude Directory
-
-Ensure the local project has a .claude directory:
+Create the .claude directory in the current project:
 
 ```bash
-# Create .claude directory in current project
-mkdir -p .claude && echo "✅ .claude directory created" || echo "❌ Failed to create .claude directory"
+mkdir -p .claude
 ```
 
-### Step 2: Download Fresh CLAUDE.md (MANDATORY)
+Print: `📁 Created .claude/ directory`
 
-Execute this bash command to download fresh CLAUDE.md to local project config:
+## STEP 2: DOWNLOAD CLAUDE.md (MANDATORY)
+
+**CRITICAL: Use curl to download. DO NOT use Write tool.**
 
 ```bash
-# Download fresh CLAUDE.md to project-local .claude/
-curl -fsSL "https://raw.githubusercontent.com/brainless/workforce/main/docs/CLAUDE.md" -o .claude/CLAUDE.md && \
-echo "✅ CLAUDE.md downloaded successfully to .claude/CLAUDE.md" || \
-echo "❌ Failed to download CLAUDE.md"
+curl -fsSL "https://raw.githubusercontent.com/brainless-brilliant/brainless/main/templates/CLAUDE.brainless.md" -o .claude/CLAUDE.md
 ```
 
-**Note**: The downloaded CLAUDE.md includes Context Persistence instructions with `<remember>` tags for surviving conversation compaction.
+If curl succeeds, print:
+```
+✅ Downloaded CLAUDE.md to .claude/CLAUDE.md
+```
 
-**MANDATORY**: Always run this command. Do NOT skip. Do NOT use Write tool.
+If curl fails, print:
+```
+❌ Download failed. Manual download available at:
+   https://raw.githubusercontent.com/brainless-brilliant/brainless/main/templates/CLAUDE.brainless.md
+```
 
-**FALLBACK** if curl fails:
-Tell user to manually download from:
-https://raw.githubusercontent.com/brainless/workforce/main/docs/CLAUDE.md
-
-### Step 3: Verify Plugin Installation
-
-The Brainless plugin provides all hooks automatically via the plugin system. Verify the plugin is enabled:
+## STEP 3: CREATE BRAINLESS DIRECTORIES
 
 ```bash
-grep -q "brainless" ~/.claude/settings.json && echo "Plugin enabled" || echo "Plugin NOT enabled"
+mkdir -p .brainless/{memory,transcripts,plans,debates,escalations}
 ```
 
-If plugin is not enabled, instruct user:
-> Run: `claude /install-plugin @brainless/workforce` to enable the plugin.
+Print: `📁 Created .brainless/ project structure`
 
-### Step 4: Confirm Success
+## STEP 4: VERIFY PLUGIN
 
-After completing all steps, report:
+Check if plugin is enabled:
 
-✅ **Brainless Project Configuration Complete**
-- CLAUDE.md: Updated with latest configuration from GitHub at ./.claude/CLAUDE.md
-- Scope: **PROJECT** - applies only to this project
-- Hooks: Provided by plugin (no manual installation needed)
-- Agents: 28+ available (base + tiered variants)
-- Model routing: Haiku/Sonnet/Opus based on task complexity
+```bash
+grep -q "brainless" ~/.claude/settings.json && echo "✅ Plugin enabled" || echo "⚠️ Plugin not found in settings"
+```
 
-**Note**: This configuration is project-specific and won't affect other projects or global settings.
+If plugin not found:
+```
+⚠️ Plugin may not be enabled. Run:
+   /install-plugin @brainless-brilliant/brainless
+```
 
----
+## STEP 5: DISPLAY COMPLETION (MANDATORY OUTPUT)
 
-## Keeping Up to Date
+```
+═══════════════════════════════════════════════════
+✅ Brainless Project Configuration Complete
+═══════════════════════════════════════════════════
 
-After installing Brainless updates (via npm or plugin update), run `/default` again in your project to get the latest CLAUDE.md configuration. This ensures you have the newest features and agent configurations.
+📁 Configuration:
+   • CLAUDE.md: .claude/CLAUDE.md
+   • Scope: PROJECT (this project only)
+   • Structure: .brainless/ created
 
----
+🎯 Next Steps:
+   1. /brainless:status - Verify configuration
+   2. /brainless:team "task" - Test team assembly
+   3. export BRAINLESS_DEBUG=true - Enable debug mode
 
-## Global vs Project Configuration
+💡 This configuration applies ONLY to this project.
+   For global config, use /default-global
 
-- **`/default`** (this command): Creates `./.claude/CLAUDE.md` in your current project
-- **`/default-global`**: Creates `~/.claude/CLAUDE.md` for all projects
+═══════════════════════════════════════════════════
+```
 
-Project-scoped configuration takes precedence over global configuration.
-
-© Brainless Technologies Pvt. Ltd.
+</command-instruction>

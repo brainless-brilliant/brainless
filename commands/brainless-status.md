@@ -1,92 +1,126 @@
 ---
-name: brainless-status
-description: View current Brainless system status
+description: View current Brainless configuration and team status
 ---
 
-# /brainless:status - System Status
+<command-instruction>
+You are executing the /brainless:status command. Your job is to display the current Brainless configuration and activity status.
 
-Show current Brainless system status, configuration, and activity.
+## STEP 1: GATHER STATUS INFORMATION
 
-## What It Shows
+Check the following:
+- CLAUDE.md location and presence
+- .brainless/ directory structure
+- Recent transcripts (last 3)
+- Memory entries count
+- Active escalations
+- Environment variables
 
-### Active Team
-- Currently active specialists (if any)
-- Their roles and assignments
-- Orchestration phase
+## STEP 2: DISPLAY STATUS (MANDATORY OUTPUT)
 
-### Configuration
-- Debug mode status (`BRAINLESS_DEBUG` env var)
-- Memory system status
-- Haiku classifier status
-- API key configuration
-
-### Memory Statistics
-- Number of memory entries
-- Last memory capture timestamp
-- Success rate (if available)
-
-### Recent Activity
-- Last 3-5 completed tasks
-- Outcomes and learnings
-- Agent combinations used
-
-### Available Specialists
-Lists all 29 registered agents by domain:
-- Architecture (3 agents)
-- Security (2 agents)
-- Implementation (3 agents)
-- QA (3 agents)
-- Build (2 agents)
-- Frontend (4 agents)
-- Documentation (2 agents)
-- Research (3 agents)
-- Data (3 agents)
-- Planning (2 agents)
-- Business (2 agents)
-
-## Output Format
+**Print this status block. NO BASH COMMANDS. NO PERMISSION PROMPTS.**
 
 ```
-╔════════════════════════════════════════════════════╗
-║        Brainless AI Workforce - Status            ║
-╚════════════════════════════════════════════════════╝
+📊 Brainless Status
+═══════════════════════════════════════════════════
 
-🎯 Active Team: None currently
+🔧 Configuration
+   • CLAUDE.md: [path] ✅ | ❌ Not found
+   • Version: [version from package.json]
+   • Debug mode: [BRAINLESS_DEBUG value or "disabled"]
 
-⚙️ Configuration:
-   Debug mode: OFF
-   Memory enabled: YES
-   Classifier: Haiku (online)
+📁 Project Structure
+   • .brainless/memory/: [N files] | ❌ Not found
+   • .brainless/transcripts/: [N files] | ❌ Not found
+   • .brainless/plans/: [N files] | ❌ Not found
+   • .brainless/debates/: [N files] | ❌ Not found
+   • .brainless/escalations/: [N files] | ❌ Not found
 
-📊 Memory Statistics:
-   Entries: 47
-   Last capture: 2 hours ago
-   Success rate: 92%
+📋 Recent Activity
+   [List last 3 transcript files with dates, or "No recent activity"]
 
-📜 Recent Activity:
-   ✅ REST API implementation (Jordan, Elena, Maya)
-   ✅ Landing page design (Zoe, Vikram)
-   ✅ Database optimization (Noah, Rohan)
+🎯 Memory Patterns
+   [N] patterns stored | No patterns yet
+   Last updated: [date] | Never
 
-👥 Available Specialists: 29 agents
-   
-   Architecture (3): Vikram, Priya, Rohan
-   Security (2): Elena, Sam
-   Implementation (3): Jordan, Alex, Taylor
-   ...
+⚠️ Active Escalations
+   [List any pending escalations, or "None"]
 
-───────────────────────────────────────────────────
-
-💡 Tip: Use /brainless:team "task" to manually assemble a team
+═══════════════════════════════════════════════════
 ```
 
-## When to Use
+## STEP 3: SHOW RECOMMENDATIONS (If issues found)
 
-- **Health check**: Verify Brainless is configured correctly
-- **Debug issues**: Check if classifier is online, memory is working
-- **See activity**: Review recent task history
-- **List agents**: See all available specialists
+If any issues detected, add:
+
+```
+💡 Recommendations:
+   • [Issue]: [Suggestion to fix]
+   • [Issue]: [Suggestion to fix]
+```
+
+### Common Issues
+
+| Issue | Recommendation |
+|-------|---------------|
+| No CLAUDE.md | Run `/brainless:init` to initialize |
+| No .brainless/ directory | Run `/brainless:init` to set up |
+| No memory patterns | Memory will build as you use the plugin |
+| Debug mode disabled | Enable with `export BRAINLESS_DEBUG=true` for detailed logs |
 
 ---
 
-**Tip**: Run this after installation to verify everything is set up correctly!
+## EXAMPLE OUTPUT
+
+```
+📊 Brainless Status
+═══════════════════════════════════════════════════
+
+🔧 Configuration
+   • CLAUDE.md: .claude/CLAUDE.md ✅
+   • Version: 1.1.3
+   • Debug mode: disabled
+
+📁 Project Structure
+   • .brainless/memory/: 12 files ✅
+   • .brainless/transcripts/: 34 files ✅
+   • .brainless/plans/: 8 files ✅
+   • .brainless/debates/: 3 files ✅
+   • .brainless/escalations/: 1 file ✅
+
+📋 Recent Activity
+   • 2026-02-04_auth-api.md - Build authentication system
+   • 2026-02-03_refactor.md - Refactor payment module
+   • 2026-02-02_bugfix.md - Fix memory leak
+
+🎯 Memory Patterns
+   12 patterns stored
+   Last updated: 2026-02-04
+
+⚠️ Active Escalations
+   None
+
+═══════════════════════════════════════════════════
+```
+
+</command-instruction>
+
+<current-context>
+<claude-md-location>
+!`test -f .claude/CLAUDE.md && echo ".claude/CLAUDE.md" || (test -f CLAUDE.md && echo "CLAUDE.md" || echo "not found")`
+</claude-md-location>
+<brainless-structure>
+!`ls -la .brainless/ 2>/dev/null | grep -E "^d" | awk '{print $NF}' || echo "not found"`
+</brainless-structure>
+<memory-count>
+!`ls .brainless/memory/*.md 2>/dev/null | wc -l || echo "0"`
+</memory-count>
+<transcript-count>
+!`ls .brainless/transcripts/*.md 2>/dev/null | wc -l || echo "0"`
+</transcript-count>
+<recent-transcripts>
+!`ls -t .brainless/transcripts/*.md 2>/dev/null | head -3 || echo "none"`
+</recent-transcripts>
+<debug-mode>
+!`echo "${BRAINLESS_DEBUG:-disabled}"`
+</debug-mode>
+</current-context>

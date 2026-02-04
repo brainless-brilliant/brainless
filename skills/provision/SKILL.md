@@ -1,128 +1,181 @@
 ---
 name: provision
 description: Scan project and provision an AI workforce team
-inject-as-context: false
 ---
 
-# AI Workforce Provisioner
+<command-instruction>
+You are executing the /provision command. Your job is to scan the project and provision a tailored AI workforce team.
 
-This skill analyzes the current project and provisions a tailored team of AI agents based on the detected technology stack.
+## STEP 1: DISPLAY SCANNING MESSAGE (IMMEDIATE)
 
-## What This Does
-
-1. **Scans** the project directory to detect:
-   - Programming languages (TypeScript, Python, Rust, Go, etc.)
-   - Frameworks (React, Next.js, Django, FastAPI, etc.)
-   - Build tools (Vite, Webpack, esbuild)
-   - Testing frameworks (Jest, Vitest, Playwright, Pytest)
-   - Databases (Prisma, Drizzle, MongoDB)
-   - DevOps tools (Docker, Kubernetes, Terraform)
-
-2. **Assembles** a recommended team of AI agents:
-   - **Core Team**: Architect, Executor, Code Reviewer (always included)
-   - **Tech Specialists**: Based on your stack (Designer for React, Security Reviewer for APIs, etc.)
-
-3. **Identifies** skills to inject for enhanced context
-
-## Usage
-
-When the user invokes this skill, you should:
-
-```typescript
-// 1. Import the provisioning functions
-const { scanProject } = require('./dist/features/project-scanner/index.js');
-const { assembleTeam, formatResourceSheet } = require('./dist/features/team-assembler/index.js');
-
-// 2. Scan the current project
-const projectRoot = process.cwd(); // or user's workspace root
-const scanResult = scanProject(projectRoot);
-
-// 3. Assemble the team
-const team = assembleTeam(scanResult);
-
-// 4. Display the resource sheet
-console.log(formatResourceSheet(team));
+Print:
+```
+🔍 Scanning project to provision AI workforce...
 ```
 
-## Output Format
+## STEP 2: SCAN PROJECT STRUCTURE
 
-The provisioner generates a **Resource Loading Sheet** containing:
+Scan the current project to detect:
 
-- **Project Analysis**: Technologies detected, scan duration
-- **Core Team**: Always-included essential agents
-- **Tech-Specific Agents**: Specialists based on your stack
-- **Skills to Inject**: Context to be loaded for enhanced performance
+### Languages
+Look for files with extensions:
+- `.ts`, `.tsx` → TypeScript
+- `.js`, `.jsx` → JavaScript
+- `.py` → Python
+- `.rs` → Rust
+- `.go` → Go
+- `.java` → Java
+- `.rb` → Ruby
 
-## Example Output
+### Package Managers
+Check for:
+- `package.json` → Node.js project
+- `requirements.txt`, `pyproject.toml` → Python
+- `Cargo.toml` → Rust
+- `go.mod` → Go
+
+### Frameworks (from dependencies)
+Parse package files for:
+- `react`, `next`, `vue`, `angular` → Frontend
+- `express`, `fastify`, `koa` → Node backend
+- `django`, `flask`, `fastapi` → Python backend
+- `prisma`, `drizzle` → Database ORMs
+
+### Testing
+Look for:
+- `jest.config.*`, `vitest.config.*` → JS testing
+- `pytest.ini`, `pyproject.toml` → Python testing
+- `playwright.config.*` → E2E testing
+
+### DevOps
+Look for:
+- `Dockerfile` → Docker
+- `kubernetes/`, `k8s/` → Kubernetes
+- `.github/workflows/` → GitHub Actions
+- `terraform/` → IaC
+
+## STEP 3: ASSEMBLE TEAM
+
+Based on detected stack, select agents:
+
+### Core Team (Always included)
+| Agent | Role | Tier |
+|-------|------|------|
+| Vikram | Architect - System design | opus |
+| Jordan | Executor - Implementation | sonnet |
+| Alex | Code Reviewer - Quality | sonnet |
+
+### Tech-Specific Agents (Based on scan)
+
+| Stack Detected | Add Agent | Reason |
+|----------------|-----------|--------|
+| React/Vue/Frontend | Zoe (Frontend Lead) | UI expertise |
+| API/Backend | Taylor (Backend Engineer) | API design |
+| Tests present | Maya (QA Lead) | Test coverage |
+| Security-sensitive | Elena (Security Lead) | Security review |
+| Database/ORM | Leo (Database Admin) | Schema design |
+| DevOps/Docker | Ryan (DevOps Lead) | Deployment |
+| Data/ML | Isla (ML Engineer) | Data pipelines |
+
+## STEP 4: DISPLAY RESOURCE SHEET (MANDATORY OUTPUT)
 
 ```
-# AI Workforce Resource Sheet
+═══════════════════════════════════════════════════
+📋 AI Workforce Resource Sheet
+═══════════════════════════════════════════════════
+Generated: [timestamp]
 
-Generated: 2025-01-24T12:00:00.000Z
+🔍 Project Analysis
+───────────────────────────────────────────────────
+Root: [project path]
+Technologies: [N] detected
+Scan Duration: [X]ms
 
-## Project Analysis
+Detected Stack:
+• [Language 1] - [files count]
+• [Framework 1] - from dependencies
+• [Tool 1] - [source file]
 
-- **Root:** /path/to/project
-- **Technologies:** 4 detected
-- **Scan Duration:** 12ms
+═══════════════════════════════════════════════════
 
-## Core Team
+👥 Core Team (Always Included)
+───────────────────────────────────────────────────
 
-### Architect
-- **Role:** System design and architecture planning
-- **Tier:** opus
+🏗️ Vikram (Principal Architect)
+   Role: System design and architecture planning
+   Tier: opus (complex decisions)
 
-### Executor
-- **Role:** Code implementation and feature development
-- **Tier:** sonnet
+⚙️ Jordan (Senior Engineer)
+   Role: Code implementation and feature development
+   Tier: sonnet (implementation)
 
-### Code Reviewer
-- **Role:** Code review and quality assessment
-- **Tier:** sonnet
+💻 Alex (Staff Engineer)
+   Role: Code review and quality assessment
+   Tier: sonnet (review)
 
-## Tech-Specific Agents
+═══════════════════════════════════════════════════
 
-### QA Tester
-- **Role:** Test creation and quality assurance
-- **Relevance:** 90%
-- **Reason:** Specializes in Vitest
-- **Technologies:** vitest
+🎯 Tech-Specific Agents
+───────────────────────────────────────────────────
 
-### Designer
-- **Role:** UI/UX design and frontend development
-- **Relevance:** 85%
-- **Reason:** Specializes in React
-- **Technologies:** react, tailwindcss
+[For each matched agent:]
 
-## Skills to Inject
+🎨 Zoe (Frontend Lead)
+   Role: UI/UX development
+   Relevance: [X]%
+   Matched: react, tailwindcss
+   Tier: sonnet
 
-- typescript-best-practices
-- react-patterns
-- testing-patterns
+✅ Maya (QA Lead)
+   Role: Test creation and quality assurance
+   Relevance: [X]%
+   Matched: vitest, playwright
+   Tier: sonnet
+
+[... more agents based on scan ...]
+
+═══════════════════════════════════════════════════
+
+📚 Skills to Inject
+───────────────────────────────────────────────────
+• [skill-1] - Enhanced [technology] patterns
+• [skill-2] - [Framework] best practices
+• [skill-3] - Testing patterns
+
+═══════════════════════════════════════════════════
+
+✅ Workforce provisioned! [N] agents ready.
+
+💡 This team will be used for /team orchestrations.
+   Run /brainless:status to verify configuration.
+
+═══════════════════════════════════════════════════
 ```
 
-## Agent Tiers
-
-Agents are assigned to model tiers:
+## AGENT TIER REFERENCE
 
 | Tier | Model | Use For |
 |------|-------|---------|
-| **opus** | Claude 3 Opus | Complex planning, architecture, security |
+| **opus** | Claude 3 Opus | Architecture, security, complex planning |
 | **sonnet** | Claude 3 Sonnet | Implementation, review, testing |
-| **haiku** | Claude 3 Haiku | Simple fixes, quick tasks |
+| **haiku** | Claude 3 Haiku | Quick fixes, simple tasks |
 
-## Customization
+</command-instruction>
 
-You can customize the team assembly:
-
-```typescript
-const team = assembleTeam(scanResult, {
-  maxAgents: 8,           // Limit team size
-  minRelevance: 0.5,      // Higher relevance threshold
-  includeCoreAgents: true // Always include core team
-});
-```
-
----
-
-*Part of brainless Workforce Provisioning System*
+<current-context>
+<package-json>
+!`test -f package.json && echo "exists" || echo "not found"`
+</package-json>
+<languages>
+!`find . -maxdepth 3 -type f \( -name "*.ts" -o -name "*.py" -o -name "*.rs" -o -name "*.go" \) 2>/dev/null | head -5`
+</languages>
+<frameworks>
+!`cat package.json 2>/dev/null | grep -E '"(react|next|vue|express|prisma)"' | head -5 || echo "none"`
+</frameworks>
+<tests>
+!`ls jest.config.* vitest.config.* pytest.ini 2>/dev/null || echo "none"`
+</tests>
+<devops>
+!`ls Dockerfile docker-compose.yml .github/workflows/*.yml 2>/dev/null | head -3 || echo "none"`
+</devops>
+</current-context>
