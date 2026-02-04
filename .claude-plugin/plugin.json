@@ -1,6 +1,6 @@
 {
   "name": "brainless",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "brainless - Let the agents do the thinking",
   "skills": "./skills/"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@brainless-brilliant/brainless",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "AI Workforce - Autonomous multi-agent orchestration with PM-managed team execution, inter-agent debate, and full activity transcripts.",
   "type": "module",
   "main": "dist/index.js",
