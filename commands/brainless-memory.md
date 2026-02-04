@@ -13,119 +13,85 @@ Search the project memory layer for patterns, solutions, and past task history.
 
 ## Task
 
-**Search Query**: {{query}}
+**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
 
-## Your Instructions
+Search project memory for patterns and past solutions.
 
-1. **Import Memory Module**:
-   ```typescript
-   const { searchMemory } = await import('${CLAUDE_PLUGIN_ROOT}/dist/features/memory/index.js');
-   ```
+## Query
 
-2. **Search Memory**:
-   ```typescript
-   const results = await searchMemory("{{query}}", {
-     limit: 10,
-     minRelevance: 0.5
-   });
-   ```
+{{query}}
 
-3. **Display Results**:
-   ```
-   🔍 Memory Search Results for "{{query}}"
-   
-   Found <N> relevant entries:
-   
-   1. <Task description>
-      📅 <timestamp>
-      👥 Team: <agents used>
-      ✅ Outcome: <success/failure>
-      💡 Key insight: <what was learned>
-   
-   2. ...
-   ```
+## Execution
 
-4. **Show Patterns**:
-   ```
-   📊 Patterns Detected:
-   - Angular builds often need Marcus (Build Engineer)
-   - Security audits always include Elena
-   - Complex refactoring prefers Jordan + Maya combo
-   ```
+**If query provided:**
 
-5. **Suggest Actions** (if relevant):
-   ```
-   💡 Suggestions:
-   - Similar task succeeded with [Team X]
-   - Watch out for: <common pitfall from history>
-   - Recommended approach: <what worked before>
-   ```
-
-## Example Output (With Query)
+1. Search memory for relevant entries
+2. Display results in this format:
 
 ```
-🔍 Memory Search Results for "authentication"
+🧠 Memory Search: "{{query}}"
 
-Found 5 relevant entries:
+Found [X] relevant entries:
 
-1. OAuth2 authentication implementation
-   📅 2 days ago
-   👥 Team: Vikram, Elena, Alex
-   ✅ Success
-   💡 JWT validation required extra security layer
+──────────────────────────────────────
 
-2. Session management refactor
-   📅 1 week ago
-   👥 Team: Priya, Sam, Jordan
-   ✅ Success
-   💡 Redis better than in-memory for production
+📍 Entry #1 [timestamp]
+Task: [task description]
+Team: [agents involved]
+Outcome: [✅ Success | ⚠️ Partial | ❌ Failed]
+Learning: [key takeaway]
 
-3. Password reset flow
-   📅 2 weeks ago
-   👥 Team: Elena, Taylor
-   ✅ Success with minor issues
-   💡 Rate limiting essential for security
+──────────────────────────────────────
 
-📊 Patterns Detected:
-- Authentication always includes Elena (Security Lead)
-- Complex auth needs Vikram for architecture
-- Testing requires Maya for edge cases
+📍 Entry #2 [timestamp]
+Task: [task description]
+Team: [agents involved]
+Outcome: [result]
+Learning: [key takeaway]
 
-💡 Suggestions:
-- Consider the JWT validation approach from Entry #1
-- Don't forget rate limiting (learned from Entry #3)
+──────────────────────────────────────
+
+🔍 Patterns Identified:
+- [Pattern 1, e.g., "Authentication tasks always include Elena"]
+- [Pattern 2, e.g., "Complex refactors need Jordan + Maya"]
+
+💡 Suggested Approach:
+[Based on successful past patterns]
 ```
 
-## Example Output (No Query - Full Summary)
+**If no query (general summary):**
+
+Display overview:
 
 ```
 🧠 Project Memory Summary
 
-📊 Total entries: 47 tasks
-📅 Date range: Last 30 days
-✅ Success rate: 91% (43/47)
+Total entries: [count]
+Success rate: [X]%
+Most active specialists: [Top 3]
 
-🔥 Most Active Specialists:
-1. Alex (Senior Engineer) - 23 tasks
-2. Elena (Security Lead) - 18 tasks
-3. Vikram (Principal Architect) - 15 tasks
+📊 Task Categories:
+- Implementation: [count]
+- Bug fixes: [count]
+- Architecture: [count]
+- Security audits: [count]
 
-📈 Top Patterns:
-- "Security audit" → Always includes Elena
-- "Refactoring" → Prefers Jordan + Maya combo
-- "TypeScript errors" → Katie handles 80% solo
+🏆 Top Patterns:
+1. [Most common pattern]
+2. [Second most common]
+3. [Third most common]
 
-🎯 Recent Learnings:
-- API rate limiting is critical (learned 3 days ago)
-- Redis outperforms in-memory cache (learned 1 week ago)
-- JWT needs refresh token rotation (learned 2 weeks ago)
+💡 Key Learnings:
+- [Top learning 1]
+- [Top learning 2]
+- [Top learning 3]
 
-💡 Tip: Use /brainless:memory "specific query" to search
+Use /brainless:memory "search term" to find specific patterns
 ```
 
-## Notes
-
-- Query is optional - shows summary if omitted
-- Searches all captured task history
-- Helps inform future team selection
+**Important:**
+- Display formatted text directly
+- Do NOT use `Bash(cat << 'EOF' ...)`
+- Query actual memory system where available
+- Use placeholders [like this] for dynamic data
 - Reveals project-specific patterns

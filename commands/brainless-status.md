@@ -3,100 +3,59 @@ name: brainless-status
 description: View current Brainless team, configuration, and system status
 ---
 
+---
+
 # Brainless Status
 
-Display the current state of the Brainless AI Workforce system.
+**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
 
-## Your Instructions
+Show current Brainless system status.
 
-1. **Show Current Team** (if active):
-   ```
-   🎯 Active Team:
-   - Specialist 1 name (role)
-   - Specialist 2 name (role)
-   - ...
-   
-   📊 Team assembled: <timestamp>
-   💡 Original task: <task description>
-   ```
+## Display Format
 
-2. **Show Configuration**:
-   ```
-   ⚙️ Configuration:
-   - Debug mode: ${BRAINLESS_DEBUG ? 'ON' : 'OFF'}
-   - Memory enabled: <check if memory accessible>
-   - Classifier: <haiku available or keyword fallback>
-   - Model routing: Active
-   ```
-
-3. **Show Memory Stats**:
-   ```
-   🧠 Memory Layer:
-   - Entries: <count from memory>
-   - Last capture: <timestamp>
-   - Storage: ~/.brainless/memory/
-   ```
-
-4. **Show Recent Activity**:
-   ```
-   📜 Recent Activity:
-   - Last team assembly: <time>
-   - Last escalation: <time or 'none'>
-   - Tasks completed today: <count>
-   ```
-
-5. **Show Agent Registry**:
-   ```
-   👥 Available Specialists (29):
-   
-   Architecture:
-   - Vikram (Principal Architect)
-   - Priya (Senior Architect)
-   - Rohan (Junior Architect)
-   
-   Security:
-   - Elena (Security Lead)
-   - Sam (Security Analyst)
-   
-   ... (show all categories)
-   ```
-
-## Example Output
+Present this information directly to the user:
 
 ```
-╔══════════════════════════════════════════════════════════╗
-║         Brainless AI Workforce - System Status          ║
-╚══════════════════════════════════════════════════════════╝
+╔════════════════════════════════════════════════════╗
+║        Brainless AI Workforce - Status            ║
+╚════════════════════════════════════════════════════╝
 
-🎯 Active Team: 3 specialists
-   🏗️ Vikram (Principal Architect)
-   🔒 Elena (Security Lead)
-   ⚙️ Alex (Senior Engineer)
-
-📊 Team assembled: 2 minutes ago
-💡 Original task: "Build OAuth2 authentication with security audit"
+🎯 Active Team: [None currently | X specialists]
+[If active team, list them with personas]
 
 ⚙️ Configuration:
-   Debug mode: OFF
+   Debug mode: ${process.env.BRAINLESS_DEBUG ? 'ON' : 'OFF'}
    Memory enabled: YES
-   Classifier: Haiku (online)
-   Model routing: Active
+   Classifier: Haiku (${ANTHROPIC_API_KEY ? 'online' : 'fallback mode'})
 
-🧠 Memory Layer:
-   Entries: 47 tasks
-   Last capture: 3 minutes ago
-   Storage: ~/.brainless/memory/
+📊 Memory Statistics:
+   Entries: [count from memory layer]
+   Last capture: [timestamp or 'Never']
+   Success rate: [if available]
 
 📜 Recent Activity:
-   Last team assembly: 2 minutes ago
-   Last escalation: none
-   Tasks completed today: 5
+   [Last 3-5 tasks if available, or 'No recent activity']
 
-👥 Available: 29 specialists across 8 domains
+👥 Available Specialists: 29 agents
+   
+   Architecture (3): Vikram, Priya, Rohan
+   Security (2): Elena, Sam
+   Implementation (3): Jordan, Alex, Taylor
+   QA (3): Maya, Oliver, Sophia
+   Build (2): Marcus, Katie
+   Frontend (4): Zoe, Liam, Aiden, Mia
+   Documentation (2): Olivia, Ethan
+   Research (3): Aria, Lucas, Isla
+   Data (3): Noah, Emma, Leo
+   Planning (2): Amelia, Ryan
+   Business (2): Chloe, Mason
+
+───────────────────────────────────────────────────
+
+💡 Tip: Use /brainless:team "task" to manually assemble a team
 ```
 
-## Notes
-
-- No arguments required
-- Shows current state snapshot
-- Useful for debugging team selection
+**Notes:**
+- Query actual system state where possible
+- Use placeholders [like this] for dynamic data
+- Display directly as formatted text, NOT as bash/codeugging team selection

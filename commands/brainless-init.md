@@ -18,211 +18,338 @@ Initialize or update your CLAUDE.md with Brainless plugin instructions.
 - **Re-merge**: If you manually edited CLAUDE.md and want to re-integrate plugin content
 - **Force override**: Replace your CLAUDE.md with fresh Brainless defaults
 
-## Your Instructions
+---
 
-1. **Check if CLAUDE.md exists**:
-   ```typescript
-   import { existsSync } from 'fs';
-   import { join } from 'path';
-   
-   const claudeMdPath = join(process.cwd(), '.claude', 'CLAUDE.md');
-   const exists = existsSync(claudeMdPath);
-   ```
+# Brainless Initialization
 
-2. **Import and Run Merger**:
-   ```typescript
-   const { performCLAUDEmdMerge } = await import('${CLAUDE_PLUGIN_ROOT}/dist/installer/claude-md-merger.js');
-   const { loadClaudeMdContent } = await import('${CLAUDE_PLUGIN_ROOT}/dist/installer/index.js');
-   
-   const pluginTemplate = loadClaudeMdContent();
-   const targetPath = join(process.cwd(), '.claude', 'CLAUDE.md');
-   
-   // Determine options based on args
-   const options = {
-     verbose: true,
-     userChoice: {{force}} ? 'override' : undefined  // Will prompt if not force
-   };
-   
-   const result = await performCLAUDEmdMerge(pluginTemplate, targetPath, options);
-   ```
+**EXECUTE IMMEDIATELY - DO NOT ASK FOR PERMISSION**
 
-3. **Display Result**:
-   ```
-   ✅ Initialization Complete!
-   
-   Result: ${result.message}
-   ${result.backupPath ? `Backup: ${result.backupPath}` : ''}
-   
-   Your CLAUDE.md now includes:
-   - Dynamic team assembly instructions
-   - Slash command reference
-   - Escalation protocol
-   - Memory layer guidance
-   - Debug mode instructions
-   ```
+You are running the `/brainless:init` command to initialize or update CLAUDE.md with Brainless plugin instructions.
 
-## Usage Examples
+## Execution Steps
 
-### Normal Init (With Prompt)
-```
-/brainless:init
+### Step 1: Check Current State
+
+First, check if CLAUDE.md already exists:
+
+```typescript
+import { existsSync } from 'fs';
+import { join } from 'path';
+import { homedir } from 'os';
+
+const locations = [
+  join(process.cwd(), '.claude', 'CLAUDE.md'),
+  join(process.cwd(), 'CLAUDE.md'),
+  join(homedir(), '.claude', 'CLAUDE.md'),
+  join(homedir(), 'CLAUDE.md')
+];
+
+const existing = locations.find(loc => existsSync(loc));
 ```
 
-**What happens:**
-- Detects existing CLAUDE.md
-- Prompts: "Override / Merge / Skip?"
-- User chooses merge option
-- AI-powered merge preserves your content
-- Backup created automatically
+Display to user:
+```
+🔍 Checking for existing CLAUDE.md...
+${existing ? `Found: ${existing}` : 'No existing CLAUDE.md found'}
+```
 
 ---
 
-### Force Override
+### Step 2: Load Plugin Template
+
+Load the Brainless plugin template:
+
+```typescript
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pluginRoot = join(__dirname, '..', '..', '..');  // Adjust based on dist location
+
+const templatePath = join(pluginRoot, 'templates', 'CLAUDE.brainless.md');
+const pluginTemplate = readFileSync(templatePath, 'utf-8');
+```
+
+---
+
+### Step 3: Determine Action
+
+**If NO existing CLAUDE.md:**
+
+Display:
+```
+✨ No existing CLAUDE.md found
+📝 Creating fresh CLAUDE.md with Brainless defaults...
+```
+
+Then: **Skip to Step 5** (Create Fresh)
+
+**If existing CLAUDE.md found:**
+
+Check for `--force` flag in command args:
+- `--force` provided → **Go to Step 4 (Override)**
+- No `--force` → **Go to Step 3b (Prompt User)**
+
+---
+
+### Step 3b: Prompt User for Merge Strategy
+
+**CRITICAL:** Present EXACTLY this prompt to the user and WAIT for response:
+
+```
+🔍 Found existing CLAUDE.md (${fileSize} KB)
+
+How should we proceed?
+
+[1] **Override** - Replace with Brainless defaults (your file will be backed up)
+[2] **Merge** - AI-powered merge that preserves your custom instructions (recommended)
+[3] **Skip** - Manual merge later, no changes made
+
+Enter 1, 2, or 3:
+```
+
+**WAIT for user response.** Do NOT proceed without explicit choice.
+
+**Based on user choice:**
+- `1` → Go to Step 4 (Override)
+- `2` → Go to Step 4 (Merge)  
+- `3` → Display "Skipping initialization. Run /brainless:init again when ready." and EXIT
+
+---
+
+### Step 4: Execute Merge or Override
+
+**Import the merger:**
+
+```typescript
+// This path works from the commands/ context
+const mergerPath = join(pluginRoot, 'dist', 'installer', 'claude-md-merger.js');
+const { performCLAUDEmdMerge } = await import(mergerPath);
+```
+
+**Set options based on user choice:**
+
+```typescript
+const targetPath = existing || join(process.cwd(), '.claude', 'CLAUDE.md');
+
+const options = {
+  verbose: true,
+  userChoice: userChoice === 1 ? 'override' : 'merge'  // From Step 3b
+};
+```
+
+**Execute merge:**
+
+```typescript
+console.log('🔄 Processing...');
+
+const result = await performCLAUDEmdMerge(pluginTemplate, targetPath, options);
+```
+
+**Display result:**
+
+```
+${result.success ? '✅' : '❌'} ${result.message}
+
+${result.backupPath ? `💾 Backup created: ${result.backupPath}` : ''}
+${result.confidence ? `📊 Merge confidence: ${result.confidence}%` : ''}
+${result.model ? `🤖 AI model used: ${result.model}` : ''}
+${result.mergeDetails ? `📝 Changes: ${result.mergeDetails.changes.join(', ')}` : ''}
+```
+
+If `result.success` → **Go to Step 6 (Verify)**
+
+If `!result.success` → **Go to Step 5 (Fallback)**
+
+---
+
+### Step 5: Create Fresh or Fallback
+
+**If merge failed or no existing file:**
+
+```typescript
+import { mkdirSync, writeFileSync } from 'fs';
+import { dirname } from 'path';
+
+const targetPath = join(process.cwd(), '.claude', 'CLAUDE.md');
+
+// Ensure directory exists
+mkdirSync(dirname(targetPath), { recursive: true });
+
+// Write plugin template
+writeFileSync(targetPath, pluginTemplate, 'utf-8');
+```
+
+**Display:**
+```
+✅ Created fresh CLAUDE.md with Brainless defaults
+
+Location: ${targetPath}
+```
+
+---
+
+### Step 6: Verify Installation
+
+Display summary:
+
+```
+╔════════════════════════════════════════════╗
+║   Brainless Initialization Complete!      ║
+╚════════════════════════════════════════════╝
+
+Your CLAUDE.md now includes:
+  ✅ Dynamic team assembly instructions
+  ✅ Slash command reference (5 commands)
+  ✅ Escalation protocol
+  ✅ Memory layer guidance  
+  ✅ Debug mode instructions
+
+Next steps:
+  1. Run /brainless:config to verify setup
+  2. Try a simple task: "Build a REST API"
+  3. Enable debug: export BRAINLESS_DEBUG=true
+
+Need help? Check the README or run /brainless:help
+```
+
+**EXIT**
+
+---
+
+## Important Notes
+
+### DO NOT:
+- ❌ Ask "Do you want me to run this?" - **JUST RUN IT**
+- ❌ Explain what you're about to do - **JUST DO IT**
+- ❌ Wait for permission unless at the explicit user choice prompt (Step 3b)
+
+### DO:
+- ✅ Execute immediately when command is invoked
+- ✅ Show progress as you work
+- ✅ Display clear results
+- ✅ Create backups before any changes
+- ✅ Handle errors gracefully with fallback
+
+---
+
+## Error Handling
+
+**If template not found:**
+```
+❌ ERROR: Plugin template not found
+
+Expected location: templates/CLAUDE.brainless.md
+
+This indicates incomplete plugin installation.
+Please reinstall: /plugin add https://github.com/brainless-brilliant/brainless
+```
+
+**If merge fails:**
+```
+⚠️ AI merge failed (confidence too low or API error)
+
+Falling back to manual creation...
+[Proceed to Step 5]
+```
+
+**If write permissions denied:**
+```
+❌ ERROR: Cannot write to ${targetPath}
+
+Permission denied. Please check:
+  - File permissions
+  - Directory write access
+  - Disk space
+
+Try: sudo chmod +w ${dirname(targetPath)}
+```
+
+---
+
+## What Gets Added to CLAUDE.md
+
+The Brainless template includes:
+
+### 1. Team Assembly Instructions
+Automatic specialist selection on every task based on:
+- AI classification (Haiku)
+- Memory patterns
+- Task complexity
+
+### 2. Slash Commands Reference
+- `/brainless:team <task>` - Manual team assembly
+- `/brainless:status` - System status
+- `/brainless:memory [query]` - Search patterns
+- `/brainless:escalate <type> <msg>` - Manual escalation
+- `/brainless:config` - Debug info
+
+### 3. Escalation Protocol
+3-tier internal resolution:
+1. Executor attempts fix
+2. Escalates to PM Coordinator
+3. PM routes to appropriate specialist (Architect, BA, etc.)
+4. Only escalates to user after 3 failed attempts
+
+### 4. Memory Layer
+Continuous learning from every task:
+- Task descriptions
+- Teams assembled
+- Outcomes (success/failure)
+- Key patterns and learnings
+
+### 5. Debug Mode
+```bash
+export BRAINLESS_DEBUG=true
+```
+
+Shows:
+- Team assembly reasoning
+- Memory search results
+- Escalation routing
+- Confidence breakdowns
+
+---
+
+## Force Mode (No Prompts)
+
+If invoked with `--force`:
+
 ```
 /brainless:init --force
 ```
 
-**What happens:**
-- Backs up existing CLAUDE.md
-- Replaces with fresh Brainless defaults
-- No prompts, immediate override
-- Use when you want a clean slate
+**Behavior:**
+- Skips user choice prompt
+- Automatically overrides existing CLAUDE.md
+- Creates backup first
+- Fast, non-interactive execution
 
----
-
-### First Time (No Existing File)
-```
-/brainless:init
-```
-
-**What happens:**
-- Creates new `.claude/CLAUDE.md`
-- Uses Brainless plugin template
-- No prompts needed
-- Ready to use immediately
-
----
-
-## What Gets Added
-
-The Brainless plugin template includes:
-
-### 1. Auto Team Assembly
-Instructions for automatic specialist selection on every task.
-
-### 2. Manual Control Commands
-Reference for all 5 slash commands:
-- `/brainless:team`
-- `/brainless:status`
-- `/brainless:memory`
-- `/brainless:escalate`
-- `/brainless:config`
-
-### 3. Escalation Protocol
-How agents resolve issues internally before user involvement.
-
-### 4. Memory Layer
-How continuous learning from past tasks works.
-
-### 5. Debug Mode
-Instructions for enabling verbose logging.
-
----
-
-## Merge vs Override Decision Guide
-
-### Choose **Merge** when:
-- ✅ You have custom SOPs in CLAUDE.md
-- ✅ You want to preserve your instructions
-- ✅ You want plugin features alongside your rules
-- ✅ First time adding Brainless to existing project
-
-### Choose **Override** when:
-- ✅ You want a clean Brainless-only setup
-- ✅ Your current CLAUDE.md is outdated/broken
-- ✅ You're okay losing custom instructions (backup exists)
-- ✅ Fresh start on a new project
-
-### Choose **Skip** when:
-- ✅ You want to manually merge later
-- ✅ You need to review the template first
-- ✅ You're not sure which option to pick
-- ✅ Testing/exploring the plugin
-
----
-
-## Troubleshooting
-
-### "Merge confidence too low"
-The AI merger returned <70% confidence. This means:
-- Your CLAUDE.md is complex
-- Conflicts detected
-- Manual merge recommended
-
-**Solution**: Use `--force` to override, or manually copy sections from `templates/CLAUDE.brainless.md`.
-
----
-
-### "Backup failed"
-File permissions issue.
-
-**Solution**: Check write permissions on `.claude/` directory.
-
----
-
-### "Template not found"
-Plugin installation incomplete.
-
-**Solution**: Re-run `/plugin add` or check plugin directory exists.
-
----
-
-## After Init
-
-Verify initialization worked:
-
-```
-/brainless:config
-```
-
-Should show:
-- ✅ Plugin loaded
-- ✅ Commands available
-- ✅ CLAUDE.md updated
-
-Then test team assembly:
-```
-"Build a simple REST API"
-```
-
-Should see team assembly display before work begins.
+**Use when:**
+- Fresh project setup
+- You want Brainless-only config
+- Automated installation scripts
+- Your existing CLAUDE.md is broken
 
 ---
 
 ## Re-Init After Updates
 
-When Brainless plugin updates:
+When Brainless plugin releases updates:
 
-1. **Check release notes** for new features
-2. **Run re-init**:
-   ```
-   /brainless:init
-   ```
-3. **Choose merge** to preserve your custom rules
-4. **AI merges** new plugin features with your existing content
+```
+git pull  # Update plugin repo
+/brainless:init
+```
 
-This keeps your CLAUDE.md up-to-date with latest features while preserving your customizations.
+Choose **[2] Merge** to:
+- Keep your custom SOPs
+- Add new plugin features
+- Preserve project-specific rules
+- AI intelligently combines both
 
 ---
 
-## Notes
-
-- Init is **idempotent** - safe to run multiple times
-- Always creates **backup** before changes
-- Merge uses **Anthropic AI** (Sonnet <10KB, Opus >10KB)
-- Falls back to **simple creation** if merge fails
-- Works with **all 4 CLAUDE.md locations**:
-  - `.claude/CLAUDE.md` (recommended)
-  - `CLAUDE.md` (project root)
-  - `~/.claude/CLAUDE.md` (user-level)
-  - `~/CLAUDE.md` (home)
+**REMEMBER: This command EXECUTES code. You are not explaining or asking - you are DOING.**

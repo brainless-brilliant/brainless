@@ -12,120 +12,128 @@ args:
 
 # Brainless Manual Escalation
 
-Manually escalate an issue using the Brainless escalation protocol.
+**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
+
+Manually escalate: **{{type}}** - "{{message}}"
 
 ## Escalation Details
 
 **Type**: {{type}}
 **Message**: {{message}}
 
-## Your Instructions
+## Execution
 
-1. **Validate Escalation Type**:
-   Allowed types:
-   - `question` - General question for PM
-   - `blocker` - Work blocker for PM
-   - `design-decision` - Architecture decision → Architect
-   - `security-concern` - Security issue → Architect
-   - `scope-change` - Scope modification → Business Analyst
-   - `approval-needed` - Direct user approval
+**Step 1:** Validate escalation type
 
-2. **Import Escalation Module**:
-   ```typescript
-   const { EscalationRouter } = await import('${CLAUDE_PLUGIN_ROOT}/dist/features/escalation/index.js');
-   const router = new EscalationRouter();
-   ```
+Allowed types:
+- `question` → PM Coordinator
+- `blocker` → PM Coordinator
+- `design-decision` → Architect (Vikram/Priya)
+- `security-concern` → Architect then User
+- `scope-change` → Business Analyst
+- `approval-needed` → Direct to User
 
-3. **Route Escalation**:
-   ```typescript
-   const routing = router.route({
-     type: "{{type}}",
-     from: "user-manual",
-     message: "{{message}}",
-     context: {}
-   });
-   ```
+**Step 2:** Route based on type
 
-4. **Execute Routing**:
-   - If routed to **specialist** (architect, analyst):
-     ```
-     🚨 Escalating to: <specialist-name-role>
-     Type: {{type}}
-     
-     <Delegate to specialist with context>
-     
-     Waiting for specialist response...
-     ```
-   
-   - If routed to **user** (approval-needed, security after attempts):
-     ```
-     ⚠️ USER DECISION REQUIRED
-     Type: {{type}}
-     
-     {{message}}
-     
-     Internal attempts: <count if applicable>
-     
-     Please decide how to proceed.
-     ```
+For **{{type}}**, route as follows:
 
-5. **Display Response**:
-   ```
-   ✅ Escalation Response:
-   From: <specialist-name>
-   
-   <specialist response>
-   
-   <Apply recommendation and continue>
-   ```
+**If routing to specialist (design-decision, security-concern initially):**
 
-## Example Output (Design Decision → Architect)
+Display:
+```
+🚨 Escalating to appropriate specialist...
+Type: {{type}}
+
+Question: "{{message}}"
+
+Routing to [Vikram (Architect) | Priya (Architect) | Chloe (Business Analyst)]...
+```
+
+Then delegate to that specialist and wait for response.
+
+**If routing to user (approval-needed or security after attempts):**
+
+Display:
+```
+⚠️ USER DECISION REQUIRED
+
+Type: {{type}}
+
+{{message}}
+
+[Include any internal discussion if applicable]
+
+Please decide how to proceed.
+```
+
+**Step 3:** Display response
+
+After specialist/user responds:
 
 ```
-🚨 Escalating to: Vikram (Principal Architect)
+✅ Response:
+
+[Response text]
+
+─────────────────────────────────────
+
+Proceeding with recommendation...
+```
+
+---
+
+## Example: Design Decision
+
+```
+🚨 Escalating to appropriate specialist...
 Type: design-decision
 
-Question: "Should we use REST or GraphQL for this API?"
+Question: "Should we use REST or GraphQL?"
 
-Delegating to architect...
+Routing to Vikram (Principal Architect)...
 
-───────────────────────────────────────────
+─────────────────────────────────────
 
 ✅ Architect Response:
-From: Vikram (Principal Architect)
 
-"Use REST for this case. The API is simple CRUD operations, GraphQL would be 
-overkill. REST is faster to implement, easier to cache, and your team already 
-knows it well.
+"Use REST for this case. Simple CRUD operations don't need GraphQL complexity.
+REST is faster to implement and your team already knows it.
 
-Recommendation: Go with REST + OpenAPI spec for documentation."
+Recommendation: REST + OpenAPI spec."
 
-───────────────────────────────────────────
+─────────────────────────────────────
 
 Proceeding with REST implementation...
 ```
 
-## Example Output (Security Concern → User)
+---
+
+## Example: User Approval
 
 ```
-⚠️ SECURITY CONCERN - USER DECISION REQUIRED
+⚠️ USER DECISION REQUIRED
 
-Type: security-concern
-Priority: HIGH
+Type: approval-needed
 
-Issue: Unvalidated user input in admin panel
-Risk: SQL injection, privilege escalation
-
-Internal Discussion (1 attempt):
-- Architect (Vikram): "Critical, needs immediate fix"
+We need to make a breaking API change to support the new feature.
+This will require mobile app updates.
 
 Options:
-A) Fix now and delay feature launch
-B) Add to security backlog (risk accepted)
-C) Implement input sanitization as hotfix
+A) Proceed with breaking change (requires coordinated deployment)
+B) Maintain backward compatibility (more complex implementation)
+C) Delay feature until v2.0
 
-Your Decision?
+Please decide how to proceed.
 ```
+
+---
+
+## Important
+
+- **DO NOT** wrap in `Bash(cat << 'EOF' ...)`
+- **DO** display formatted text directly  
+- **DO** actually route the escalation
+- **DO** wait for specialist/user response before proceeding
 
 ## Escalation Flow
 

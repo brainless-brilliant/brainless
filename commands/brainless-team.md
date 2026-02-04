@@ -7,56 +7,60 @@ args:
     required: true
 ---
 
+---
+
 # Brainless Team Assembly
 
-You are manually triggering team assembly via the `/brainless:team` command.
+**EXECUTE IMMEDIATELY - DISPLAY OUTPUT DIRECTLY**
 
-## Task
+You are manually triggering team assembly for: **{{task}}**
 
-**User Request**: {{task}}
+## Execution
 
-## Your Instructions
+**Step 1:** Call the team assembly function
 
-1. **Call Team Assembly**:
-   ```typescript
-   const { assembleTeamForTask } = await import('${CLAUDE_PLUGIN_ROOT}/dist/agents/team-assembly.js');
-   const teamPrompt = await assembleTeamForTask("{{task}}");
-   ```
+```typescript
+const { assembleTeamForTask } = await import('${CLAUDE_PLUGIN_ROOT}/dist/agents/team-assembly.js');
+const teamPrompt = await assembleTeamForTask("{{task}}");
+```
 
-2. **Display Team Information**:
-   - Show the formatted team introduction
-   - List specialists with their personas
-   - Display confidence score and sources
-   - Show team rationale
-
-3. **Wait for User Confirmation**:
-   Before proceeding with delegation, ask:
-   "Ready to proceed with this team? I'll delegate work to them now."
-
-4. **Delegate Work**:
-   Once confirmed, use the standard delegation flow:
-   - Coordinator orchestrates
-   - Specialists execute
-   - Verify completion
-
-## Example Output
+**Step 2:** Display the team (use the actual teamPrompt output, this is just an example format):
 
 ```
-🎯 Building your dream team (or at least a functional one)
+🎯 Building your dream team for this task...
 
 👥 Team of 3 assembled:
    🏗️ **Vikram** (Principal Architect): "CAP theorem in my sleep"
-   🔒 **Elena** (Security Lead): "Assuming everything is a SQL injection"
+   🔒 **Elena** (Security Lead): "Assuming everything is a SQL injection"  
    ⚙️ **Alex** (Senior Engineer): "Ship it or skip it"
 
-💡 Rationale: Security audit + architecture design needed
-📊 Confidence: 85% | Sources: haiku + memory
+💡 Rationale: [From team assembly logic]
+📊 Confidence: [X]% | Sources: [haiku/memory/fallback]
 
-✨ Your team is ready! Coordinator will now orchestrate their work.
+──────────────────────────────────────
 ```
 
-## Notes
+**Step 3:** Ask for confirmation
 
-- This bypasses automatic team assembly
-- Useful for reviewing team selection before work begins
-- User can request different specialists if needed
+Display:
+```
+Ready to proceed with this team?
+
+If yes, I'll delegate the work to them now.
+If no, let me know what adjustments you'd like.
+```
+
+**WAIT for user response.**
+
+**Step 4:** If confirmed, proceed with delegation
+
+Use standard coordinator delegation flow.
+
+---
+
+## Important
+
+- **DO NOT** wrap output in `Bash(cat << 'EOF' ...)` 
+- **DO** display the formatted text directly
+- **DO** actually call the team assembly function
+- **DO** wait for user confirmation before delegating

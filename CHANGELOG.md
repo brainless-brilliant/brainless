@@ -5,6 +5,124 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-04
+
+### Added
+
+#### Smart CLAUDE.md Merger
+- **AI-powered CLAUDE.md integration** during first-time setup
+  - Detects existing CLAUDE.md in 4 priority locations
+  - Interactive prompt: Override / Merge / Skip
+  - Uses Anthropic API (Sonnet for <10KB, Opus for >10KB) for intelligent merging
+  - Preserves user content while adding Brainless plugin instructions
+  - Automatic backup system before any changes
+  - Fallback to basic creation if AI merge fails
+  - Module: `src/installer/claude-md-merger.ts`
+  - Template: `templates/CLAUDE.brainless.md`
+  - Integration tests: `scripts/test-claude-md-merger.ts`
+
+#### Slash Commands for Manual Control (6 new commands)
+- `/brainless:init` - Initialize or re-initialize CLAUDE.md configuration
+  - Force mode for non-interactive override
+  - Manual init flow for post-installation setup
+  - Re-merge support after plugin updates
+
+- `/brainless:team <task>` - Manually trigger team assembly
+  - Preview team before delegation
+  - Show confidence scores and rationale
+  - User confirmation before proceeding
+
+- `/brainless:status` - View current system status
+  - Active team display
+  - Configuration check (debug mode, classifier, memory)
+  - Memory statistics
+  - Available specialists (29 agents)
+
+- `/brainless:memory [query]` - Search project memory
+  - Query-based search for patterns
+  - General summary without query
+  - Pattern identification
+  - Suggested approaches based on past success
+
+- `/brainless:escalate <type> <message>` - Manual escalation
+  - Types: question, blocker, design-decision, security-concern, scope-change, approval-needed
+  - Routes to appropriate specialist or user
+  - Bypasses 3-tier internal resolution
+
+- `/brainless:config` - Display configuration and debug info
+  - Plugin version and root path
+  - Environment variables
+  - Classifier status
+  - Memory configuration
+  - Agent registry (29 specialists)
+  - Feature flags
+  - System diagnostics
+
+#### Documentation Enhancements
+- **README.md** - Added comprehensive "Getting Started: Optimal Usage" section
+  - First-time setup guide (4 steps)
+  - 5 scenario-based workflows (complex features, bugs, security, refactoring, research)
+  - 7 power user tips
+  - Best practices summary (DOs and DON'Ts)
+
+### Changed
+
+- **Installer** (`src/installer/index.ts`)
+  - Made `install` function async to support CLAUDE.md merger
+  - Replaced basic CLAUDE.md creation with smart merger integration
+  - Dynamic fallback if merger fails
+
+- **CLI** (`src/cli/index.ts`)
+  - Updated `install` and `postinstall` commands to await async installation
+  - Proper Promise handling for installation result
+
+- **Command Format** - Fixed all slash commands to display directly
+  - Eliminated "Your Instructions" conversational format
+  - Added "DISPLAY IMMEDIATELY - NO BASH WRAPPERS" headers
+  - Explicit warnings against `Bash(cat << 'EOF' ...)` wrapping
+  - Directive language for immediate execution
+
+### Fixed
+
+- **Bash Wrapper Issue** - All 6 new slash commands now display formatted text directly
+  - Prevents infinite conversational loops
+  - Matches UX promise in README (smooth, delightful display)
+  - No bash script wrappers breaking immersion
+
+- **Type Safety**
+  - Fixed TypeScript errors in `claude-md-merger.ts` (explicit `string` type for map callback)
+  - Corrected async/await handling in CLI commands
+
+### Technical Details
+
+**New Files:**
+- `commands/brainless-init.md` (297 lines)
+- `commands/brainless-team.md` (67 lines)
+- `commands/brainless-status.md` (63 lines)
+- `commands/brainless-memory.md` (68 lines)
+- `commands/brainless-escalate.md` (121 lines)
+- `commands/brainless-config.md` (117 lines)
+- `src/installer/claude-md-merger.ts` (359 lines)
+- `templates/CLAUDE.brainless.md` (58 lines)
+- `scripts/test-claude-md-merger.ts` (141 lines)
+
+**Modified Files:**
+- `README.md` - Added 110 lines of optimal usage examples
+- `CONTRIBUTING.md` - Updated with merger testing guidance
+- `src/installer/index.ts` - Async install + merger integration
+- `src/cli/index.ts` - Await install calls
+- `package.json` - Version bump + dependencies
+
+**Dependencies Added:**
+- Uses existing `@anthropic-ai/sdk` for AI-powered merging
+- No new external dependencies
+
+**Build:**
+- ✅ All TypeScript compilation passing
+- ✅ Integration tests for merger module
+
+**Total Lines Changed:** ~1,500 lines (9 new files, 6 modified)
+
 ## [3.4.2] - 2026-01-24
 
 ### Fixed
