@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-02-04
+
+### Fixed
+
+- **Command File Format** - Rewrote all 6 slash commands to use descriptive documentation format
+  - Changed from imperative code execution (TypeScript blocks) to natural language descriptions
+  - Eliminates bash permission prompts when running commands
+  - Matches the format of existing commands (team.md, help.md)
+  - Commands now execute directly without requiring user approval for bash scripts
+  - Affected commands: init, team, status, memory, escalate, config
+
+### Changed
+
+- **Documentation** - Simplified command files from ~1,500 lines to ~600 lines total
+  - Removed unnecessary TypeScript code samples
+  - Focused on WHAT commands do, not HOW to implement them
+  - Improved readability and user experience
+
 ## [1.1.0] - 2026-02-04
 
 ### Added
