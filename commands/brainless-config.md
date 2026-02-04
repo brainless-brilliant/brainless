@@ -1,42 +1,113 @@
 ---
 name: brainless-config
-description: Show Brainless configuration and debug information
+description: Display comprehensive configuration and debug info
 ---
 
----
+# /brainless:config - Configuration & Debug Info
 
-# Brainless Configuration & Debug Info
+Show comprehensive Brainless configuration, diagnostics, and system health.
 
-**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
+## What It Shows
 
-Show comprehensive Brainless configuration and diagnostics.
+### Plugin Information
+- Plugin version (from `package.json`)
+- Plugin root directory path
+- Installation verification
 
-## Display Format
+### Environment Variables
+- `BRAINLESS_DEBUG`: Debug mode status
+- `ANTHROPIC_API_KEY`: API key configuration (masked)
+- `NODE_ENV`: Environment setting
 
-Present this information directly to the user:
+### Haiku Classifier
+- Status: Online / Fallback mode
+- Model: `claude-3-5-haiku-20241022`
+- Cache status: Enabled / Disabled
+- Fallback: Keyword-based matching
+
+### Memory Layer
+- Storage location: `~/.brainless/memory/`
+- Entry count
+- Capture filter: Executor/specialist only
+- Auto-capture status: Enabled
+
+### Agent Registry
+Complete list of 29 specialists organized by domain:
+- Architecture (3)
+- Security (2)
+- Implementation (3)
+- QA (3)
+- Build (2)
+- Frontend (4)
+- Documentation (2)
+- Research (3)
+- Data (3)
+- Planning (2)
+- Business (2)
+
+### Feature Flags
+- ✅ Dynamic team assembly
+- ✅ Memory integration
+- ✅ Escalation protocol
+- ✅/⚠️ AI classification (online or fallback)
+- ✅ Slash commands
+
+### Important Files
+- Plugin root
+- Commands directory
+- Memory storage
+- Global CLAUDE.md location
+
+### System Diagnostics
+- Plugin loaded correctly
+- Commands directory accessible
+- API key status
+- Memory directory writable
+- Agent registry loaded
+- Overall health status
+
+## Debug Commands
+
+Includes helper commands for troubleshooting:
+
+```
+# Enable debug mode
+export BRAINLESS_DEBUG=true
+
+# Test team assembly
+/brainless:team "test task"
+
+# Search memory
+/brainless:memory
+
+# View runtime status
+/brainless:status
+```
+
+## Output Format
 
 ```
 ╔══════════════════════════════════════════════════════════╗
 ║         Brainless AI Workforce - Configuration          ║
 ╚══════════════════════════════════════════════════════════╝
 
-📦 Plugin Version: [from package.json]
-📂 Root: ${CLAUDE_PLUGIN_ROOT}
+📦 Plugin Version: 1.1.0
+📂 Root: /path/to/plugin
 
 🌍 Environment:
-   BRAINLESS_DEBUG: ${process.env.BRAINLESS_DEBUG || 'not set'}
-   ANTHROPIC_API_KEY: ${process.env.ANTHROPIC_API_KEY ? 'set (sk-ant-...)' : 'not set'}
-   NODE_ENV: ${process.env.NODE_ENV || 'not set'}
+   BRAINLESS_DEBUG: not set
+   ANTHROPIC_API_KEY: set (sk-ant-...hidden)
+   NODE_ENV: not set
 
 🤖 Haiku Classifier:
-   Status: [online | fallback mode]
+   Status: online
    Model: claude-3-5-haiku-20241022
-   Cache: [enabled | disabled]
+   Cache: enabled
    Fallback: keyword-based
 
 🧠 Memory Layer:
-   Storage: ~/.brain less/memory/
-   Entries: [count or 'Unknown']
+   Storage: ~/.brainless/memory/
+   Entries: 47
    Capture filter: Executor/specialist only
    Auto-capture: enabled
 
@@ -46,97 +117,7 @@ Present this information directly to the user:
    - Architecture (3): Vikram, Priya, Rohan  
    - Security (2): Elena, Sam
    - Implementation (3): Jordan, Alex, Taylor
-   - QA (3): Maya, Oliver, Sophia
-   - Build (2): Marcus, Katie
-   - Frontend (4): Zoe, Liam, Aiden, Mia
-   - Documentation (2): Olivia, Ethan
-   - Research (3): Aria, Lucas, Isla
-   - Data (3): Noah, Emma, Leo
-   - Planning (2): Amelia, Ryan
-   - Business (2): Chloe, Mason
-
-🚩 Features:
-   ✅ Dynamic team assembly
-   ✅ Memory integration
-   ✅ Escalation protocol
-   [✅ | ⚠️ Fallback] AI classification
-   ✅ Slash commands
-
-📁 Important Files:
-   Plugin: ${CLAUDE_PLUGIN_ROOT}/
-   Commands: ${CLAUDE_PLUGIN_ROOT}/commands/
-   Memory: ~/.brainless/memory/
-   Config: ~/.claude/CLAUDE.md
-
-🏥 System Diagnostics:
-
-   ✅ Plugin loaded correctly
-   ✅ Commands directory accessible
-   ${process.env.ANTHROPIC_API_KEY ? '✅' : '⚠️'} Anthropic API key ${process.env.ANTHROPIC_API_KEY ? 'configured' : 'not set (fallback mode)'}
-   ✅ Memory directory writable
-   ✅ Agent registry loaded (29 specialists)
-   [✅ | ⚠️] No issues detected
-
-🔧 Debug Commands:
-   Enable debug: export BRAINLESS_DEBUG=true
-   Test team: /brainless:team "test task"
-   Search memory: /brainless:memory
-   View status: /brainless:status
-
-───────────────────────────────────────────────────────────
-
-💡 Tip: Use /brainless:status for runtime information
-```
-
----
-
-## Important
-
-- **DO NOT** wrap in `Bash(cat << 'EOF' ...)`  
-- **DO** display formatted text directly
-- **DO** query actual system state where available
-- **DO** use placeholders [like this] for dynamic data you can't access
-
-## Example Output
-
-```
-╔══════════════════════════════════════════════════════════╗
-║         Brainless AI Workforce - Configuration          ║
-╚══════════════════════════════════════════════════════════╝
-
-📦 Plugin Version: 1.0.0
-📂 Root: ~/.claude/plugins/brainless/
-
-🌍 Environment:
-   BRAINLESS_DEBUG: true
-   ANTHROPIC_API_KEY: set (sk-ant-...)
-   NODE_ENV: production
-
-🤖 Haiku Classifier:
-   Status: ✅ online
-   Model: claude-3-5-haiku-20241022
-   Cache: enabled
-   Fallback: keyword-based (unused)
-
-🧠 Memory Layer:
-   Storage: ~/.brainless/memory/
-   Entries: 47 tasks
-   Capture filter: Executor/specialist only
-   Auto-capture: enabled
-
-👥 Agent Registry: 29 specialists
-
-   Architecture (3): Vikram, Priya, Rohan
-   Security (2): Elena, Sam
-   Implementation (3): Jordan, Alex, Taylor
-   QA (3): Maya, Oliver, Sophia
-   Build (2): Marcus, Katie
-   Frontend (4): Zoe, Liam, Aiden, Mia
-   Documentation (2): Olivia, Ethan
-   Research (3): Aria, Lucas, Isla
-   Data (3): Noah, Emma, Leo
-   Planning (2): Amelia, Ryan
-   Business (2): Chloe, Mason
+   ...
 
 🚩 Features:
    ✅ Dynamic team assembly
@@ -145,13 +126,13 @@ Present this information directly to the user:
    ✅ AI classification
    ✅ Slash commands
 
-📁 Files:
-   Plugin: ~/.claude/plugins/brainless/
-   Commands: ~/.claude/plugins/brainless/commands/
+📁 Important Files:
+   Plugin: /plugin/root/
+   Commands: /plugin/root/commands/
    Memory: ~/.brainless/memory/
    Config: ~/.claude/CLAUDE.md
 
-🏥 Diagnostics:
+🏥 System Diagnostics:
    ✅ Plugin loaded correctly
    ✅ Commands directory accessible
    ✅ Anthropic API key configured
@@ -159,20 +140,19 @@ Present this information directly to the user:
    ✅ Agent registry loaded (29 specialists)
    ✅ No issues detected
 
-🔧 Debug Mode: ON
-   Verbose logging enabled
-   Team assembly details visible
-   Memory search results shown
-   Escalation routing traced
-
 ───────────────────────────────────────────────────────────
 
-💡 Tip: Run /brainless:status for runtime information
+💡 Tip: Use /brainless:status for runtime information
 ```
 
-## Notes
+## When to Use
 
-- No arguments required
-- Shows complete system configuration
-- Useful for troubleshooting
-- Includes diagnostic checks
+- **Verify installation**: Check if plugin is configured correctly
+- **Debug issues**: Diagnose what's not working
+- **Check API status**: Verify classifier is online
+- **List all agents**: See complete registry
+- **Troubleshooting**: Comprehensive system health check
+
+---
+
+**Tip**: Run this immediately after installation to verify setup!

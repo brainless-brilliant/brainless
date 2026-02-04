@@ -1,156 +1,130 @@
 ---
 name: brainless-escalate
-description: Manually escalate an issue to a specialist or the user
+description: Manually escalate issues to specialists or user
 args:
   - name: type
-    description: Escalation type (question, blocker, design-decision, security-concern, scope-change, approval-needed)
+    description: Escalation type
     required: true
   - name: message
-    description: Escalation message/question
+    description: Issue description
     required: true
 ---
 
-# Brainless Manual Escalation
+# /brainless:escalate - Manual Escalation
 
-**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
+Manually escalate issues to appropriate specialists or directly to the user.
 
-Manually escalate: **{{type}}** - "{{message}}"
+## Escalation Types
 
-## Escalation Details
+| Type | Routes To | When to Use |
+|------|-----------|-------------|
+| `question` | PM Coordinator | General questions about approach |
+| `blocker` | PM Coordinator | Task is blocked, need guidance |
+| `design-decision` | Architect (Vikram/Priya) | Requires architectural input |
+| `security-concern` | Security Lead → User | Security implications found |
+| `scope-change` | Business Analyst (Chloe) | Requirements changing |
+| `approval-needed` | User (Direct) | Explicit user decision required |
 
-**Type**: {{type}}
-**Message**: {{message}}
+## How It Works
 
-## Execution
+### Specialist Escalations
+For `design-decision`, `security-concern`, `scope-change`:
 
-**Step 1:** Validate escalation type
+1. **Route to specialist** (Vikram, Elena, Chloe)
+2. **Specialist analyzes** the issue
+3. **Provides recommendation**
+4. **If unresolved**, escalates to user
 
-Allowed types:
-- `question` → PM Coordinator
-- `blocker` → PM Coordinator
-- `design-decision` → Architect (Vikram/Priya)
-- `security-concern` → Architect then User
-- `scope-change` → Business Analyst
-- `approval-needed` → Direct to User
+### Direct User Escalations
+For `approval-needed` or after specialist attempts:
 
-**Step 2:** Route based on type
+1. **Present issue to user** with context
+2. **Wait for user decision**
+3. **Proceed based on user input**
 
-For **{{type}}**, route as follows:
+## 3-Tier Internal Resolution
 
-**If routing to specialist (design-decision, security-concern initially):**
-
-Display:
-```
-🚨 Escalating to appropriate specialist...
-Type: {{type}}
-
-Question: "{{message}}"
-
-Routing to [Vikram (Architect) | Priya (Architect) | Chloe (Business Analyst)]...
-```
-
-Then delegate to that specialist and wait for response.
-
-**If routing to user (approval-needed or security after attempts):**
-
-Display:
-```
-⚠️ USER DECISION REQUIRED
-
-Type: {{type}}
-
-{{message}}
-
-[Include any internal discussion if applicable]
-
-Please decide how to proceed.
-```
-
-**Step 3:** Display response
-
-After specialist/user responds:
+Brainless follows a 3-tier escalation protocol:
 
 ```
-✅ Response:
-
-[Response text]
-
-─────────────────────────────────────
-
-Proceeding with recommendation...
+Tier 1: Agent Self-Resolution
+  ↓ (if stuck)
+Tier 2: Specialist Consultation
+  ↓ (if still unresolved)
+Tier 3: User Decision
 ```
 
----
+This command **bypasses Tier 1** and goes directly to Tier 2 or 3.
 
-## Example: Design Decision
+## Usage
 
+```
+/brainless:escalate <type> "<message>"
+```
+
+## Examples
+
+### Architecture Question
+```
+/brainless:escalate design-decision "Should we use event sourcing or traditional CRUD for order management?"
+```
+**Routes to**: Vikram (architect) for analysis and recommendation
+
+### Security Concern
+```
+/brainless:escalate security-concern "User input not sanitized in search endpoint"
+```
+**Routes to**: Elena (security) first, then user if critical
+
+### Approval Needed
+```
+/brainless:escalate approval-needed "Deploy to production now or wait for additional testing?"
+```
+**Routes to**: User directly (no specialist intermediary)
+
+### Scope Change
+```
+/brainless:escalate scope-change "User wants real-time notifications, not just email"
+```
+**Routes to**: Chloe (business analyst) for impact assessment
+
+## Output Format
+
+### Specialist Routing
 ```
 🚨 Escalating to appropriate specialist...
 Type: design-decision
 
-Question: "Should we use REST or GraphQL?"
+Question: "Should we use event sourcing or traditional CRUD?"
 
 Routing to Vikram (Principal Architect)...
 
-─────────────────────────────────────
+[Vikram's analysis appears here]
 
-✅ Architect Response:
-
-"Use REST for this case. Simple CRUD operations don't need GraphQL complexity.
-REST is faster to implement and your team already knows it.
-
-Recommendation: REST + OpenAPI spec."
-
-─────────────────────────────────────
-
-Proceeding with REST implementation...
+💡 Recommendation: [decision]
+📊 Confidence: [X]%
 ```
 
----
-
-## Example: User Approval
-
+### User Routing
 ```
 ⚠️ USER DECISION REQUIRED
 
 Type: approval-needed
 
-We need to make a breaking API change to support the new feature.
-This will require mobile app updates.
+Deploy to production now or wait for additional testing?
 
-Options:
-A) Proceed with breaking change (requires coordinated deployment)
-B) Maintain backward compatibility (more complex implementation)
-C) Delay feature until v2.0
+[Include any internal discussion]
 
 Please decide how to proceed.
 ```
 
+## When to Use
+
+- **Stuck on decision**: Need expert input to proceed
+- **Security risk found**: Immediate attention required
+- **Requirements unclear**: Business analyst review needed
+- **User choice required**: No right/wrong answer, user must decide
+
 ---
 
-## Important
-
-- **DO NOT** wrap in `Bash(cat << 'EOF' ...)`
-- **DO** display formatted text directly  
-- **DO** actually route the escalation
-- **DO** wait for specialist/user response before proceeding
-
-## Escalation Flow
-
-```
-Manual Escalation
-    ↓
-Validate Type
-    ↓
-Route to Specialist/User
-    ↓
-    ├─→ Specialist → Get Response → Continue
-    └─→ User → Wait for Decision
-```
-
-## Notes
-
-- Bypasses automatic 3-tier internal resolution
-- Useful when you know exactly who to ask
-- All escalations logged to memory
-- Security concerns escalate to user after 1 attempt
+**Tip**: Most issues resolve automatically through the 3-tier protocol. Use this command for urgent or explicit escalations!

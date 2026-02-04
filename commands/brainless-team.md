@@ -1,30 +1,81 @@
 ---
 name: brainless-team
-description: Manually trigger Brainless team assembly for a specific task
+description: Manually trigger team assembly for a task
 args:
   - name: task
-    description: Task description for team assembly
+    description: The task description to assemble a team for
     required: true
 ---
 
----
+# /brainless:team - Manual Team Assembly
 
-# Brainless Team Assembly
+Manually trigger team assembly to preview which specialists will be selected for your task.
 
-**EXECUTE IMMEDIATELY - DISPLAY OUTPUT DIRECTLY**
+## When to Use
 
-You are manually triggering team assembly for: **{{task}}**
+- **Preview team composition**: See who gets selected before starting work
+- **Understand agent selection**: Learn how the classifier routes tasks
+- **Test team assembly**: Verify the right specialists are chosen
+- **Manual delegation**: Start orchestration after team approval
 
-## Execution
+## How It Works
 
-**Step 1:** Call the team assembly function
+When you run `/brainless:team "<task>"`, the system will:
 
-```typescript
-const { assembleTeamForTask } = await import('${CLAUDE_PLUGIN_ROOT}/dist/agents/team-assembly.js');
-const teamPrompt = await assembleTeamForTask("{{task}}");
+1. **Analyze the task** using the Haiku-powered classifier
+2. **Select specialists** from the registry of 29 agents based on:
+   - Task category (architecture, security, implementation, etc.)
+   - Required skills and expertise
+   - Complexity level
+3. **Display the team** with:
+   - Agent names and roles
+   - Their specializations/catchphrases
+   - Selection rationale
+   - Confidence score
+   - Source (haiku classifier / memory / fallback)
+
+4. **Wait for confirmation** before proceeding
+
+## Team Assembly Rules
+
+The classifier follows these principles:
+
+| Task Type | Specialists Selected |
+|-----------|---------------------|
+| Architecture/Design | Vikram, Priya, Rohan (architects) |
+| Security Review | Elena, Sam (security leads) |
+| Implementation | Jordan, Alex, Taylor (executors) |
+| QA/Testing | Maya, Oliver, Sophia (QA testers) |
+| Frontend/UI | Zoe, Liam, Aiden, Mia (designers) |
+| Documentation | Olivia, Ethan (writers) |
+| Research | Aria, Lucas, Isla (researchers) |
+| Data/Analytics | Noah, Emma, Leo (data specialists) |
+| Planning | Amelia, Ryan (planners) |
+| Business Logic | Chloe, Mason (analysts) |
+
+**Complex tasks** may select multiple specialists from different domains.
+
+## Memory Integration
+
+The team assembly learns from past success:
+- Tracks which teams worked well together
+- Remembers successful agent combinations
+- Adjusts recommendations based on project patterns
+
+## Examples
+
+```
+/brainless:team "Build authentication API with JWT"
+→ Shows: Elena (security), Jordan (executor), Maya (QA)
+
+/brainless:team "Design dark mode landing page"
+→ Shows: Zoe (frontend), Vikram (architect)
+
+/brainless:team "Optimize database queries"
+→ Shows: Noah (data), Rohan (architect), Oliver (QA)
 ```
 
-**Step 2:** Display the team (use the actual teamPrompt output, this is just an example format):
+## Output Format
 
 ```
 🎯 Building your dream team for this task...
@@ -34,33 +85,14 @@ const teamPrompt = await assembleTeamForTask("{{task}}");
    🔒 **Elena** (Security Lead): "Assuming everything is a SQL injection"  
    ⚙️ **Alex** (Senior Engineer): "Ship it or skip it"
 
-💡 Rationale: [From team assembly logic]
-📊 Confidence: [X]% | Sources: [haiku/memory/fallback]
+💡 Rationale: Task involves system design and security review
+📊 Confidence: 87% | Source: haiku
 
 ──────────────────────────────────────
+
+Proceed with this team? (yes/no)
 ```
-
-**Step 3:** Ask for confirmation
-
-Display:
-```
-Ready to proceed with this team?
-
-If yes, I'll delegate the work to them now.
-If no, let me know what adjustments you'd like.
-```
-
-**WAIT for user response.**
-
-**Step 4:** If confirmed, proceed with delegation
-
-Use standard coordinator delegation flow.
 
 ---
 
-## Important
-
-- **DO NOT** wrap output in `Bash(cat << 'EOF' ...)` 
-- **DO** display the formatted text directly
-- **DO** actually call the team assembly function
-- **DO** wait for user confirmation before delegating
+**Tip**: Use this command to validate team selection before running `/team` for full orchestration!

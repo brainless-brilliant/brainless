@@ -1,97 +1,111 @@
 ---
 name: brainless-memory
-description: Search project memory for patterns and past task solutions
+description: Search project memory for patterns and learnings
 args:
   - name: query
-    description: Search query for memory patterns
+    description: Search query (optional, shows summary if omitted)
     required: false
 ---
 
-# Brainless Memory Search
+# /brainless:memory - Memory Search
 
-Search the project memory layer for patterns, solutions, and past task history.
+Search project memory for patterns, past solutions, and learnings.
 
-## Task
+## How Memory Works
 
-**DISPLAY IMMEDIATELY - NO BASH WRAPPERS**
+Brainless maintains a project memory system that captures:
+- **Successful task completions**: What worked and why
+- **Team compositions**: Which agents collaborated effectively
+- **Technical patterns**: Reusable solutions and approaches
+- **Failure learnings**: What didn't work and lessons learned
 
-Search project memory for patterns and past solutions.
+Memory is stored in `~/.brainless/memory/` and automatically captures task outcomes.
 
-## Query
+## Usage
 
-{{query}}
-
-## Execution
-
-**If query provided:**
-
-1. Search memory for relevant entries
-2. Display results in this format:
-
+### With Query
+Search for specific topics:
 ```
-🧠 Memory Search: "{{query}}"
+/brainless:memory "authentication"
+/brainless:memory "database optimization"
+/brainless:memory "error handling"
+```
 
-Found [X] relevant entries:
+### Without Query
+Shows general memory summary:
+```
+/brainless:memory
+```
+
+## Search Results
+
+When you search with a query, you'll see:
+
+### Relevant Entries
+```
+🧠 Memory Search: "authentication"
+
+Found 3 relevant entries:
 
 ──────────────────────────────────────
 
-📍 Entry #1 [timestamp]
-Task: [task description]
-Team: [agents involved]
-Outcome: [✅ Success | ⚠️ Partial | ❌ Failed]
-Learning: [key takeaway]
+📍 Entry #1 [2026-02-01 14:30]
+Task: Build JWT authentication API
+Team: Elena (security), Jordan (executor), Maya (QA)
+Outcome: ✅ Success
+Learning: Always validate token expiry on both client and server
 
 ──────────────────────────────────────
 
-📍 Entry #2 [timestamp]
-Task: [task description]
-Team: [agents involved]
-Outcome: [result]
-Learning: [key takeaway]
+📍 Entry #2 [2026-01-28 09:15]
+Task: Add OAuth integration
+Team: Elena, Alex, Oliver
+Outcome: ✅ Success
+Learning: Use PKCE flow for public clients
 
 ──────────────────────────────────────
+```
 
+### Identified Patterns
+```
 🔍 Patterns Identified:
-- [Pattern 1, e.g., "Authentication tasks always include Elena"]
-- [Pattern 2, e.g., "Complex refactors need Jordan + Maya"]
+- Authentication tasks always include Elena (security lead)
+- Complex integrations need both executor + QA pairing
+- OAuth requires architecture review before implementation
+```
 
+### Suggested Approach
+```
 💡 Suggested Approach:
-[Based on successful past patterns]
+Based on successful past patterns:
+1. Start with security review (Elena)
+2. Implement with executor (Jordan/Alex)
+3. Verify with QA (Maya/Oliver)
+4. Add integration tests before merging
 ```
 
-**If no query (general summary):**
+## Memory Capture
 
-Display overview:
+Memory is automatically captured when:
+- Task completes successfully (with `TASK_COMPLETE` promise)
+- Executor or specialist agents finish work
+- PM marks orchestration phase complete
+
+Capture filter: Executor/specialist work only (not exploratory tasks)
+
+## Examples
 
 ```
-🧠 Project Memory Summary
+/brainless:memory "API design"
+→ Shows API-related learnings and patterns
 
-Total entries: [count]
-Success rate: [X]%
-Most active specialists: [Top 3]
+/brainless:memory "performance optimization"
+→ Shows optimization approaches that worked
 
-📊 Task Categories:
-- Implementation: [count]
-- Bug fixes: [count]
-- Architecture: [count]
-- Security audits: [count]
-
-🏆 Top Patterns:
-1. [Most common pattern]
-2. [Second most common]
-3. [Third most common]
-
-💡 Key Learnings:
-- [Top learning 1]
-- [Top learning 2]
-- [Top learning 3]
-
-Use /brainless:memory "search term" to find specific patterns
+/brainless:memory
+→ Shows general stats and recent entries
 ```
 
-**Important:**
-- Display formatted text directly
-- Do NOT use `Bash(cat << 'EOF' ...)`
-- Query actual memory system where available
-- Use placeholders [like this] for dynamic data
-- Reveals project-specific patterns
+---
+
+**Tip**: Check memory before starting similar tasks to learn from past successes!
