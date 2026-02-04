@@ -1,0 +1,1 @@
+{"version":3,"file":"architecture.js","sourceRoot":"","sources":["../../../src/agents/modules/architecture.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAIH,MAAM,CAAC,MAAM,0BAA0B,GAAiB;IACtD,EAAE,EAAE,uBAAuB;IAC3B,IAAI,EAAE,uBAAuB;IAC7B,eAAe,EAAE,GAAG;IACpB,aAAa,EAAE,KAAK;IACpB,aAAa,EAAE,CAAC,IAAI,EAAE,EAAE,CAAC,IAAI,CAAC,iBAAiB;IAC/C,OAAO,EAAE;;;;;;;;;;;;;;;;;6BAiBkB;CAC5B,CAAC"}
