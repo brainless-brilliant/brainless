@@ -19,6 +19,11 @@
             "type": "command",
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/context-injector.mjs\"",
             "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/godmode-status.mjs\"",
+            "timeout": 3
           }
         ]
       }

@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-09
+
+### Added
+
+#### God-Mode: AI-Powered Multi-Agent Orchestration
+
+The most comprehensive execution mode yet - combines deep initialization with parallel ralph loops:
+
+- **`/brainless:god-mode "task"`** - New slash command for complex multi-directory tasks
+- **Deep Init Phase** - AI-analyzes codebase and generates `.brainless/CLAUDE.md` per directory
+- **Multi-Agent Execution** - Spawns parallel ralph loops with specialized agents
+- **Full Integration** - Wires into memory, debates, escalation, team-builder, and model-routing
+
+**New Files (8):**
+| File | Purpose |
+|------|---------|
+| `src/hooks/godmode/state.ts` | State machine for phase tracking |
+| `src/hooks/godmode/index.ts` | Main hook handler with TeamBuilder integration |
+| `src/hooks/godmode/claude-generator.ts` | Directory-specific CLAUDE.md generator |
+| `scripts/directory-analyzer.mjs` | Cross-platform directory type detection |
+| `scripts/godmode-status.mjs` | HUD status injector when active |
+| `commands/brainless-godmode.md` | Slash command with warning |
+| `skills/godmode/SKILL.md` | Core orchestration skill |
+| `docs/internal-modes/godmode.md` | Internal mode documentation |
+
+**Integration Points:**
+- **Memory**: Queries past work per directory, stores learnings after execution
+- **Team Builder**: Uses Haiku classifier to select optimal agents per directory type
+- **Debates**: Auto-created when agents propose conflicting approaches
+- **Escalation**: Routes blockers through Agent → PM → Specialist → User hierarchy
+- **Model Routing**: Complexity-based tier selection
+
+**User Decisions:**
+- Uses `.brainless/` directories (plugin-specific, not `.claude/`)
+- Auto-added to `.gitignore` for safety
+- Command hint shows caution warning before execution
+- CLAUDE.md template updated to surface `.brainless/` discovery
+
+### Changed
+
+- **`commands/brainless-init.md`** - Added god-mode to template and next steps
+- **`hooks/hooks.json`** - Added `godmode-status.mjs` hook for HUD injection
+
 ## [2.0.0] - 2026-02-04
 
 ### ⚠️ BREAKING CHANGE: Command System Refactor

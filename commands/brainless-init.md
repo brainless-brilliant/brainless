@@ -123,6 +123,11 @@ Write the Brainless template content that includes:
 
 ## Slash Commands
 [Reference to command files]
+
+## God-Mode & Context Discovery
+If you see `.brainless/` directories in subdirectories, these contain AI-generated
+context for specialized work. Read `.brainless/CLAUDE.md` before working in that directory.
+Use /brainless:god-mode for comprehensive multi-agent task execution.
 ```
 
 ## STEP 5: CREATE .brainless DIRECTORY
@@ -153,7 +158,8 @@ Create any missing directories.
 🎯 Next steps:
    1. Run /brainless:status to verify configuration
    2. Try /brainless:team "your task" to test team assembly
-   3. Enable debug mode: export BRAINLESS_DEBUG=true
+   3. Use /brainless:god-mode "task" for comprehensive multi-agent execution
+   4. Enable debug mode: export BRAINLESS_DEBUG=true
 
 💡 Tip: Your existing SOPs were [preserved/merged/backed up].
 ```
