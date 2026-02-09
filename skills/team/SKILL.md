@@ -217,10 +217,9 @@ Write all activity to:
 </command-instruction>
 
 <current-context>
-<brainless-dir>
-!`test -d .brainless && echo "exists" || mkdir -p .brainless/{transcripts,decisions,debates,plans}`
-</brainless-dir>
-<session-id>
-!`date +%Y%m%d-%H%M%S`
-</session-id>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - brainless.exists: whether .brainless/ exists (create if not) -->
+<!-- - sessionId: unique session identifier for transcript naming -->
+<!-- - timestamp: current timestamp -->
 </current-context>

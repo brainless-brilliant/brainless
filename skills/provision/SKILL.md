@@ -163,19 +163,11 @@ Detected Stack:
 </command-instruction>
 
 <current-context>
-<package-json>
-!`test -f package.json && echo "exists" || echo "not found"`
-</package-json>
-<languages>
-!`find . -maxdepth 3 -type f \( -name "*.ts" -o -name "*.py" -o -name "*.rs" -o -name "*.go" \) 2>/dev/null | head -5`
-</languages>
-<frameworks>
-!`cat package.json 2>/dev/null | grep -E '"(react|next|vue|express|prisma)"' | head -5 || echo "none"`
-</frameworks>
-<tests>
-!`ls jest.config.* vitest.config.* pytest.ini 2>/dev/null || echo "none"`
-</tests>
-<devops>
-!`ls Dockerfile docker-compose.yml .github/workflows/*.yml 2>/dev/null | head -3 || echo "none"`
-</devops>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - stack.languages: array of detected languages -->
+<!-- - stack.frameworks: array of detected frameworks -->
+<!-- - stack.hasTests: whether test config exists -->
+<!-- - stack.hasDocker: whether Dockerfile exists -->
+<!-- - stack.hasGithubActions: whether .github/workflows exists -->
 </current-context>

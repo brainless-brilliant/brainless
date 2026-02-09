@@ -167,10 +167,9 @@ Proceed with this team? (yes/no)
 </command-instruction>
 
 <current-context>
-<project-has-memory>
-!`test -d .brainless/memory && echo "yes" || echo "no"`
-</project-has-memory>
-<recent-teams>
-!`ls -la .brainless/transcripts/*.md 2>/dev/null | tail -3 || echo "no transcripts"`
-</recent-teams>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - brainless.exists: whether .brainless/ exists -->
+<!-- - brainless.transcripts: count of transcript files -->
+<!-- - brainless.recentTranscripts: array of recent transcript filenames -->
 </current-context>

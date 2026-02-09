@@ -105,22 +105,10 @@ If any issues detected, add:
 </command-instruction>
 
 <current-context>
-<claude-md-location>
-!`test -f .claude/CLAUDE.md && echo ".claude/CLAUDE.md" || (test -f CLAUDE.md && echo "CLAUDE.md" || echo "not found")`
-</claude-md-location>
-<brainless-structure>
-!`ls -la .brainless/ 2>/dev/null | grep -E "^d" | awk '{print $NF}' || echo "not found"`
-</brainless-structure>
-<memory-count>
-!`ls .brainless/memory/*.md 2>/dev/null | wc -l || echo "0"`
-</memory-count>
-<transcript-count>
-!`ls .brainless/transcripts/*.md 2>/dev/null | wc -l || echo "0"`
-</transcript-count>
-<recent-transcripts>
-!`ls -t .brainless/transcripts/*.md 2>/dev/null | head -3 || echo "none"`
-</recent-transcripts>
-<debug-mode>
-!`echo "${BRAINLESS_DEBUG:-disabled}"`
-</debug-mode>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - claudeMd: location of CLAUDE.md -->
+<!-- - brainless.exists/memory/transcripts/etc: directory structure -->
+<!-- - brainless.recentTranscripts: array of recent transcript filenames -->
+<!-- - debugMode: BRAINLESS_DEBUG value -->
 </current-context>

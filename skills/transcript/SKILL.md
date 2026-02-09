@@ -105,10 +105,9 @@ Use these icons based on action type:
 </command-instruction>
 
 <current-context>
-<transcript-files>
-!`ls -t .brainless/transcripts/*.md 2>/dev/null | head -5 || echo "none"`
-</transcript-files>
-<activity-log>
-!`test -f .brainless/transcripts/activity.jsonl && echo "exists" || echo "not found"`
-</activity-log>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - brainless.transcripts: count of transcript files -->
+<!-- - brainless.recentTranscripts: array of recent filenames -->
+<!-- - hasActivityLog: whether activity.jsonl exists -->
 </current-context>

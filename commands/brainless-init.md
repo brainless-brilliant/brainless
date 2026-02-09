@@ -207,16 +207,9 @@ Which option? (1/2/3)
 </command-instruction>
 
 <current-context>
-<project-claude-md>
-!`test -f .claude/CLAUDE.md && echo "exists at .claude/CLAUDE.md" || echo "not found"`
-</project-claude-md>
-<root-claude-md>
-!`test -f CLAUDE.md && echo "exists at root" || echo "not found"`
-</root-claude-md>
-<global-claude-md>
-!`test -f ~/.claude/CLAUDE.md && echo "exists globally" || echo "not found"`
-</global-claude-md>
-<brainless-dir>
-!`test -d .brainless && echo "exists" || echo "not found"`
-</brainless-dir>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - claudeMd: location of CLAUDE.md ("not found" if missing) -->
+<!-- - brainless.exists: whether .brainless/ directory exists -->
+<!-- - version: plugin version from package.json -->
 </current-context>

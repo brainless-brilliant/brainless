@@ -193,25 +193,12 @@ If debug mode is enabled, add:
 </command-instruction>
 
 <current-context>
-<version>
-!`node -p "require('./package.json').version" 2>/dev/null || echo "unknown"`
-</version>
-<debug-mode>
-!`echo "${BRAINLESS_DEBUG:-not set}"`
-</debug-mode>
-<api-key-set>
-!`test -n "$ANTHROPIC_API_KEY" && echo "set" || echo "not set"`
-</api-key-set>
-<claude-md>
-!`test -f .claude/CLAUDE.md && echo ".claude/CLAUDE.md" || (test -f CLAUDE.md && echo "CLAUDE.md" || echo "not found")`
-</claude-md>
-<brainless-dir>
-!`test -d .brainless && echo ".brainless/" || echo "not found"`
-</brainless-dir>
-<agent-count>
-!`ls agents/*.yaml 2>/dev/null | wc -l || echo "0"`
-</agent-count>
-<skill-count>
-!`ls -d skills/*/ 2>/dev/null | wc -l || echo "0"`
-</skill-count>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - version: plugin version -->
+<!-- - debugMode: BRAINLESS_DEBUG value or "disabled" -->
+<!-- - apiKeySet: true/false for ANTHROPIC_API_KEY -->
+<!-- - claudeMd: location of CLAUDE.md -->
+<!-- - brainless.exists: whether .brainless/ exists -->
+<!-- - brainless.memory/transcripts/etc: file counts -->
 </current-context>

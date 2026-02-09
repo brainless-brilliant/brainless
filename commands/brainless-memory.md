@@ -161,13 +161,9 @@ No matching patterns found for this query.
 </command-instruction>
 
 <current-context>
-<memory-exists>
-!`test -d .brainless/memory && echo "yes" || echo "no"`
-</memory-exists>
-<memory-files>
-!`ls .brainless/memory/*.md 2>/dev/null | head -10 || echo "none"`
-</memory-files>
-<memory-count>
-!`ls .brainless/memory/*.md 2>/dev/null | wc -l || echo "0"`
-</memory-count>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - brainless.exists: whether .brainless/memory/ exists -->
+<!-- - brainless.memory: count of memory files -->
+<!-- - memoryFiles: array of memory file names -->
 </current-context>

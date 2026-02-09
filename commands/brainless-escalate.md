@@ -243,10 +243,8 @@ Reply to continue. Orchestration paused.
 </command-instruction>
 
 <current-context>
-<escalations-dir>
-!`test -d .brainless/escalations && echo "exists" || echo "not found"`
-</escalations-dir>
-<pending-escalations>
-!`grep -l "Status: pending" .brainless/escalations/*.md 2>/dev/null | wc -l || echo "0"`
-</pending-escalations>
+<!-- Context is automatically injected by the context-injector.mjs hook -->
+<!-- Parse the <brainless-context> JSON block above for: -->
+<!-- - brainless.escalations: count of escalation files -->
+<!-- - pendingEscalations: count of pending escalations -->
 </current-context>
