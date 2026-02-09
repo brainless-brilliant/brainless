@@ -151,6 +151,53 @@ If user approves team, enter PM (Athena) role:
 
 ---
 
+## God Mode - Autonomous Multi-Directory Execution
+
+For large-scale tasks spanning multiple directories, **God Mode** provides context-isolated parallel execution.
+
+### Activation
+- Slash command: `/brainless:godmode`
+- Auto-trigger: Tasks affecting 3+ directories
+
+### Phases
+
+| Phase | What Happens |
+|-------|--------------|
+| **Deep Init** | Analyzes every directory, creates `.brainless/CLAUDE.md` per folder |
+| **Decomposition** | Breaks task into directory-scoped subtasks |
+| **Parallel Execution** | Spawns isolated subagents per directory |
+| **Consolidation** | Architect verifies all work, resolves conflicts |
+
+### Context Recovery
+
+Each subagent receives injected context:
+1. **Memory search results** - Recent relevant work from `.brainless/memory/`
+2. **CLAUDE.md conventions** - Directory-specific rules
+3. **Progress state** - Loop continuity from `.brainless/progress.txt`
+4. **Team assignment** - Specialists for delegation
+
+**Result**: Subagent has full context even after context rot.
+
+### Conflict Resolution
+
+If subagents disagree:
+1. Debate room created automatically in `.brainless/debates/`
+2. PM moderates using evidence-based resolution
+3. Decision logged for future reference
+
+### Escalation in God Mode
+
+If a subagent is blocked:
+1. Routed per type: design → Architect, security → Elena
+2. Higher tiers consulted before bothering user
+3. Context preserved across escalation chain
+
+### Isolation Guarantee
+
+**God Mode subagents run in separate sessions** - their work never pollutes the parent's context window. The parent orchestrator receives only summaries.
+
+---
+
 ## Phase 3: Escalation Protocol
 
 ### 3-Tier Escalation Matrix

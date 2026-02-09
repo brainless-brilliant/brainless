@@ -326,6 +326,34 @@ export const codeReviewerLowAgent: AgentConfig = {
 };
 
 // ============================================================
+// GOD MODE AGENTS
+// ============================================================
+
+/**
+ * Godmode-Init Agent - Phase 1 Deep Initialization
+ */
+export const godmodeInitAgent: AgentConfig = {
+  name: 'godmode-init',
+  description: 'God Mode Phase 1 - Deep initialization, directory analysis, and CLAUDE.md generation',
+  prompt: loadAgentPrompt('godmode-init'),
+  tools: ['Read', 'Grep', 'Glob', 'Bash', 'Write'],
+  model: 'sonnet',
+  defaultModel: 'sonnet'
+};
+
+/**
+ * Ralph-Loop Agent - Persistent Execution Loop
+ */
+export const ralphLoopAgent: AgentConfig = {
+  name: 'ralph-loop',
+  description: 'Persistent execution loop for directory-scoped tasks with completion verification',
+  prompt: loadAgentPrompt('ralph-loop'),
+  tools: ['Read', 'Grep', 'Glob', 'Bash', 'Edit', 'Write', 'Task'],
+  model: 'sonnet',
+  defaultModel: 'sonnet'
+};
+
+// ============================================================
 // AGENT REGISTRY
 // ============================================================
 
@@ -374,7 +402,10 @@ export function getAgentDefinitions(overrides?: Partial<Record<string, Partial<A
     'tdd-guide': tddGuideAgent,
     'tdd-guide-low': tddGuideLowAgent,
     'code-reviewer': codeReviewerAgent,
-    'code-reviewer-low': codeReviewerLowAgent
+    'code-reviewer-low': codeReviewerLowAgent,
+    // God Mode agents
+    'godmode-init': godmodeInitAgent,
+    'ralph-loop': ralphLoopAgent
   };
 
   const result: Record<string, { description: string; prompt: string; tools: string[]; model?: ModelType; defaultModel?: ModelType }> = {};

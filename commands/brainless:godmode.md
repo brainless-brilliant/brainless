@@ -57,7 +57,7 @@ Spawn ralph loops for each relevant directory:
 
 ```
 // For each relevant directory in parallel:
-Task(subagent_type="brainless:ralph",
+Task(subagent_type="brainless:ralph-loop",
   prompt="Execute in [DIR_PATH]: [SUBTASK]
   
   Context: Read .brainless/CLAUDE.md in this directory first.
