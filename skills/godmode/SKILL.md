@@ -14,6 +14,9 @@ God-mode is the ultimate orchestration system that:
 4. **Spawns** parallel ralph loops with the right agents per directory
 5. **Consolidates** results through architect verification
 
+> [!IMPORTANT]
+> **Delegation is Mandatory**: God-mode operates as an ORCHESTRATOR, not an executor. All implementation work MUST be delegated via `Task()` to subagents. Direct code editing by the orchestrator violates God Mode protocol.
+
 ## Phases
 
 ### Phase 1: Deep Init

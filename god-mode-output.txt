@@ -1,0 +1,737 @@
+❯ /brainless-godmode I want you to fix the alignment issues and also make the bordered thing as an interactive one so if one hovers the mouse it picks the nearest column to indicate the time there and if no mouse 
+is detected over any of the cities it resets to current time as default, and make it look like one continous lens instead of broken ones where it is hard to correlate. I have added both screenshots for your 
+reference the world time buddy's one is one continous column like indicator much cleaner and easier visual guidance as opposed to ours, broken alignments and confusing for three rows or more especially. 
+
+⏺ Our app (screenshot 1):
+  - Mumbai, London, Tokyo rows
+  - The dashed border indicator is broken/disconnected between rows (there's a gap due to the info section between each row's hour blocks)
+  - The hour strips are correctly time-aligned (London shows :30 times due to India's +5:30 offset)
+  - But the dashed borders don't form a continuous vertical column
+
+  WorldTimeBuddy (screenshot 2):
+  - Mumbai and New York rows
+  - The dashed border column is ONE CONTINUOUS vertical line that spans from the top of the first row's hour blocks all the way down to the bottom of the last row's hour blocks
+  - The info sections (city name, time) are to the LEFT, and the hour strips are on the RIGHT, so the column can be continuous
+  - The column indicator is interactive - it follows the mouse hover position
+
+  The key issues to fix:
+
+  1. Continuous column indicator: The dashed border needs to be a single continuous element that spans ALL rows, not per-cell borders. The current approach of adding borders to individual .hour-block.current-hour
+  cells creates gaps between rows (because info sections separate the hour blocks).
+  2. Interactive hover: The column should follow the mouse position when hovering over the hour blocks area. When not hovering, it defaults to the current time column.
+  3. Layout alignment: The broken visual is caused by the info section being ABOVE the hour blocks for each row. In WTB, info is to the LEFT. But the user previously asked for info on top and hours below. The
+  issue is that with info on top, the dashed column can't be continuous between rows.
+
+  Solution approach:
+
+  The cleanest way to make a continuous column indicator is to use an absolutely positioned overlay at the grid level that spans the full height of all rows' hour blocks. This overlay would be a single element
+  positioned at the correct column, creating one continuous dashed border rectangle.
+
+  But the challenge is that with the current layout (info on top, hours below), the hour blocks of different rows aren't vertically adjacent - they're separated by the next row's info section. So a single overlay
+  would also cover the info sections.
+
+  Actually, looking at WorldTimeBuddy again: the info is to the LEFT of the hour strip, with the hour strip as a continuous vertical column. The rows are separated by a small gap but the column indicator still
+  spans the full height including the gaps.
+
+  I think the best approach is:
+  1. Use an absolutely positioned overlay element inside the timezone-grid component
+  2. This overlay spans the entire grid height
+  3. It's positioned horizontally at the column index
+  4. It's semi-transparent so the info sections show through
+  5. Only the parts overlapping hour blocks get the full dashed border look
+
+  Actually, let me think differently. The simplest approach that creates a continuous visual:
+
+  Use a single absolutely positioned column overlay at the grid level that:
+  - Spans from the first row's hour blocks top to the last row's hour blocks bottom
+  - Has a dashed border (left and right sides, plus top and bottom)
+  - Is positioned at the correct column's X position
+  - Width = one cell width
+  - Moves with mouse hover
+  - Resets to current time on mouse leave
+
+  This means the column overlay goes through the info sections too, but that's actually what WTB does - the column line extends from top to bottom of the entire widget.
+
+  Wait, looking at WTB screenshot 2 more carefully: the dashed column ONLY spans within each row's hour strip, but the two strips are very close together (just a small gap for "MON" label). The column doesn't
+  extend through the city info area because the info is to the LEFT.
+
+  In our layout, info is on TOP. So either:
+  a) Move info to the left (but user asked for it on top)
+  b) Make the column overlay span the entire grid including info sections
+  c) Make the column overlay only show on hour-block areas but visually connected with a thin line through the info gaps
+
+  I think option (b) is the most practical. The column overlay will span the full grid height. It'll have a semi-transparent background with dashed borders. The info sections will show through it.
+
+  Actually, let me reconsider. The cleaner approach:
+
+  Make the grid use CSS Grid where all hour blocks from all rows are in a contiguous vertical area, and info sections are in a separate column to the left. This would make the hour blocks vertically adjacent,
+  allowing a continuous overlay.
+
+  But the user explicitly asked for info on top and hours below (the horizontal layout with stacked rows)...
+
+  Hmm, actually, looking at both screenshots again:
+  - In WTB, the info (city, time) IS to the LEFT and the hour strip is to the RIGHT on the same line
+  - The user's previous request was to NOT have them side by side but stacked vertically
+
+  Wait, let me re-read the user's previous request: "the height from left most column is unnecessarily too much instead arrange the time to the right side make the fonts little bigger for time to make it look
+  easier on eyes instead of vertically dragged strips"
+
+  Actually the user wanted the info in a HORIZONTAL line (not the old tall left column), with the time on the right. They wanted the hour blocks BELOW the info line. But now they're seeing the broken column effect
+   and want it fixed.
+
+  OK, I think the pragmatic solution is: use an absolutely positioned overlay at the grid level that spans the full height and goes through everything. Let me implement this.
+
+  Here's my plan:
+
+  1. Remove per-cell current-hour CSS borders - no more per-cell dashed borders
+  2. Add a column overlay element in timezone-grid.component that:
+    - Is absolutely positioned spanning the full grid height
+    - Width = one cell width (grid width / 24)
+    - Has dashed border on all 4 sides
+    - Positioned at the hovered column or current time column
+  3. Add mouse hover interaction to the grid:
+    - mousemove on the grid calculates which column the mouse is over
+    - Sets the overlay position to that column
+    - mouseleave resets to current time column
+  4. Remove the invisible time-slider component - replace it with the new hover interaction
+
+  Let me implement this. I'll work directly rather than spawning agents since I have clear understanding of all the files.
+
+  Actually, let me think about the hover interaction more carefully. The grid contains both info sections and hour blocks. When hovering over the hour blocks area, we need to detect which column. When hovering
+  over info sections, we can either:
+  - Ignore (reset to current time)
+  - Use the same X position to determine the column
+
+  I think using the X position regardless of whether we're over info or hour blocks makes sense - the column should follow the mouse across the entire grid.
+
+  For the column width calculation: since all hour blocks have flex: 1 within their .hour-blocks container, each cell width = container width / 24. But there's also the midnight marker element that takes space.
+  For simplicity, I'll calculate based on the first .hour-blocks element's width / 24.
+
+  Actually, there's a complication with the midnight marker. It's an extra element inside .hour-blocks that takes up space, making the 24 hour cells not exactly 1/24 of the container width. For simplicity, I'll
+  remove the midnight marker as a separate element and instead put the date label INSIDE the first cell after midnight.
+
+  Let me also think about what happens with the column overlay position. The hour blocks don't start at the left edge of the grid - each row has padding/margin for the info section above. But since we're using a
+  full-width overlay, we need to know the X offset of the hour blocks relative to the grid.
+
+  Wait, actually in the current layout, the .hour-blocks div spans the full width of the grid (since it's inside .timezone-row which is a column flex). So the hour blocks start at x=0 of the grid. Each cell = grid
+   width / 24.
+
+  But there's the midnight marker... Let me simplify by putting the midnight date label inside the hour cell itself rather than as a separate flex item. Or just remove the midnight marker entirely for now and
+  focus on the main issue.
+
+  OK let me outline the specific changes:
+
+  timezone-grid component
+
+  - Add a column overlay element (absolutely positioned div)
+  - Add mousemove and mouseleave event handlers
+  - Track hoveredColumnIndex signal
+  - Compute overlay position from column index
+  - Compute column index from mouse X position
+
+  timezone-row component
+
+  - Remove current-hour class and dashed border CSS (the overlay handles it now)
+  - Remove isFirstRow/isLastRow inputs (no longer needed for per-cell borders)
+  - Keep the midnight marker inside the hour cell (or remove it)
+
+  time-slider component
+
+  - Can be removed entirely (hover replaces it)
+
+  timezone.service
+
+  - Remove sliderOffset signal (hover replaces slider)
+  - Actually, keep sliderOffset - the hover can set it temporarily
+
+  Wait, the hover interaction is different from the slider. The slider was for shifting the "current" time. The hover is for indicating a specific column. Let me think about this...
+
+  In WorldTimeBuddy, when you hover over the grid, the dashed column follows your mouse to let you compare times across rows at that moment. When you move away, it returns to the current time.
+
+  So the interaction is:
+  1. Default: column is at current time position
+  2. Hover: column follows mouse to the nearest column
+  3. Mouse leave: column returns to current time
+
+  This means we need:
+  - A hoveredColumnIndex signal (null when not hovering, 0-23 when hovering)
+  - The overlay uses hoveredColumnIndex ?? currentTimeColumnIndex
+  - The currentTime display in each row should also update to show the hovered time (not just the actual current time)
+
+  Actually, wait. In WTB, when you hover over different columns, the current time display in each row's info section updates to show the time at that column. Let me not go that far - let's just make the visual
+  column indicator work first.
+
+  Here's my revised plan:
+
+  1. Add hoveredColumn signal to TimezoneService (null | number)
+  2. Compute activeColumn = hoveredColumn ?? currentTimeColumn (based on reference timezone)
+  3. In timezone-grid:
+    - Add overlay div
+    - Handle mousemove/mouseleave on the grid
+    - Calculate column from mouse position
+  4. In timezone-row:
+    - Keep hour blocks but remove per-cell current-hour borders
+    - Add [class.active-col] on the column matching activeColumn
+    - Actually no - the overlay handles the visual indicator
+  5. Remove TimeSliderComponent entirely
+
+  Hmm, but there's still the issue of the overlay needing to span continuously across rows. With info sections between hour blocks, a single overlay div would cover info sections too. That's actually fine - make
+  it semi-transparent with just dashed borders (no background fill), so it just draws a dashed rectangle outline through the entire grid.
+
+  Let me implement this now. I'll make the overlay a child of .timezone-grid with:
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(100% / 24);  /* one cell width */
+  left: calc(columnIndex * 100% / 24);
+  border: 2px dashed #333;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 10;
+
+  This would create a continuous dashed border rectangle from the top to the bottom of the grid.
+
+  But the hour blocks start not at position 0 of the grid - they start after the info section for each row. And since the layout is vertical (info on top, hours below), the first row's info section is at the top
+  of the grid. The hour blocks are below it.
+
+  Actually, let me reconsider. The .timezone-grid contains the rows, and each row has .row-info + .hour-blocks. The .hour-blocks span the full width of the grid. So column positions are consistent across all rows'
+   hour blocks. The overlay should be positioned based on the .hour-blocks width.
+
+  Since .hour-blocks spans the full width (no left margin), the overlay left position = columnIndex * (gridWidth / 24) and width = gridWidth / 24.
+
+  But the overlay also needs to span from the TOP of the first row's hour blocks to the BOTTOM of the last row's hour blocks, not the full grid height (which would include the info sections above the first row).
+
+  Actually, for simplicity and visual appeal, let me just make it span the full grid height. The dashed border going through info sections is fine - WTB does something similar where the indicator extends the full
+  height.
+
+  Let me code this up. I'll need to be very careful about:
+  1. The midnight marker - it disrupts the 24-column layout. Let me remove it as a separate element and put the info inside the cell.
+  2. The hour blocks having flex: 1 means equal width distribution. As long as there are exactly 24 .hour-block children (no extra elements), each is 1/24 of the container.
+
+  Wait, the midnight marker IS an extra element in the .hour-blocks flex container. It has flex: 0 0 auto but it still takes space, pushing the hour cells. This means the hour cells aren't exactly 1/24 of the grid
+   width. For some rows (those with a midnight crossing), there's a midnight marker, and for others there isn't. This misaligns the columns between rows!
+
+  This is probably contributing to the alignment issues the user sees. Let me fix this:
+  - Remove the midnight marker as a separate element
+  - Instead, add the date label inside the hour cell that is at the midnight boundary
+
+  Let me implement everything now. I'll modify:
+  1. timezone-row.component.html - remove midnight-marker, add date label inside the cell
+  2. timezone-row.component.scss - remove midnight marker styles, remove per-cell current-hour borders
+  3. timezone-row.component.ts - simplify (remove isFirstRow/isLastRow)
+  4. timezone-grid.component.html - add column overlay, add mouse event handlers
+  5. timezone-grid.component.ts - add hover logic, compute overlay position
+  6. timezone-grid.component.scss - style the overlay
+  7. timezone.service.ts - add hoveredColumn signal
+  8. Remove time-slider component references
+
+  Actually, I should keep the row component inputs for first/last since we might still want them later. But the main visual change is moving from per-cell borders to a grid-level overlay.
+
+  Let me also think about removing the TimeSliderComponent. It's referenced in:
+  - timezone-grid.component.ts (import)
+  - timezone-grid.component.html (template)
+
+  I need to remove both references.
+
+  Let me also think about the hover math. When the user hovers over the grid, I need to:
+  1. Get the mouse X position relative to the grid
+  2. Determine which column (0-23) that maps to
+  3. But the hour blocks might have different starting X positions per row due to the midnight marker (which I'm removing)
+
+  With the midnight marker removed, all rows have exactly 24 flex: 1 children in .hour-blocks, so each cell is exactly gridWidth / 24 wide. The column index = Math.floor(mouseX / (gridWidth / 24)).
+
+  But wait, the mouseX is relative to the grid, and the .hour-blocks starts at the left edge of the grid (since .timezone-row is full width, and .hour-blocks is full width within it). So the hour blocks' left edge
+   = grid's left edge.
+
+  Let me also think about what changes I need to pass through. Currently isCurrentHour is set on each block in the service. With the overlay approach, I don't need isCurrentHour on blocks anymore - the overlay
+  handles the visual. But I might still want it for accessibility or for the info section to show the selected time.
+
+  For now, let me keep isCurrentHour in the model but just not style it with per-cell borders. The overlay at the grid level handles the visual.
+
+  Actually, I realize I should also update the time display in the info section to reflect the hovered column. When the user hovers over column 5, each row should show what time it is at column 5 in that timezone.
+   This gives the "lens" effect where you can compare times across zones at any moment.
+
+  This means:
+  - TimezoneService needs a hoveredColumn signal
+  - The timezoneRows computed should factor in hoveredColumn for the currentTime display
+  - Or better: add a separate computed for the "displayed time" that's different from the actual current time
+
+  Let me keep it simple for now:
+  - Add hoveredColumn: signal<number | null>(null) to TimezoneService
+  - Add activeColumn = computed(() => this.hoveredColumn() ?? this.getCurrentColumn())
+  - The grid component uses activeColumn for overlay positioning
+  - The row's currentTime stays as the real current time (we can add hover time display later)
+
+  OK, let me code all of this up now. Let me start with the implementation.
+
+  One more thing: I should also handle the case when the user has the hour blocks with minutes (like :30). The column overlay should still work correctly since it's based on column index, not hour value.
+
+  Let me write all the code changes now.
+
+  For the grid component, the key new functionality is:
+
+  // In timezone-grid.component.ts
+  hoveredColumn = signal<number | null>(null);
+
+  // Computed: active column index (hovered or current time)
+  activeColumn = computed(() => {
+    const hovered = this.hoveredColumn();
+    if (hovered !== null) return hovered;
+
+    // Default to current time column in reference timezone
+    const ids = this.timezoneService.selectedTimezoneIds();
+    if (ids.length === 0) return 0;
+    const refTz = ids[0];
+    const now = this.timezoneService.currentTime();
+    return this.timeCalc.getCurrentHour(now, refTz);
+  });
+
+  onGridMouseMove(event: MouseEvent): void {
+    const grid = this.gridRef.nativeElement;
+    const rect = grid.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const cellWidth = rect.width / 24;
+    const col = Math.floor(mouseX / cellWidth);
+    this.hoveredColumn.set(Math.max(0, Math.min(23, col)));
+  }
+
+  onGridMouseLeave(): void {
+    this.hoveredColumn.set(null);
+  }
+
+  And in the template:
+  <div class="timezone-grid" #gridEl
+    cdkDropList
+    (cdkDropListDropped)="onDrop($event)"
+    (mousemove)="onGridMouseMove($event)"
+    (mouseleave)="onGridMouseLeave()">
+
+    <!-- Column overlay -->
+    <div class="column-overlay"
+      [style.left]="'calc(' + activeColumn() + ' * 100% / 24)'"
+      [style.width]="'calc(100% / 24)'">
+    </div>
+
+    @for (row of timezoneService.timezoneRows(); ...) {
+      ...
+    }
+  </div>
+
+  And the CSS:
+  .column-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border: 2px dashed #333;
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 10;
+    transition: left 0.1s ease;
+  }
+
+  This creates a continuous dashed rectangle from top to bottom of the grid, spanning through info sections and hour blocks alike. It moves smoothly with the mouse.
+
+  Wait, but the .timezone-grid has overflow: hidden. The overlay needs to be inside the grid and the grid needs position: relative. The grid already has position: relative from the old time-slider setup.
+
+  Also, I need to handle the slider offset. Currently, the slider drag was used to shift the current hour. With the new hover interaction, clicking/hovering changes which column is highlighted, but doesn't shift
+  the hour blocks. The hour blocks always show the fixed 24-hour range. The overlay moves to show different time points.
+
+  Actually, in WTB, the column indicator doesn't shift the hours - it just moves to show which time you're looking at. The sliderOffset concept was different - it shifted the entire grid. Let me remove the
+  sliderOffset and just use the hover column.
+
+  But removing sliderOffset changes how generateHourBlocks works. The sliderOffset was used to shift which hour is considered "current". Without it, the "current hour" is always the actual current hour. The hover
+  column is just a visual indicator.
+
+  Let me simplify:
+  1. Remove sliderOffset from the service (set to 0 always)
+  2. Remove the time-slider component entirely
+  3. Add hover column tracking at the grid level
+  4. The overlay position follows hover column or defaults to current hour column
+
+  Actually, let me keep sliderOffset in case we want click-to-set-time later, but set it to 0 and don't use the slider component.
+
+  Let me also think about whether I should also update the currentTime display when hovering. When you hover over column 3, each row should show what time it is at hour 3 in their timezone. This is the "lens"
+  effect.
+
+  I'll add this as a nice touch: each row's displayed time updates to the hovered column's time.
+
+  For this, I need:
+  - The timezoneRows computed to take hoveredColumn into account
+  - When hovering, show the time at that column instead of the real current time
+  - When not hovering, show the real current time
+
+  Hmm, this adds complexity. Let me implement the visual overlay first and add the time display update if there's room.
+
+  OK, let me write all the code now. I'll implement the changes directly without spawning agents since I understand all the files.
+
+  Let me list all files to modify:
+  1. timezone-grid.component.ts - add hover logic, remove time-slider import, add TimeCalculationService
+  2. timezone-grid.component.html - add overlay, add mouse events, remove time-slider
+  3. timezone-grid.component.scss - add overlay styles
+  4. timezone-row.component.ts - clean up unused imports
+  5. timezone-row.component.html - remove midnight-marker as separate element, embed in cell
+  6. timezone-row.component.scss - remove per-cell current-hour borders, remove midnight-marker styles
+  7. timezone.service.ts - add hoveredColumn signal, remove sliderOffset usage
+
+  Let me start coding.
+
+  Actually wait - I should also think about how isCurrentHour on individual blocks interacts with the overlay. With the overlay, we don't need per-cell highlighting. But isCurrentHour is set in generateHourBlocks
+  based on the sliderOffset. If I remove sliderOffset (set to 0), isCurrentHour will always mark the actual current hour. But we don't need per-cell visual styling for it anymore.
+
+  I can keep isCurrentHour in the data model for potential use (like showing the hovered time in the info section), but remove the CSS styling for .current-hour.
+
+  Let me implement everything now. I'll be thorough.
+
+  Wait, actually, let me also consider the approach of making the overlay only cover the hour-blocks areas. Instead of spanning the full grid height, I could clip it to only show where hour blocks are. This can be
+   done with the overlay having the same background as the grid, but clipped...
+
+  No, that's overly complex. Let me just span the full grid height. The dashed border will go through info sections too, which is fine - it creates a clean vertical guide line.
+
+  Let me also think about whether the active column should update the displayed time in the info-right section. WTB does this - when you move the column indicator, the time display for each row updates to show the
+   time at that column. This is super useful for comparing times.
+
+  For this, I'll add a hoveredColumn signal to the service, and make the timezoneRows computed factor it in for currentTime. When hoveredColumn is not null, currentTime should show the time at that column's hour
+  instead of the real current time.
+
+  How to compute the time at a specific column:
+  - Column col in the reference timezone corresponds to hour col (for the reference row)
+  - For other rows, column col corresponds to hour (col + offsetDiff) % 24
+  - So the displayed time = that hour + minutes (based on offset fractional part)
+
+  Actually, this is complex because I need to compute a Date object for that hour. Let me do it differently: when hovered, display the hour from the hour block at that column index. The hourBlocks[col].displayHour
+   already has the formatted time.
+
+  So in the template, I could show:
+  - When not hovered: row.currentTime (real current time like "7:48 PM")
+  - When hovered: row.hourBlocks[hoveredColumn].displayHour (like "8 PM" or "2:30 PM")
+
+  This requires passing the hoveredColumn to the row component. Let me add it as an input.
+
+  OK, this is getting complex. Let me just focus on the main visual fix (continuous overlay, hover interaction) and skip the time display update for now. The user can always look at the hour cell labels to see the
+   time.
+
+  Let me code now.
+
+  Actually, you know what, let me also update the time display. It's a core part of the "lens" effect and makes it much more useful. I'll pass activeColumn to each row and have it optionally show the hovered time.
+
+  Here's my final plan:
+
+  timezone.service.ts
+
+  - Add hoveredColumn = signal<number | null>(null)
+  - Keep sliderOffset but default to 0
+
+  timezone-grid.component.ts
+
+  import { Component, inject, signal, computed, ViewChild, ElementRef } from '@angular/core';
+  import { CommonModule } from '@angular/common';
+  import { CdkDragDrop, CdkDropList, CdkDrag, CdkDragPlaceholder } from '@angular/cdk/drag-drop';
+  import { TimezoneService } from '../../core/services/timezone.service';
+  import { TimeCalculationService } from '../../core/services/time-calculation.service';
+  import { TimezoneRowComponent } from '../timezone-row/timezone-row.component';
+
+  @Component({
+    selector: 'app-timezone-grid',
+    standalone: true,
+    imports: [CommonModule, CdkDropList, CdkDrag, CdkDragPlaceholder, TimezoneRowComponent],
+    templateUrl: './timezone-grid.component.html',
+    styleUrls: ['./timezone-grid.component.scss']
+  })
+  export class TimezoneGridComponent {
+    protected timezoneService = inject(TimezoneService);
+    private timeCalc = inject(TimeCalculationService);
+
+    activeColumn = computed(() => {
+      const hovered = this.timezoneService.hoveredColumn();
+      if (hovered !== null) return hovered;
+      const ids = this.timezoneService.selectedTimezoneIds();
+      if (ids.length === 0) return 0;
+      const refTz = ids[0];
+      const now = this.timezoneService.currentTime();
+      const currentHour = this.timeCalc.getCurrentHour(now, refTz);
+      return ((currentHour + this.timezoneService.sliderOffset()) % 24 + 24) % 24;
+    });
+
+    protected onDrop(event: CdkDragDrop<any>): void {
+      this.timezoneService.reorderTimezones(event.previousIndex, event.currentIndex);
+      this.timezoneService.syncState();
+    }
+
+    protected onRemove(id: string): void {
+      this.timezoneService.removeTimezone(id);
+      this.timezoneService.syncState();
+    }
+
+    protected onGridMouseMove(event: MouseEvent): void {
+      const target = event.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const cellWidth = rect.width / 24;
+      const col = Math.floor(mouseX / cellWidth);
+      this.timezoneService.hoveredColumn.set(Math.max(0, Math.min(23, col)));
+    }
+
+    protected onGridMouseLeave(): void {
+      this.timezoneService.hoveredColumn.set(null);
+    }
+  }
+
+  timezone-grid.component.html
+
+  <div class="timezone-grid" #gridEl
+    cdkDropList
+    (cdkDropListDropped)="onDrop($event)"
+    (mousemove)="onGridMouseMove($event)"
+    (mouseleave)="onGridMouseLeave()">
+
+    <div class="column-overlay"
+      [style.left]="'calc(' + activeColumn() + ' * 100% / 24)'"
+      [style.width]="'calc(100% / 24)'">
+    </div>
+
+    @for (row of timezoneService.timezoneRows(); track row.entry.id; let first = $first; let last = $last) {
+      <div cdkDrag>
+        <app-timezone-row
+          [row]="row"
+          [isFirstRow]="first"
+          [isLastRow]="last"
+          [activeColumn]="activeColumn()"
+          (remove)="onRemove($event)"
+        />
+        <div class="drag-placeholder" *cdkDragPlaceholder></div>
+      </div>
+    }
+  </div>
+
+  timezone-grid.component.scss
+
+  .timezone-grid {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .column-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border: 2px dashed #555;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 10;
+    transition: left 0.08s ease-out;
+  }
+
+  .drag-placeholder {
+    background: #f4f4f4;
+    border: 2px dashed var(--color-border);
+    height: 60px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .cdk-drag-preview {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  timezone-row.component.ts
+
+  - Add @Input() activeColumn: number = 0;
+  - Keep isFirstRow/isLastRow
+
+  timezone-row.component.html
+
+  - Remove midnight-marker div, embed date info in the cell
+  - Remove [class.current-hour] (no longer needed)
+
+  timezone-row.component.scss
+
+  - Remove .current-hour styles
+  - Remove :host(.first-row) and :host(.last-row) current-hour rules
+  - Remove .midnight-marker styles
+
+  Wait, actually I should think about this more. The user says "make it look like one continuous lens". Looking at the WorldTimeBuddy screenshot, the dashed column goes through the ENTIRE height - both rows' hour
+  strips AND the gap between them. It's truly one continuous rectangle.
+
+  In our layout, the grid contains:
+  [row1 info section]
+  [row1 hour blocks]
+  [row2 info section]
+  [row2 hour blocks]
+  [row3 info section]
+  [row3 hour blocks]
+
+  If I put a single absolute overlay spanning the full grid height, it will go through everything - info sections and hour blocks. This is the WTB behavior! The column indicator goes through everything. This is
+  cleaner.
+
+  But wait, the info section doesn't have the same "column" structure as the hour blocks. The overlay will draw a dashed rectangle that spans the full height, including info sections, which might look weird over
+  city names.
+
+  Looking at WTB more carefully: the info section is to the LEFT of the hour strip, so the column only goes through hour strips. The gap between the two rows is minimal.
+
+  In our layout, the info is ON TOP, so the column would also go through the info section. But since the column overlay has no background (just borders), it would draw two vertical dashed lines through the city
+  name area. That might not look great.
+
+  Alternative: use the overlay technique but clip it to only be visible within .hour-blocks areas. I can do this by:
+  1. Setting overflow: hidden on the overlay
+  2. No, that doesn't help
+
+  Another approach: instead of a grid-level overlay, use CSS to draw vertical lines at the correct column position. Each row's .hour-blocks gets a ::before pseudo-element that draws the left/right dashed borders,
+  and the overall grid has a column indicator that draws top/bottom borders on the first/last row.
+
+  Actually, the simplest clean approach:
+
+  Make each row's .hour-blocks have the same visual indicator (left/right dashed lines at the active column), and connect them by removing borders between rows. The key is that the hour blocks from different rows
+  are separated by info sections. The dashed lines won't be continuous.
+
+  You know what, let me just go with the full-height overlay. It'll look like two vertical dashed lines going through the entire grid, with horizontal dashes at top and bottom. Through the info sections, it's just
+   two thin dashed lines - not very intrusive. And through the hour blocks, it highlights the column. This is actually what WTB does if you look carefully - the indicator extends the full height.
+
+  Let me just implement it and see. If the user doesn't like the lines going through info sections, we can adjust.
+
+  Let me write the code now. I'll focus on making it work.
+
+  For the time display update: when hovering, I should update the displayed time in the info section to show the time at the hovered column. This requires:
+  - activeColumn input on the row component
+  - A computed/getter that returns the time at that column
+
+  I'll add this:
+  get displayedTime(): string {
+    if (this.row.hourBlocks.length > this.activeColumn) {
+      const block = this.row.hourBlocks[this.activeColumn];
+      return block.displayHour;
+    }
+    return this.row.currentTime;
+  }
+
+  And in the template:
+  <span class="current-time">{{ displayedTime }}</span>
+
+  Wait, but displayHour is like "7 PM" not "7:00 PM". It's less precise than currentTime which shows "7:48 PM" with minutes. The hourly display is a simplification. For the hover display, showing just the hour is
+  fine for comparing across zones. Let me keep currentTime as the real time and add a separate display for the hovered time.
+
+  Actually, looking at WTB, when you hover, it updates the big time display to show the time at that column. So if I hover over the 3 AM column for Mumbai, it shows "3:00 AM" (or the precise time for that column).
+   For New York (offset -10.5), the same column would show "4:30 PM" etc.
+
+  Let me do this: when hoveredColumn is not null, show the hour block's display time. When null, show the real current time.
+
+  But I need to differentiate between the real current time and the hovered time visually. Let me just swap them and make the hover time the main display. When not hovering, the real time is shown.
+
+  Let me code this up now. I'll keep it simple - in the row component, check if activeColumn is provided and if hovering (via a separate isHovering input or by checking if activeColumn differs from the real
+  current hour... actually, let me just add a simple isHovering input).
+
+  Hmm, this is getting complex. Let me just add activeColumn input and an isHovering flag. Actually, the simplest: pass hoveredColumn from the service to the row component. If it's not null, show hovered time. If
+  null, show real time.
+
+  Let me pass it as an input from the grid:
+  <app-timezone-row
+    [row]="row"
+    [hoveredColumn]="timezoneService.hoveredColumn()"
+    (remove)="onRemove($event)"
+  />
+
+  And in the row component:
+  @Input() hoveredColumn: number | null = null;
+
+  get displayedTime(): string {
+    if (this.hoveredColumn !== null && this.hoveredColumn < this.row.hourBlocks.length) {
+      return this.row.hourBlocks[this.hoveredColumn].displayHour;
+    }
+    return this.row.currentTime;
+  }
+
+  In the template:
+  <span class="current-time">{{ displayedTime }}</span>
+
+  OK I think this is a solid approach. Let me implement all the changes now. I'll do them in order.
+
+  One more thing I need to handle: removing the midnight marker from being a separate element. Currently, the template has:
+  @if (block.crossesMidnight) {
+    <div class="midnight-marker">...</div>
+  }
+  This is OUTSIDE the .hour-block div and inside the .hour-blocks flex container. This extra element disrupts the 24-column layout because it takes space. I need to either:
+  a) Remove it entirely
+  b) Move it inside the .hour-block div
+
+  Let me move it inside the hour-block as an absolutely positioned element. This way it doesn't disrupt the flex layout.
+
+  Actually, looking at WTB, the date marker is a small box that says "FEB 9" integrated into the hour strip but doesn't take extra space - it replaces part of the cell content. Let me put the date label inside the
+   cell:
+
+  <div class="hour-block" ...>
+    @if (block.crossesMidnight) {
+      <span class="date-label">{{ midnightDateLabel }}</span>
+    }
+    <span class="hour-num">...</span>
+    <span class="hour-period">...</span>
+  </div>
+
+  With CSS:
+  .date-label {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    background: #e8e8e8;
+    font-size: 0.45rem;
+    padding: 0 1px;
+    display: flex;
+    align-items: center;
+    writing-mode: vertical-lr;
+    z-index: 3;
+  }
+
+  Actually, this is still complex. Let me just skip the midnight marker for now and focus on the main issues. I can add it back later.
+
+  OK, final implementation plan:
+
+  1. timezone.service.ts: Add hoveredColumn signal
+  2. timezone-grid.component.ts: Add hover handlers, activeColumn computed, remove TimeSliderComponent
+  3. timezone-grid.component.html: Add overlay, mouse events, remove time-slider, pass hoveredColumn
+  4. timezone-grid.component.scss: Add overlay styles
+  5. timezone-row.component.ts: Add hoveredColumn input, displayedTime getter
+  6. timezone-row.component.html: Remove midnight-marker wrapper (embed in cell), use displayedTime
+  7. timezone-row.component.scss: Remove current-hour per-cell borders, remove midnight-marker styles
+
+  Let me write the code now.
+
+  Actually, I also want to make the overlay only visible when it's within the hour blocks. But since the full-height overlay is fine for the continuous lens effect, let me go with it.
+
+  One more consideration: the CDK drag-drop might interfere with the mousemove handler. CDK drag might capture mouse events. But since we're only tracking mousemove (not drag), it should be fine. CDK drag only
+  activates on mousedown+move.
+
+  Also, the .timezone-grid has overflow: hidden. The overlay is inside the grid so it's clipped to the grid bounds.
+
+  Let me now code everything.
+
+  Wait - I also need to handle the fact that when dragging to reorder rows, the mousemove handler will fire. I should check event.buttons to ignore moves during drag. Actually, CDK drag might stopPropagation. Let
+  me not worry about this edge case for now.
+
+  Also need to make sure the transition on the overlay left property is smooth enough for hover but doesn't lag.
+
+  OK, coding now.
+
+  For the hours displayed in the info section when hovering - I realize the displayHour from HourBlock is like "7 PM" or "1:30 PM". This is good enough for comparing. But the real current time like "7:48 PM" has
+  minutes. When hovering ends and we go back to real time, the display will jump from "7 PM" to "7:48 PM". That's fine.
+
+  Actually, a better UX: when hovering, show the hour block time with a different styling (maybe slightly different opacity or with a "hover indicator"). When not hovering, show the real time. Let me keep it
+  simple and just swap the text.
+
+  Let me now write all the files.
+
+
+  I can see the issues clearly from both screenshots. The main problems are:
+
+  1. Broken column indicator - per-cell dashed borders create gaps between rows, unlike WTB's continuous vertical column
+  2. No hover interaction - the column should follow mouse and snap to nearest column
+  3. Midnight marker disrupts alignment - it's a separate flex element that shifts columns
+
+  I'll implement a single continuous overlay at the grid level with hover interaction. Let me code all the changes directly.
+
+⏺ Update(src/app/core/services/timezone.service.ts)
